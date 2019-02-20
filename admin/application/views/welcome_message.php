@@ -68,8 +68,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<a href="<?php echo base_url('welcome/siswa'); ?>">Home</a>
-	<a href="<?php echo base_url('welcome/soal'); ?>">Soal</a>
+	<a href="<?php echo base_url('welcome/guru'); ?>">Menu Guru</a>
+	<a href="<?php echo base_url('welcome/kelas'); ?>">Menu Kelas</a>
 	<h1>Welcome to CodeIgniter!</h1>
 
 	<div id="body">

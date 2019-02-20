@@ -18,27 +18,17 @@ class Welcome extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function __construct(){
-		parent::__construct();
-		$this->load->library('pagination');
-		$this->load->model('Model'); // Load model ke controller ini
-	}
-
 	public function index()
 	{
 		// $this->load->view('welcome_message');
-		$this->pages('module/home/home');
+		$this->pages('module/guru/guru');
 	}
 	
-	public function siswa()
-	{
-		// $this->pages('module/home/home', $data);
-		$this->pages('module/home/home');
+	public function guru() {
+		$this->pages('module/guru/guru');
 	}
 	
-	public function soal()
-	{
-		// $this->pages('module/home/home', $data);
-		$this->pages('module/soal/soal');
+	public function kelas() {
+		$this->pages('module/kelas/kelas');
 	}
 }
