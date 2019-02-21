@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2019 at 05:14 PM
+-- Generation Time: Feb 21, 2019 at 07:40 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -45,6 +45,14 @@ CREATE TABLE `kelas` (
   `nama_kelas` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
+(1, 'X RPL'),
+(2, 'X TKJ');
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +64,14 @@ CREATE TABLE `pelajaran` (
   `nama` varchar(30) DEFAULT NULL,
   `KKM` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pelajaran`
+--
+
+INSERT INTO `pelajaran` (`id_pelajaran`, `nama`, `KKM`) VALUES
+(1, 'B. Inggris Dosti', 75),
+(2, 'B. Indonesia Najwa', 75);
 
 -- --------------------------------------------------------
 
@@ -72,6 +88,13 @@ CREATE TABLE `siswa` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `siswa`
+--
+
+INSERT INTO `siswa` (`id_siswa`, `id_kelas`, `nama`, `nis`, `tanggal_lahir`, `username`, `password`) VALUES
+(2, 1, 'hendri', '2212', '2019-02-22', 'hendri', 'hendri');
 
 -- --------------------------------------------------------
 
@@ -91,6 +114,15 @@ CREATE TABLE `soal` (
   `soal_jawaban` varchar(1) NOT NULL,
   `gambar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `soal`
+--
+
+INSERT INTO `soal` (`soal_id`, `soal_pelajaran`, `soal_deskripsi`, `soal_jwb1`, `soal_jwb2`, `soal_jwb3`, `soal_jwb4`, `soal_jwb5`, `soal_jawaban`, `gambar`) VALUES
+(1, 1, 'siapa presiden akan datang ?', 'soeharto', 'soekarno', 'habibie', 'jokowi', 'prabowo', 'j', ''),
+(2, 1, 'Kepala sekolah smk hebat', 'soeharto', 'soekarno', 'habibie', 'jokowi', 'prabowo', 'j', ''),
+(3, 1, 'prgrammer hebat', 'soeharto', 'soekarno', 'habibie', 'jokowi', 'prabowo', 'j', '');
 
 -- --------------------------------------------------------
 
@@ -144,7 +176,8 @@ ALTER TABLE `pelajaran`
 -- Indexes for table `siswa`
 --
 ALTER TABLE `siswa`
-  ADD PRIMARY KEY (`id_siswa`);
+  ADD PRIMARY KEY (`id_siswa`),
+  ADD KEY `id_kelas` (`id_kelas`);
 
 --
 -- Indexes for table `soal`
@@ -184,19 +217,19 @@ ALTER TABLE `guru`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pelajaran`
 --
 ALTER TABLE `pelajaran`
-  MODIFY `id_pelajaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pelajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ujian`
@@ -207,6 +240,12 @@ ALTER TABLE `ujian`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `siswa`
+--
+ALTER TABLE `siswa`
+  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`);
 
 --
 -- Constraints for table `soal`
