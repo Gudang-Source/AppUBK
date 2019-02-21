@@ -1,3 +1,12 @@
+<?php
+    // $array=[];
+    // foreach($random as $data){
+    //     array_push($array,$data->soal_id);
+    // }
+    // $arrays= join(',',$array);
+    // $this->db->query("INSERT INTO record (id_siswa,id_pelajaran,id_soal) VALUES ('$siswa->id_siswa','$kelas->id_kelas','$arrays')");
+?>
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">

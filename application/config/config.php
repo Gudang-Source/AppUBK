@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://180.248.145.101/AppUBK';
-// $config['base_url'] = 'http://localhost/AppUBK';
+// $config['base_url'] = 'http://180.248.145.101/AppUBK';
+$config['base_url'] = 'http://localhost/AppUBK';
 
 /*
 |--------------------------------------------------------------------------

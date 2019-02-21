@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
 				<p class="navbar-brand judulapp" >Aplikasi Latihan UNBK</a>
 				<!-- <ul class="nav navbar-top-links navbar-right">
-
+				
 				</ul> -->
 			</nav>
 			

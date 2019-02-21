@@ -59,6 +59,9 @@ class Welcome extends MY_Controller {
 		$this->pagination->initialize($config);
 
 		$data["soal"] = $this->Model->soal($config);
+		$data["siswa"] = $this->Model->siswa();
+		$data["kelas"] = $this->Model->kelas();
+		$data["random"] = $this->Model->random();
 		$this->pages('module/soal/soal', $data);
 	}
 	public function login()
