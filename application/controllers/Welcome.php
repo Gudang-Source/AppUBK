@@ -30,10 +30,10 @@ class Welcome extends MY_Controller {
 		$this->pages('module/home/home');
 	}
 	
-	public function siswa()
-	{
-		// $this->pages('module/home/home', $data);
-		$this->pages('module/home/home');
+	public function siswa() {
+		$data["siswa"] = $this->Model->siswa();
+		$this->pages('module/home/home', $data);
+		// $this->pages('module/home/home');
 	}
 	
 	public function soal()

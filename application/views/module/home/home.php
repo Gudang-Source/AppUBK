@@ -6,8 +6,12 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td>Mata Pelajaran</td>
-                            <td>Bahasa Indonesia</td>
+                            <td class="font-weight-bold">Nama :</td>
+                            <td><?php echo $siswa->nama; ?></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Kelas :</td>
+                            <td><?php echo $siswa->jurusan; ?></td>
                         </tr>
                     </tbody>
                 </table>
