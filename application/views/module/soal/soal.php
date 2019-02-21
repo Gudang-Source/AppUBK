@@ -5,10 +5,18 @@
                 Selamat Ujian Muhammad Syarif Hidayatullah
 			</div>
 			<div class="card-body">
-				
+				<?php foreach ($soal as $data) {
+                    echo $data->soal_deskripsi; ?> <br>
+                    <input type="radio" name="pilgan" value="<?php echo $data->soal_jwb1 ?>"> <?php echo $data->soal_jwb1 ?><br>
+                    <input type="radio" name="pilgan" value="<?php echo $data->soal_jwb2 ?>"> <?php echo $data->soal_jwb2 ?><br>
+                    <input type="radio" name="pilgan" value="<?php echo $data->soal_jwb3 ?>"> <?php echo $data->soal_jwb3 ?><br>
+                    <input type="radio" name="pilgan" value="<?php echo $data->soal_jwb4 ?>"> <?php echo $data->soal_jwb4 ?><br>
+                    <input type="radio" name="pilgan" value="<?php echo $data->soal_jwb5 ?>"> <?php echo $data->soal_jwb5 ?>
+                <?php } ?>
             </div>
             <div class="card-footer">
                 <div class="row">
+                    <div class="col-6"><?php echo $this->pagination->create_links(); ?></div>
                     <div class="col-md-6">
                         <a href="" class="w-100 btn btn-info">Prev</a>    
                     </div>

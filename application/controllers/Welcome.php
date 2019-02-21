@@ -24,22 +24,42 @@ class Welcome extends MY_Controller {
 		$this->load->model('Model'); // Load model ke controller ini
 	}
 
-	public function index()
-	{
-		// $this->load->view('welcome_message');
-		$this->pages('module/home/home');
-	}
-	
-	public function siswa() {
+	public function index() {
 		$data["siswa"] = $this->Model->siswa();
 		$this->pages('module/home/home', $data);
-		// $this->pages('module/home/home');
 	}
 	
-	public function soal()
-	{
-		// $this->pages('module/home/home', $data);
-		$this->pages('module/soal/soal');
+	public function soal() {
+		//pagination
+		$config['base_url']    = base_url()."welcome/soal/";
+		$config['total_rows']  = $this->db->query("SELECT * FROM soal;")->num_rows();
+		$config['per_page']    = 1;
+		$config['num_links']   = 5;
+		$config['uri_segment'] = 3;
+
+		//styling
+		$config['full_tag_open']   = "<nav aria-label='Page navigation example'><ul class='pagination pagination-sm justify-content-end'>";
+		$config['full_tag_close']  = "</ul></nav>";
+		$config['first_tag_open']  = "<li class='page-item'><span class='page-link'>";
+		$config['first_tag_close'] = "</span></li>";
+		$config['last_tag_open']   = "<li class='page-item'><span class='page-link'>";
+		$config['last_tag_close']  = "</span></li>";
+		$config['next_tag_open']   = "<li class='page-item'><span class='page-link'>";
+		$config['next_tag_close']  = "</span></li>";
+		$config['prev_tag_open']   = "<li class='page-item'><span class='page-link'>";
+		$config['prev_tag_close']  = "</span></li>";
+		$config['cur_tag_open']    = "<li class='page-item active'><span class='page-link'>";
+		$config['cur_tag_close']   = "</span></li>";
+		$config['num_tag_open']    = "<li class='page-item'><span class='page-link'>";
+		$config['num_tag_close']   = "</span></li>";
+		$config['first_link']	   = "First";
+		$config['last_link']	   = "End";
+		$config['next_link']	   = "Next";
+		$config['prev_link']	   = "Previous";
+		$this->pagination->initialize($config);
+
+		$data["soal"] = $this->Model->soal($config);
+		$this->pages('module/soal/soal', $data);
 	}
 	public function login()
 	{

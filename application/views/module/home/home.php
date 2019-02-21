@@ -11,7 +11,7 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Kelas :</td>
-                            <td><?php echo $siswa->jurusan; ?></td>
+                            <td><?php echo $siswa->nis; ?></td>
                         </tr>
                     </tbody>
                 </table>
