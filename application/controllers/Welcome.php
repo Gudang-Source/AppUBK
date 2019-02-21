@@ -41,4 +41,9 @@ class Welcome extends MY_Controller {
 		// $this->pages('module/home/home', $data);
 		$this->pages('module/soal/soal');
 	}
+	public function login()
+	{
+		// $this->pages('module/home/home', $data);
+		$this->pages('module/login/login');
+	}
 }
