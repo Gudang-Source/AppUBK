@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2019 at 06:00 AM
+-- Generation Time: Feb 21, 2019 at 05:14 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -31,10 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `guru` (
   `id_guru` int(11) NOT NULL,
   `nama` varchar(60) NOT NULL,
-  `tgl_lahir` date NOT NULL,
-  `tempat_lahir` varchar(30) NOT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `wali_kelas` int(11) DEFAULT NULL
+  `NIP` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -45,9 +42,8 @@ CREATE TABLE `guru` (
 
 CREATE TABLE `kelas` (
   `id_kelas` int(11) NOT NULL,
-  `nama` varchar(30) DEFAULT NULL,
-  `keterangan` varchar(150) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `nama_kelas` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -58,8 +54,7 @@ CREATE TABLE `kelas` (
 CREATE TABLE `pelajaran` (
   `id_pelajaran` int(11) NOT NULL,
   `nama` varchar(30) DEFAULT NULL,
-  `keterangan` varchar(100) DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `KKM` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -70,14 +65,12 @@ CREATE TABLE `pelajaran` (
 
 CREATE TABLE `siswa` (
   `id_siswa` int(11) NOT NULL,
+  `id_kelas` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `nis` varchar(50) NOT NULL,
-  `alamat` varchar(250) NOT NULL,
   `tanggal_lahir` date NOT NULL,
-  `jurusan` enum('NONE','IPA','IPS','AGAMA','BAHASA') DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT NULL,
-  `tahun_penerimaan` varchar(10) NOT NULL DEFAULT '_'
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -96,9 +89,7 @@ CREATE TABLE `soal` (
   `soal_jwb4` varchar(200) NOT NULL,
   `soal_jwb5` varchar(200) NOT NULL,
   `soal_jawaban` varchar(1) NOT NULL,
-  `soal_ket` text NOT NULL,
-  `creatby` int(11) DEFAULT NULL COMMENT 'id guru',
-  `soal_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `gambar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -108,11 +99,9 @@ CREATE TABLE `soal` (
 --
 
 CREATE TABLE `ujian` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(100) DEFAULT NULL,
-  `keterangan` varchar(250) DEFAULT NULL,
-  `waktu_ujian` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `id_ujian` int(11) NOT NULL,
+  `id_kelas` int(11) NOT NULL,
+  `id_pelajaran` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -126,26 +115,7 @@ CREATE TABLE `ujian_jawaban` (
   `ujian_id` int(11) NOT NULL,
   `siswa_id` int(11) DEFAULT NULL,
   `soal_id` int(11) DEFAULT NULL,
-  `jawaban` char(1) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ujian_nilai`
---
-
-CREATE TABLE `ujian_nilai` (
-  `id` int(11) NOT NULL,
-  `ujian_id` int(11) NOT NULL,
-  `siswa_id` int(11) DEFAULT NULL,
-  `nilai` float DEFAULT NULL,
-  `ujian_start` datetime DEFAULT NULL COMMENT 'menunjukan waktu mulai ujian',
-  `ujian_end` datetime DEFAULT NULL COMMENT 'menunjukan waktu berakhir ujian',
-  `selesai` tinyint(4) DEFAULT NULL COMMENT 'menunjukan status ujian : 0 = belum selesai; 1 = selesai',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT NULL
+  `jawaban` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -156,8 +126,7 @@ CREATE TABLE `ujian_nilai` (
 -- Indexes for table `guru`
 --
 ALTER TABLE `guru`
-  ADD PRIMARY KEY (`id_guru`),
-  ADD KEY `fk_walikelas_kelas` (`wali_kelas`);
+  ADD PRIMARY KEY (`id_guru`);
 
 --
 -- Indexes for table `kelas`
@@ -182,14 +151,15 @@ ALTER TABLE `siswa`
 --
 ALTER TABLE `soal`
   ADD PRIMARY KEY (`soal_id`),
-  ADD KEY `fk_soal_guru` (`creatby`),
   ADD KEY `fk_soal_pelajaran` (`soal_pelajaran`);
 
 --
 -- Indexes for table `ujian`
 --
 ALTER TABLE `ujian`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_ujian`),
+  ADD UNIQUE KEY `id_kelas` (`id_kelas`),
+  ADD KEY `id_pelajaran` (`id_pelajaran`);
 
 --
 -- Indexes for table `ujian_jawaban`
@@ -199,14 +169,6 @@ ALTER TABLE `ujian_jawaban`
   ADD KEY `fk_jawaban_ujian` (`ujian_id`),
   ADD KEY `fk_jawaban_siswa` (`siswa_id`),
   ADD KEY `fk_jawaban_soal` (`soal_id`);
-
---
--- Indexes for table `ujian_nilai`
---
-ALTER TABLE `ujian_nilai`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_nilai_ujian` (`ujian_id`),
-  ADD KEY `fk_siswa_ujian` (`siswa_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -222,7 +184,7 @@ ALTER TABLE `guru`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pelajaran`
@@ -231,36 +193,40 @@ ALTER TABLE `pelajaran`
   MODIFY `id_pelajaran` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `siswa`
 --
+ALTER TABLE `siswa`
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for table `guru`
+-- AUTO_INCREMENT for table `ujian`
 --
-ALTER TABLE `guru`
-  ADD CONSTRAINT `fk_walikelas_kelas` FOREIGN KEY (`wali_kelas`) REFERENCES `kelas` (`id_kelas`);
+ALTER TABLE `ujian`
+  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
 
 --
 -- Constraints for table `soal`
 --
 ALTER TABLE `soal`
-  ADD CONSTRAINT `fk_soal_guru` FOREIGN KEY (`creatby`) REFERENCES `guru` (`id_guru`),
   ADD CONSTRAINT `fk_soal_pelajaran` FOREIGN KEY (`soal_pelajaran`) REFERENCES `pelajaran` (`id_pelajaran`);
+
+--
+-- Constraints for table `ujian`
+--
+ALTER TABLE `ujian`
+  ADD CONSTRAINT `ujian_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`),
+  ADD CONSTRAINT `ujian_ibfk_2` FOREIGN KEY (`id_pelajaran`) REFERENCES `pelajaran` (`id_pelajaran`);
 
 --
 -- Constraints for table `ujian_jawaban`
 --
 ALTER TABLE `ujian_jawaban`
-  ADD CONSTRAINT `fk_jawaban_siswa` FOREIGN KEY (`siswa_id`) REFERENCES `siswa` (`id_siswa`),
   ADD CONSTRAINT `fk_jawaban_soal` FOREIGN KEY (`soal_id`) REFERENCES `soal` (`soal_id`),
-  ADD CONSTRAINT `fk_jawaban_ujian` FOREIGN KEY (`ujian_id`) REFERENCES `ujian` (`id`);
-
---
--- Constraints for table `ujian_nilai`
---
-ALTER TABLE `ujian_nilai`
-  ADD CONSTRAINT `fk_nilai_ujian` FOREIGN KEY (`ujian_id`) REFERENCES `ujian` (`id`),
-  ADD CONSTRAINT `fk_siswa_ujian` FOREIGN KEY (`siswa_id`) REFERENCES `siswa` (`id_siswa`);
+  ADD CONSTRAINT `ujian_jawaban_ibfk_1` FOREIGN KEY (`siswa_id`) REFERENCES `siswa` (`id_siswa`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
