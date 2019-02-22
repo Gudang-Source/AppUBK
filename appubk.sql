@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 21, 2019 at 07:40 PM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.11
+-- Host: localhost
+-- Generation Time: Feb 22, 2019 at 01:40 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -76,6 +76,26 @@ INSERT INTO `pelajaran` (`id_pelajaran`, `nama`, `KKM`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `record`
+--
+
+CREATE TABLE `record` (
+  `id_record` int(11) NOT NULL,
+  `id_siswa` int(15) NOT NULL,
+  `id_pelajaran` int(15) NOT NULL,
+  `id_soal` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `record`
+--
+
+INSERT INTO `record` (`id_record`, `id_siswa`, `id_pelajaran`, `id_soal`) VALUES
+(32, 2, 1, '1,3,2');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `siswa`
 --
 
@@ -111,7 +131,7 @@ CREATE TABLE `soal` (
   `soal_jwb3` varchar(200) NOT NULL,
   `soal_jwb4` varchar(200) NOT NULL,
   `soal_jwb5` varchar(200) NOT NULL,
-  `soal_jawaban` varchar(1) NOT NULL,
+  `soal_jawaban` varchar(200) NOT NULL,
   `gambar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -120,9 +140,9 @@ CREATE TABLE `soal` (
 --
 
 INSERT INTO `soal` (`soal_id`, `soal_pelajaran`, `soal_deskripsi`, `soal_jwb1`, `soal_jwb2`, `soal_jwb3`, `soal_jwb4`, `soal_jwb5`, `soal_jawaban`, `gambar`) VALUES
-(1, 1, 'siapa presiden akan datang ?', 'soeharto', 'soekarno', 'habibie', 'jokowi', 'prabowo', 'j', ''),
-(2, 1, 'Kepala sekolah smk hebat', 'soeharto', 'soekarno', 'habibie', 'jokowi', 'prabowo', 'j', ''),
-(3, 1, 'prgrammer hebat', 'soeharto', 'soekarno', 'habibie', 'jokowi', 'prabowo', 'j', '');
+(1, 1, 'siapa prsiden kita', 'Jokowi', 'Soekarno', 'Soeharto', 'Habibi', 'Megawati', 'Jokowi', ''),
+(2, 1, 'Siapa kita ?`', 'Kami', 'Dia', 'Mereka', 'Saya', 'Kita', 'Kita', ''),
+(3, 1, 'Siapa anda ?`', 'Kami', 'Dia', 'Mereka', 'Saya', 'Anda', 'Anda', '');
 
 -- --------------------------------------------------------
 
@@ -135,6 +155,13 @@ CREATE TABLE `ujian` (
   `id_kelas` int(11) NOT NULL,
   `id_pelajaran` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ujian`
+--
+
+INSERT INTO `ujian` (`id_ujian`, `id_kelas`, `id_pelajaran`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -171,6 +198,12 @@ ALTER TABLE `kelas`
 --
 ALTER TABLE `pelajaran`
   ADD PRIMARY KEY (`id_pelajaran`);
+
+--
+-- Indexes for table `record`
+--
+ALTER TABLE `record`
+  ADD PRIMARY KEY (`id_record`);
 
 --
 -- Indexes for table `siswa`
@@ -226,16 +259,28 @@ ALTER TABLE `pelajaran`
   MODIFY `id_pelajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `record`
+--
+ALTER TABLE `record`
+  MODIFY `id_record` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
   MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `soal`
+--
+ALTER TABLE `soal`
+  MODIFY `soal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `ujian`
 --
 ALTER TABLE `ujian`
-  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -264,8 +309,8 @@ ALTER TABLE `ujian`
 -- Constraints for table `ujian_jawaban`
 --
 ALTER TABLE `ujian_jawaban`
-  ADD CONSTRAINT `fk_jawaban_soal` FOREIGN KEY (`soal_id`) REFERENCES `soal` (`soal_id`),
-  ADD CONSTRAINT `ujian_jawaban_ibfk_1` FOREIGN KEY (`siswa_id`) REFERENCES `siswa` (`id_siswa`);
+  ADD CONSTRAINT `ujian_jawaban_ibfk_1` FOREIGN KEY (`siswa_id`) REFERENCES `siswa` (`id_siswa`),
+  ADD CONSTRAINT `ujian_jawaban_ibfk_2` FOREIGN KEY (`soal_id`) REFERENCES `soal` (`soal_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

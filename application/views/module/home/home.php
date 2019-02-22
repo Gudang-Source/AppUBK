@@ -11,7 +11,7 @@
                         </tr>
                         <tr>
                             <td class="font-weight-bold">Kelas :</td>
-                            <td><?php echo $siswa->nis; ?></td>
+                            <td><?php echo $ujian->nama_kelas; ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -28,7 +28,11 @@
                     <tbody>
                         <tr>
                             <td>Mata Pelajaran</td>
-                            <td>Bahasa Indonesia</td>
+                            <td><?php echo $ujian->nama; ?></td>
+                        </tr>
+                        <tr>
+                            <td>KKM</td>
+                            <td><?php echo $ujian->KKM; ?></td>
                         </tr>
                     </tbody>
                 </table>

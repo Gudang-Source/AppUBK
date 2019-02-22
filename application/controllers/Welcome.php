@@ -22,11 +22,24 @@ class Welcome extends MY_Controller {
 		parent::__construct();
 		$this->load->library('pagination');
 		$this->load->model('Model'); // Load model ke controller ini
+		if($this->session->userdata('status') != "success"){
+			redirect(base_url("login"));
+		}
 	}
 
 	public function index() {
-		$data["siswa"] = $this->Model->siswa();
+		$where = array(
+			'id_siswa' => $this->session->userdata('id_siswa'),
+		);
+		$data["siswa"] = $this->Model->siswa("siswa",$where)->row();
+		$ada_ujian = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->num_rows();
+		if($ada_ujian > 0 ){
+			$data['ujian'] = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
+		}else{
+			redirect(base_url("welcome/login"));
+		}
 		$this->pages('module/home/home', $data);
+		
 	}
 	
 	public function soal() {
@@ -57,15 +70,24 @@ class Welcome extends MY_Controller {
 		$config['next_link']	   = "Next";
 		$config['prev_link']	   = "Previous";
 		$this->pagination->initialize($config);
-
+		$array=[];
+		$siswa = $this->session->userdata('id_siswa');
+		$kelas = $this->Model->kelas('kelas',array('id_kelas' => $this->session->userdata('id_kelas')));
+		$random= $this->Model->random();
+		$cek_record=$this->Model->cek_record($siswa)->num_rows();
+		if($cek_record < 1 ){
+			foreach($random as $datas){
+				array_push($array,$datas->soal_id);
+			}
+			$arrays= join(',',$array);
+			$this->db->query("INSERT INTO record (id_siswa,id_pelajaran,id_soal) VALUES ('$siswa','$kelas->id_kelas','$arrays')");
+		}
 		$data["soal"] = $this->Model->soal($config);
-		$data["siswa"] = $this->Model->siswa();
-		$data["kelas"] = $this->Model->kelas();
-		$data["random"] = $this->Model->random();
 		$this->pages('module/soal/soal', $data);
 	}
 	public function login()
 	{
+
 		// $this->pages('module/home/home', $data);
 		$this->pages('module/login/login');
 	}

@@ -1,21 +1,14 @@
-<?php
-    // $array=[];
-    // foreach($random as $data){
-    //     array_push($array,$data->soal_id);
-    // }
-    // $arrays= join(',',$array);
-    // $this->db->query("INSERT INTO record (id_siswa,id_pelajaran,id_soal) VALUES ('$siswa->id_siswa','$kelas->id_kelas','$arrays')");
-?>
-
 <div class="row">
+    <?php var_dump($soal); ?>
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
                 Selamat Ujian Muhammad Syarif Hidayatullah
 			</div>
 			<div class="card-body">
+                <?php $no=1 ?>
 				<?php foreach ($soal as $data) {
-                    echo $data->soal_deskripsi; ?> <br>
+                    echo $no++.'.'.$data->soal_deskripsi; ?> <br>
                     <input type="radio" name="pilgan" value="<?php echo $data->soal_jwb1 ?>"> <?php echo $data->soal_jwb1 ?><br>
                     <input type="radio" name="pilgan" value="<?php echo $data->soal_jwb2 ?>"> <?php echo $data->soal_jwb2 ?><br>
                     <input type="radio" name="pilgan" value="<?php echo $data->soal_jwb3 ?>"> <?php echo $data->soal_jwb3 ?><br>
