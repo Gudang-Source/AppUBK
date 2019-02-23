@@ -13,9 +13,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div id="app">
 		<nav class="navbar fixed-top navbar-light bg-light">
 		<div class="navbar-brand judulapp">Aplikasi Latihan UNBK</div>
-			<div class="navbar nav" style="background-color: #343434;;">
+			<!-- <div class="navbar nav" style="background-color: #343434;;">
 				<img src="<?=base_url('./assets/avatar.gif') ?>" alt="..">	
-			</div>
+			</div> -->
 		</nav>
 
 				<div>
