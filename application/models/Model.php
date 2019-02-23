@@ -38,15 +38,17 @@ class Model extends CI_Model {
     }
 
     public function soal($config) {
-        $this->db->join('record','soal.soal_pelajaran= record.id_pelajaran');
-        $this ->db->order_by('FIELD(soal.soal_id, record.id_soal)');
-        // $hasilquery = $this->db->query('SELECT * FROM soal as a JOIN record as b ON a.soal_pelajaran=b.id_pelajaran ORDER BY FIELD(soal_id,id_soal) DESC')->result();
-        $hasilquery = $this->db->get('soal', $config['per_page'], $this->uri->segment(3));
-        if ($hasilquery->num_rows() > 0) {
+            $this->db->join('record','soal.soal_pelajaran= record.id_pelajaran');
+            $this->db->join('siswa','siswa.id_siswa= record.id_siswa');
+            $this->db->join('ujian','siswa.id_kelas= ujian.id_kelas','soal.soal_pelajaran=ujian.id_pelajaran');
+            $this ->db->order_by('FIELD(soal.soal_id, record.id_soal)');
+            $hasilquery = $this->db->get('soal', $config['per_page'], $this->uri->segment(3));
             foreach ($hasilquery->result() as $value) {
                 $data[] = $value;
             }
             return $data;
-        }
+    }
+    public function cek_jawaban($table, $where){
+            return $this->db->get_where($table,$where);
     }
 }

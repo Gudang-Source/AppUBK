@@ -42,14 +42,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-4">
-            <div class="alert alert-info" style="background-color:#00c0ef !important;color:white;padding:30px;">
-                <h4>
-                    <i class="icon fa fa-info"></i> Perhatian!
-                </h4>
-                Silahkan klik tombol mulai ujian dibawah ini, jika anda telah siap melaksanakan ujian.
-            </div>
-            <a class="btn btn-success btn-lg btn-block" href="<?=base_url('welcome/soal')?>">Mulai Ujian</a>
+    </div>
+    <div class="col-md-4">
+        <div class="alert alert-info" style="background-color:#00c0af !important;color:white;padding:30px;">
+            <h4>
+                <i class="icon fa fa-info"></i> Perhatian!
+            </h4>
+            Silahkan klik tombol mulai ujian dibawah ini, jika anda telah siap melaksanakan ujian.
         </div>
     </div>
 </div>
