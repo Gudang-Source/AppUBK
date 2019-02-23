@@ -10,18 +10,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="<?=base_url('./assets/css/style.css')?>">
 </head>
 <body>
-<<<<<<< Updated upstream
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding: 0;">
-			<div class="navbar-brand judulapp">Aplikasi Latihan UNBK</div>
+		<div id="app">
+		<nav class="navbar fixed-top navbar-light bg-light">
+		<div class="navbar-brand judulapp">Aplikasi Latihan UNBK</div>
 			<div class="navbar nav" style="background-color: #343434;;">
 				<img src="<?=base_url('./assets/avatar.gif') ?>" alt="..">	
 			</div>
-		</nav>
-	<?php echo $content; ?>
-=======
-		<div id="app">
-		<nav class="navbar fixed-top navbar-light bg-light">
-  			<a class="navbar-brand" href="#">Fixed top</a>
 		</nav>
 
 				<div>
@@ -31,6 +25,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo base_url('assets/js/vue.js')?>"></script>
 	<script src="<?php echo base_url('assets/js/axios.min.js')?>"></script>
 	<script src="<?php echo base_url('assets/js/script.js')?>"></script>
->>>>>>> Stashed changes
 </body>
 </html>

@@ -1,6 +1,6 @@
 body{
-<<<<<<< Updated upstream
     background-color: #e1e1e1;
+    overflow-x: hidden;
 }
 .navbar{
     background-color: #347ab6;
@@ -11,10 +11,6 @@ body{
     height: 80px;
 }
 
-=======
-    overflow-x: hidden;
-}
->>>>>>> Stashed changes
 .login-form {
     width: 340px;
     margin: 50px auto;
