@@ -37,18 +37,22 @@ class Model extends CI_Model {
         return $this->db->get();
     }
 
-    public function soal($config) {
+    public function soal($config,$siswa) {
+            $id_soal=$this->db->query("SELECT record.id_soal,ujian.id_ujian,siswa.id_siswa FROM record JOIN siswa ON siswa.id_siswa=$siswa JOIN ujian ON ujian.id_kelas=siswa.id_kelas WHERE record.id_siswa=siswa.id_siswa AND record.id_pelajaran=ujian.id_pelajaran")->row();
+            $arrayId=explode(",",$id_soal->id_soal);
             if($config=="select"){
-                $data=$this->db->query('SELECT jawaban FROM soal JOIN record ON record.id_pelajaran=soal.soal_pelajaran JOIN siswa ON siswa.id_siswa=record.id_siswa JOIN ujian ON siswa.id_kelas=ujian.id_kelas AND soal.soal_pelajaran=ujian.id_pelajaran LEFT OUTER JOIN ujian_jawaban ON ujian.id_ujian=ujian_jawaban.ujian_id AND siswa.id_siswa=ujian_jawaban.siswa_id AND soal.soal_id=ujian_jawaban.soal_id ORDER BY FIELD(soal.soal_id,record.id_soal)')->result();
+                $arrayId2=implode(",", $arrayId);
+                $hasilquery=$this->db->query("SELECT * FROM soal LEFT OUTER JOIN ujian_jawaban ON ujian_jawaban.ujian_id=$id_soal->id_ujian AND ujian_jawaban.siswa_id=$id_soal->id_siswa AND ujian_jawaban.soal_id=soal.soal_id WHERE soal.soal_id IN ($arrayId2) ORDER BY FIELD(soal.soal_id,$arrayId2)"); 
             }else{
-                $this->db->join('record','soal.soal_pelajaran= record.id_pelajaran');
-                $this->db->join('siswa','siswa.id_siswa= record.id_siswa');
-                $this->db->join('ujian','siswa.id_kelas= ujian.id_kelas','soal.soal_pelajaran=ujian.id_pelajaran');
-                $this ->db->order_by('FIELD(soal.soal_id, record.id_soal)');
-                $hasilquery = $this->db->get('soal', $config['per_page'], $this->uri->segment(3));
-                foreach ($hasilquery->result() as $value) {
-                    $data[] = $value;
-                }
+                $this->db->join('ujian','ujian.id_ujian='.$id_soal->id_ujian);
+                $this->db->join('siswa','siswa.id_siswa='.$siswa);
+                $this->db->where_in('soal.soal_id',$arrayId);
+                $order = sprintf('FIELD(soal.soal_id, %s)', implode(', ', $arrayId));
+                $this->db->order_by($order);
+                $hasilquery=$this->db->get('soal',$config['per_page'], $this->uri->segment(3));
+            }
+            foreach ($hasilquery->result() as $value) {
+                $data[] = $value;
             }
             return $data;
     }

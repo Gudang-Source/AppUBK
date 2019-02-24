@@ -84,15 +84,47 @@ body{
 .sidebar-right > .toggler > i {
     margin: 15px 2px;
 }
+.aktif,.biasa,.terjawab{
+    transition: 0.3s;
+}
 .aktif{
-    border: 3px solid rgb(49, 49, 50);
-    background-color: lightskyblue;
+    border: 3px solid #007bff;
+    background-color: #007bff;
     color:white;
 }
+.aktif:hover{
+    border: 3px solid #0a65c7;
+    background-color: #0a65c7;
+    color:white;
+    text-decoration: none;
+}
 .biasa{
-    border: 3px solid rgb(49, 49, 50);
+    border: 3px solid #17a2b8;
+    color:black;
+    background-color: white;
+}
+.biasa:hover{
+    border: 3px solid #0e4d57;
+    color:black;
+    background-color: white;
+    text-decoration:none;
 }
 .terjawab{
-    border: 3px solid rgb(49, 49, 50);
-    color:red
+    border: 3px solid #28a745;
+    background-color: #28a745;
+    color:white;
+}
+.terjawab:hover{
+    border: 3px solid #208337;
+    background-color: #208337;
+    color:white;
+    text-decoration:none;
+}
+.link-pag{
+    border-radius:2px;
+    font-size:20px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 53px;
 }

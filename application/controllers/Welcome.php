@@ -73,8 +73,9 @@ class Welcome extends MY_Controller {
 			$arrays= join(',',$array);
 			$this->db->query("INSERT INTO record (id_siswa,id_pelajaran,id_soal) VALUES ('$siswa','$kelas->id_kelas','$arrays')");
 		}
-		$data["soal"] = $this->Model->soal($config);
-		$data["soalSemua"] = $this->Model->soal('select');
+		$data["soal"] = $this->Model->soal($config,$siswa);
+		$data["soalSemua"] = $this->Model->soal('select',$siswa);
+		$data['url']=$this->uri->segment('3');
 		$this->pages('module/soal/soal', $data);
 	}
 	public function login()
