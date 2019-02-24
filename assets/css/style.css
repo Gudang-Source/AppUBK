@@ -42,17 +42,6 @@ body{
     background-color: #efefef;
     z-index: 20;
 }
-.item{
-    width: 50px;
-    height: 50px;
-    /* background-color: green; */
-    border: #313132;
-    color: #fff;
-    border-style: solid;
-    margin-bottom: 17px;
-    font-size: 18px;
-    line-height: normal;
-}
 .col-md-12,.col-sm-12{
     padding: 0;
 }
@@ -94,4 +83,16 @@ body{
 }
 .sidebar-right > .toggler > i {
     margin: 15px 2px;
+}
+.aktif{
+    border: 3px solid rgb(49, 49, 50);
+    background-color: lightskyblue;
+    color:white;
+}
+.biasa{
+    border: 3px solid rgb(49, 49, 50);
+}
+.terjawab{
+    border: 3px solid rgb(49, 49, 50);
+    color:red
 }

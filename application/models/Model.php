@@ -27,7 +27,7 @@ class Model extends CI_Model {
         $this->db->join('ujian','ujian.id_pelajaran=soal.soal_pelajaran');
         $this->db->join('siswa','ujian.id_kelas=siswa.id_kelas');
         $this->db->order_by('rand()');
-        return $this->db->get()->result();
+        return $this->db->get();
     }
     public function cek_record($siswa){
         $this->db->select('*');
@@ -38,13 +38,17 @@ class Model extends CI_Model {
     }
 
     public function soal($config) {
-            $this->db->join('record','soal.soal_pelajaran= record.id_pelajaran');
-            $this->db->join('siswa','siswa.id_siswa= record.id_siswa');
-            $this->db->join('ujian','siswa.id_kelas= ujian.id_kelas','soal.soal_pelajaran=ujian.id_pelajaran');
-            $this ->db->order_by('FIELD(soal.soal_id, record.id_soal)');
-            $hasilquery = $this->db->get('soal', $config['per_page'], $this->uri->segment(3));
-            foreach ($hasilquery->result() as $value) {
-                $data[] = $value;
+            if($config=="select"){
+                $data=$this->db->query('SELECT jawaban FROM soal JOIN record ON record.id_pelajaran=soal.soal_pelajaran JOIN siswa ON siswa.id_siswa=record.id_siswa JOIN ujian ON siswa.id_kelas=ujian.id_kelas AND soal.soal_pelajaran=ujian.id_pelajaran LEFT OUTER JOIN ujian_jawaban ON ujian.id_ujian=ujian_jawaban.ujian_id AND siswa.id_siswa=ujian_jawaban.siswa_id AND soal.soal_id=ujian_jawaban.soal_id ORDER BY FIELD(soal.soal_id,record.id_soal)')->result();
+            }else{
+                $this->db->join('record','soal.soal_pelajaran= record.id_pelajaran');
+                $this->db->join('siswa','siswa.id_siswa= record.id_siswa');
+                $this->db->join('ujian','siswa.id_kelas= ujian.id_kelas','soal.soal_pelajaran=ujian.id_pelajaran');
+                $this ->db->order_by('FIELD(soal.soal_id, record.id_soal)');
+                $hasilquery = $this->db->get('soal', $config['per_page'], $this->uri->segment(3));
+                foreach ($hasilquery->result() as $value) {
+                    $data[] = $value;
+                }
             }
             return $data;
     }

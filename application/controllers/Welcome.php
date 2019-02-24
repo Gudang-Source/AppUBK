@@ -23,7 +23,7 @@ class Welcome extends MY_Controller {
 		$this->load->library('pagination');
 		$this->load->model('Model'); // Load model ke controller ini
 		if($this->session->userdata('status') != "success"){
-			redirect(base_url("login"));
+			redirect(base_url("welcome/login"));
 		}
 	}
 
@@ -51,25 +51,20 @@ class Welcome extends MY_Controller {
 		$config['uri_segment'] = 3;
 
 		//styling
-		$config['full_tag_open']   = "<nav aria-label='Page navigation example'><ul class='pagination pagination-sm justify-content-end'>";
-		$config['full_tag_close']  = "</ul></nav>";
-		$config['first_tag_open']  = "<li class='page-item'><span class='page-link'>";
-		$config['first_tag_close'] = "</span></li>";
-		$config['last_tag_open']   = "<li class='page-item'><span class='page-link'>";
-		$config['last_tag_close']  = "</span></li>";
-		$config['next_tag_open']   = "<div class='col-md-6'><span class='w-100 btn btn-success'>Next";
-		$config['next_tag_close']  = "</span></div>";
-		$config['prev_tag_open']   = "<div class='col-md-6'><span class='w-100 btn btn-info'>Prev";
-		$config['prev_tag_close']  = "</span></div>";
-		$config['cur_tag_open']    = "<li class='page-item'><span class='page-link'>";
-		$config['cur_tag_close']   = "</span></li>";
-		$config['num_tag_open']    = "<li class='page-item'><span class='page-link'>";
-		$config['num_tag_close']   = "</span></li>";
+		$config['full_tag_open']   = "";
+		$config['full_tag_close']  = "";
+		$config['last_tag_open']    = "";
+		$config['last_tag_close']   = "";
+		$config['cur_tag_open']    = "<div style='margin-bottom:30px;padding:2px;color: rgb(0, 0, 0); width:25%;'>";
+		$config['cur_tag_close']   = "</div>";
+		$config['num_tag_open']    = "<div style='margin-bottom:30px;padding:2px;color: rgb(0, 0, 0); width:25%;'>";
+		$config['num_tag_close']   = "</div>";
 		$this->pagination->initialize($config);
 		$array=[];
 		$siswa = $this->session->userdata('id_siswa');
 		$kelas = $this->Model->kelas('kelas',array('id_kelas' => $this->session->userdata('id_kelas')));
-		$random= $this->Model->random();
+		$random= $this->Model->random()->result();
+		$data['jum_soal']=$this->Model->random()->num_rows();
 		$cek_record=$this->Model->cek_record($siswa)->num_rows();
 		if($cek_record < 1 ){
 			foreach($random as $datas){
@@ -79,6 +74,7 @@ class Welcome extends MY_Controller {
 			$this->db->query("INSERT INTO record (id_siswa,id_pelajaran,id_soal) VALUES ('$siswa','$kelas->id_kelas','$arrays')");
 		}
 		$data["soal"] = $this->Model->soal($config);
+		$data["soalSemua"] = $this->Model->soal('select');
 		$this->pages('module/soal/soal', $data);
 	}
 	public function login()

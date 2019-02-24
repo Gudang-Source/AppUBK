@@ -2,6 +2,10 @@
     <?php
         $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $ambil_url	 = substr($actual_link, 37, 1);
+        $url	 = substr($actual_link, 37, 1);
+        if($url==""){
+            $url=0;
+        }
         if($ambil_url==""){
             $ambil_url=0+1;
         }else{
@@ -20,23 +24,24 @@
     	        <div class="contente" style="">
     	            <div class="text-center" style="padding-bottom:20px; font-size:14px; color:#0066CC;">Soal Pilihan Ganda</div>
                     <div id="xslide" style="text-align: center; height: 1675px; position: relative;">
-                    <div class="item" id="bulat2" style="color: rgb(0, 0, 0); border-color: rgb(49, 49, 50); position: absolute; left: 0px; top: 0px;">
-				        <p style="font-family:Arial, Helvetica, sans-serif; font-size:36px">
-				        	1				
-				        </p>
-				        <div class="text-center" id="noti-count" style="#313132">	
-				        	<div id="kecil2">
+                        <div class='row' style='margin:0 auto;'>
 
-				        	</div>
-				        </div>
-			        </div>
+                            <?php
+                            for($i=0; $i<count($soalSemua); $i++){ ?>
+                                <div style='margin-bottom:30px;padding:2px;color: rgb(0, 0, 0); width:25%;'>
+                                    <a class="<?php if($url==$i){echo "aktif";}else{if($soalSemua[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" style="font-size:20px;padding:15px;" href="<?php echo base_url('welcome/soal/'.$i); ?>"><?php echo $i+1; ?></a>
+                                </div>
+                            <?php } ?>
+                        </div>
     	            </div>          
     	        </div>	
             </div>
         </div>
-        <div  style="font-size:40px; text-align:center;" class="toggler">
-            <i @click="sidebar.right=0" class="fas fa-angle-left" v-if="sidebar.right=='-300px'"></i>
-            <i @click="sidebar.right='-300px'" class="fas fa-angle-right" v-if="sidebar.right=='0'"></i>
+        <div @click="sidebar.right='0'" v-if="sidebar.right=='-300px'" style="font-size:40px; text-align:center;" class="toggler">
+            <i class="fas fa-angle-left"></i>
+        </div>
+        <div @click="sidebar.right='-300px'" v-if="sidebar.right=='0'" style="font-size:40px; text-align:center;" class="toggler">
+            <i class="fas fa-angle-right"></i>
         </div>
     </div>
 		<div class="card">
@@ -44,7 +49,6 @@
                 Selamat Ujian Muhammad Syarif Hidayatullah
 			</div>
 			<div class="card-body">
-                <?php $no=1 ?>
 				<?php foreach ($soal as $data) {
                     if($cek_jawaban>0){
                         echo $ambil_url.'.'.$data->soal_deskripsi; ?> <br>
@@ -65,15 +69,38 @@
             </div>
             <div class="card-footer">
                 <div class="row">
-                    <div class="col-6"><?php echo $this->pagination->create_links(); ?></div>
+                    
                     <div class="col-md-6">
-                        <a href="" class="w-100 btn btn-info">Prev</a>    
+                        <?php
+                        if($url==0){ ?>
+                            <p class="w-100 btn btn-info disabled">Prev</a>    
+                        <?php
+                        }else{ 
+                            
+                            $url_previous=$url-1;
+                            ?>
+                            <a href="<?php echo base_url('welcome/soal/'.$url_previous) ?>" class="w-100 btn btn-info">Prev</a>    
+                        <?php
+                        }
+                        ?>
+                        
                     </div>
                     <!-- <div class="col-md-4">
                         <a href="" class="w-100 btn btn-success">Selesai</a>
                     </div> -->
                     <div class="col-md-6">
-                        <a href="" class="w-100 btn btn-primary">Next</a>
+                    <?php
+                        if($url==0){
+                            $url_next=1; 
+                            ?>
+                            <a href="<?php echo base_url('welcome/soal/'.$url_next) ?>" class="w-100 btn btn-primary">Next</a>    
+                        <?php }else if($url<$jum_soal-1){ 
+                            $url_next=$url+1;
+                        ?>
+                            <a href="<?php echo base_url('welcome/soal/'.$url_next) ?>" class="w-100 btn btn-primary">Next</a>    
+                        <?php }else if($url){ ?>
+                            <a class="btn btn-success w-100" href="">Finish</a>
+                        <?php } ?>       
                     </div>
                 </div>
     	    </div>
