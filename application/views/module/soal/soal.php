@@ -37,7 +37,6 @@
         </div>
     </div>
 		<div class="card" style="margin-top:70px;">
-            <?php var_dump($soal) ?>
 			<div class="card-header">
                 Selamat Ujian Muhammad Syarif Hidayatullah
 			</div>
