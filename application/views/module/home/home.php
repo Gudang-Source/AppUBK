@@ -1,8 +1,10 @@
 <div class="container" style="margin-top: 70px;">
     <div class="row">
-        <div class="col-md-4">
-        <div class="card card-default">
-                <img src="" class="card-img-top rounded mx-auto d-block" alt="...">
+        <div class="col-12 col-md-4">
+            <div class="card card-default">
+                <div class="card-header">
+                    <img src="<?=base_url('./assets/avatar.gif')?>" class="rounded mx-auto d-block" alt="...">
+                </div>
                 <div class="card-body">
                     <table class="table">
                         <tbody>
@@ -19,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-12 col-md-4">
             <div class="card card-default">
                 <div class="card-header">
                     Info Ujian

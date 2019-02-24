@@ -1,3 +1,4 @@
+<div class="container">
 <div class="row">
     <?php
         $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -17,10 +18,10 @@
         $cek_jawaban= $this->db->query("SELECT jawaban FROM ujian_jawaban WHERE ujian_id='$ujian_id' AND siswa_id='$siswa_id' AND soal_id='$soal_id'")->num_rows();
         $jawaban=$this->db->query("SELECT * FROM ujian_jawaban WHERE soal_id='$soal_id' AND ujian_id='$ujian_id' AND siswa_id='$siswa_id'")->row();
     ?>
-	<div class="col-md-12">
+	<div class="col-12">
     <div id="slideMenu" class="container sidebar sidebar-right" v-bind:style="sidebar">
         <div class="row">
-    	    <div class="sidebar col-xs-12 col-sm-12 col-md-12 col-lg1-12">
+    	    <div class="sidebar col-12 col-sm-12 col-md-12 col-lg-12">
     	        <div class="contente" style="">
     	            <div class="text-center" style="padding-bottom:20px; font-size:14px; color:#0066CC;">Soal Pilihan Ganda</div>
                     <div id="xslide" style="text-align: center; height: 1675px; position: relative;">
@@ -70,7 +71,7 @@
             <div class="card-footer">
                 <div class="row">
                     
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                         <?php
                         if($url==0){ ?>
                             <p class="w-100 btn btn-info disabled">Prev</a>    
@@ -88,7 +89,7 @@
                     <!-- <div class="col-md-4">
                         <a href="" class="w-100 btn btn-success">Selesai</a>
                     </div> -->
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                     <?php
                         if($url==0){
                             $url_next=1; 
@@ -106,4 +107,5 @@
     	    </div>
     	</div>
     </div>
+</div>
 </div>
