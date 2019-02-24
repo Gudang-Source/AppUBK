@@ -4,11 +4,6 @@ body{
 }
 .navbar{
     background-color: #347ab6;
-    color: #ffffff;
-}
-.navbar img{
-    width: 80px;
-    height: 80px;
 }
 
 .login-form {
