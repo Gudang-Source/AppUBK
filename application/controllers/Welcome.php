@@ -23,7 +23,7 @@ class Welcome extends MY_Controller {
 		$this->load->library('pagination');
 		$this->load->model('Model'); // Load model ke controller ini
 		if($this->session->userdata('status') != "success"){
-			redirect(base_url("welcome/login"));
+			redirect(base_url("./login"));
 		}
 	}
 
