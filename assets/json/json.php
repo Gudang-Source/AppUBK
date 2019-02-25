@@ -35,6 +35,9 @@
 			$jawaban= $datas->jawaban;
 			$id= $datas->id;
 			$sql= "UPDATE ujian_jawaban SET jawaban='$jawaban' WHERE id='$id'";
+		}
+		if($datas->stat=="logout"){
+    		header('Location: ../../login/logout'); 
         }
         if(isset($sql)){
 			$query 	= $koneksi->query($sql);

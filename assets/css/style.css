@@ -1,3 +1,6 @@
+[v-cloack]{
+    display: none;
+}
 body{
     background-color: #e1e1e1;
     overflow-x: hidden;
@@ -122,4 +125,38 @@ body{
     width: 100%;
     height: 100%;
     line-height: 53px;
+}
+.modalSelesai{
+    width: 100%;
+    height: 100vh;
+    top:0;
+    background-color: rgba(0,0,0,.2);
+    position: fixed;
+    z-index: 999999;
+}
+.modal-c{
+    width: 450px;
+    height: 450px;
+    margin: 0 auto;
+    z-index: 999999;
+    
+}
+.modal-y{
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    z-index: 999999;
+    
+}
+.form-enter-active {
+    transition: all .3s ease;
+}
+.form-leave-active {
+    transition: all .3s ease;
+}
+.form-enter, .form-leave-to{
+  opacity: 0;
+}
+.modal-c table tr td{
+    width: 30px;
 }

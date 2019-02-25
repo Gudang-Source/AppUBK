@@ -14,11 +14,7 @@
 	<div class="col-12">
     <div id="slideMenu" class="container sidebar sidebar-right" v-bind:style="sidebar">
         <div class="row">
-<<<<<<< HEAD
     	    <div class="sidebar col-xs-12 col-sm-12 col-md-12 col-lg-12">
-=======
-    	    <div class="sidebar col-12 col-sm-12 col-md-12 col-lg-12">
->>>>>>> master
     	        <div class="contente" style="">
     	            <div class="text-center" style="padding-bottom:20px; font-size:14px; color:#0066CC;">Soal Pilihan Ganda</div>
                     <div id="xslide" style="text-align: center; height: 1675px; position: relative;">
@@ -88,17 +84,16 @@
                     </div> -->
                     <div class="col-6 col-md-6">
                     <?php
-                        if($url==0){
-                            $url_next=1; 
-                            ?>
-                            <a href="<?php echo base_url('welcome/soal/'.$url_next) ?>" class="w-100 btn btn-primary">Next</a>    
-                        <?php }else if($url<$jum_soal-1){ 
+                        if($url+1<count($soalSemua)){ 
                             $url_next=$url+1;
                         ?>
+
                             <a href="<?php echo base_url('welcome/soal/'.$url_next) ?>" class="w-100 btn btn-primary">Next</a>    
-                        <?php }else if($url){ ?>
-                            <a class="btn btn-success w-100" href="">Finish</a>
-                        <?php } ?>       
+                        <?php }else if($url+1==count($soalSemua)){ 
+                            ?>
+                            <button class="btn btn-success w-100" @click="yakin.form=true">Selesai</button>
+                        <?php } 
+                        ?>       
                     </div>
                 </div>
     	    </div>
@@ -106,3 +101,46 @@
     </div>
 </div>
 </div>
+
+        <transition name="form">
+        <div v-if="yakin.form" class="modalSelesai">
+        	<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content modal-y">
+        		    <div class="modal-body">
+        		        <h2 style="text-align: center;vertical-align: middle;  ">
+                            Anda yakin ingin mengakhiri ujian ini !!
+						</h2>
+        		    </div>
+        		    <div class="modal-footer">
+                            <button class="btn btn-success w-50" @click="selesaiButton(<?=$ujian_id?>,<?=$siswa_id?>,<?=count($soalSemua)?>)">Akhiri</button>
+                            <button class="btn btn-danger w-50" @click="yakin.form=false">Batal</button>
+        		    </div>
+        		</div>
+			</div>
+        </div>
+        </transition>
+        <transition name="form">
+		<div v-if="selesai.form" class="modalSelesai">
+        	<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content modal-c">
+        		    <div class="modal-body">
+                            <table class="table">
+                                <tr>
+                                    <td>Benar</td>
+                                    <td>{{selesai.benar}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Salah</td>
+                                    <td>{{selesai.salah}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">
+                                        <h1>{{selesai.nilai}}</h1>
+                                    </td>
+                                </tr>
+                            </table>
+        		    </div>
+        		</div>
+			</div>
+    	</div>
+        </transition>
