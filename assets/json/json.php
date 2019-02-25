@@ -28,7 +28,8 @@
 			$id_ujian=$datas->id_ujian;
 			$id_siswa=$datas->id_siswa;
 			$id_soal= $datas->id_soal;
-			$sql= "INSERT INTO ujian_jawaban (ujian_id,siswa_id,soal_id,jawaban) VALUES('$id_ujian','$id_siswa','$id_soal','$jawaban')";
+			// $sql ="DELETE ujian_jawaban WHERE ujian_id='$id_ujian' AND siswa_id='$id_siswa' AND soal_id='$id_soal'";
+			$sql= "REPLACE INTO ujian_jawaban (ujian_id,siswa_id,soal_id,jawaban) VALUES ('$id_ujian','$id_siswa','$id_soal','$jawaban')";
 		}
 		if($datas->stat=="update_jawab"){
 			$jawaban= $datas->jawaban;

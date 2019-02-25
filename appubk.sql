@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2019 at 01:40 PM
+-- Generation Time: Feb 23, 2019 at 08:25 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -174,8 +174,15 @@ CREATE TABLE `ujian_jawaban` (
   `ujian_id` int(11) NOT NULL,
   `siswa_id` int(11) DEFAULT NULL,
   `soal_id` int(11) DEFAULT NULL,
-  `jawaban` char(1) DEFAULT NULL
+  `jawaban` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ujian_jawaban`
+--
+
+INSERT INTO `ujian_jawaban` (`id`, `ujian_id`, `siswa_id`, `soal_id`, `jawaban`) VALUES
+(9, 1, 2, 3, 'Anda');
 
 --
 -- Indexes for dumped tables
@@ -281,6 +288,12 @@ ALTER TABLE `soal`
 --
 ALTER TABLE `ujian`
   MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `ujian_jawaban`
+--
+ALTER TABLE `ujian_jawaban`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

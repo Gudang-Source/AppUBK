@@ -30,7 +30,7 @@ class Login extends MY_Controller {
             $this->session->set_userdata($data_session);
 			redirect(base_url("welcome/"));
 		}else{ 
-            echo "<script>alert('Username atau Password yang Anda masukkan SALAH'); window.location.href='".base_url('welcome/login')."'</script>"; 
+            echo "<script>alert('Username atau Password yang Anda masukkan SALAH'); window.location.href='".base_url('./')."'</script>"; 
         }
 	}
 
