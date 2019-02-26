@@ -28,8 +28,14 @@ class Model extends CI_Model {
         $this->db->order_by('rand()');
         return $this->db->get();
     }
+    public function kkm ($id_pelajaran){
+        $this->db->select('kkm');
+        $this->db->from('pelajaran');
+        $this->db->where('id_pelajaran',$id_pelajaran);
+        return $this->db->get();
+    }
     public function cek_record($siswa,$id_pelajaran){
-        return $this->db->query("SELECT * FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran'")->num_rows();
+        return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran'")->num_rows();
     }
 
     public function soal($config,$siswa) {

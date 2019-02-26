@@ -24,6 +24,11 @@ class Welcome extends MY_Controller {
 		$this->load->model('Model'); // Load model ke controller ini
 		if($this->session->userdata('status') != "success"){
 			redirect(base_url("./login"));
+		}else{
+			$ada_ujian = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->num_rows();
+			if($ada_ujian < 1 ){
+				redirect(base_url("./login"));
+			}
 		}
 	}
 
@@ -32,12 +37,7 @@ class Welcome extends MY_Controller {
 			'id_siswa' => $this->session->userdata('id_siswa'),
 		);
 		$data["siswa"] = $this->Model->siswa("siswa",$where)->row();
-		$ada_ujian = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->num_rows();
-		if($ada_ujian > 0 ){
-			$data['ujian'] = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
-		}else{
-			redirect(base_url("welcome/login"));
-		}
+		$data['ujian'] = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
 		$this->pages('module/home/home', $data);
 		
 	}
@@ -64,6 +64,7 @@ class Welcome extends MY_Controller {
 		$kelas = $this->Model->kelas('kelas',array('id_kelas' => $this->session->userdata('id_kelas')));
 		$ujian = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
 		$data['jum_soal']=$this->Model->random($ujian->id_pelajaran)->num_rows();
+		$data['kkm']= $this->Model->kkm($ujian->id_pelajaran)->row();
 		$cek_record=$this->Model->cek_record($siswa,$ujian->id_pelajaran);
 		if($cek_record < 1 ){
 			$random= $this->Model->random($ujian->id_pelajaran)->result();
