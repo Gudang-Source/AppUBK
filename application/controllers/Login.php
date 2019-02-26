@@ -7,7 +7,8 @@ class Login extends MY_Controller {
 	}
 
 	public function index(){
-        $this->load->view('module/login/login');
+        // $this->load->view('module/login/login');
+		$this->pages('module/login/login');
 	}
 	
 	public function login(){
