@@ -29,10 +29,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="menu-title">
-                        <a href="<?php echo base_url('welcome/guru')?>">Menu guru </a>
+                        <a href="<?php echo base_url('welcome/guru')?>"><i class="fa fa-user"></i>    Menu guru</a>
                     </li>
                     <li class="menu-title">
-						<a href="<?php echo base_url('welcome/kelas')?>">Menu kelas </a>
+                        <a href="<?php echo base_url('welcome/kelas')?>"><i class="fa fa-users"></i> Menu kelas</a>
 					</li><!-- /.menu-title -->
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -59,11 +59,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                             </form>
                         </div>
+                        <a href="#sign-out"><i class="fa fa-sign-out"></i></a>
                     </div>
 
-                    <div class=" float-right">
-                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
-                    </div>
 
                 </div>
             </div>
@@ -75,11 +73,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
-                        <div class="">
-                            <div class="">
-                                <div class="">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
                                     <div class="">
-                                        <div class="text-left dib">
+                                        <div class="text-left dib col-lg-12 col-md-12">
 											<?php echo $content; ?>
                                         </div>
                                     </div>
@@ -92,22 +90,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <!-- .animated -->
         </div>
         <!-- /.content -->
-    </div>
-    <!-- /#right-panel -->
-	<!-- Footer -->
-	<!--<div class="panel-footer">
+        <!-- /#right-panel -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
 		<footer class="site-footer">
-			<div class="footer-inner bg-white">
-				<div class="row">
+            <div class="footer-inner bg-white">
+                <div class="row">
+                    <div class="col-xs-6">
+                        </div>
 						<div class="col-xs-6">
+                            Copyright &copy; 2019 Computer Media Utama 
 						</div>
-						<div class="col-xs-6">
-							Copyright &copy; 2019 Computer Media Utama 
-						</div>
-				</div>
-			</div>
-		</footer>
-	</div>-->
+                    </div>
+                </div>
+            </div>-->
+    </div>
 	<!-- /.site-footer -->
 
     <!-- Scripts -->
