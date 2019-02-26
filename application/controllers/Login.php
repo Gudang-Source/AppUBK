@@ -36,7 +36,6 @@ class Login extends MY_Controller {
 
 	public function logout(){
 		$this->session->sess_destroy();
-		redirect (base_url('../'));
 	}
 	
 }

@@ -11,25 +11,16 @@
         $jawaban=$this->db->query("SELECT * FROM ujian_jawaban WHERE soal_id='$soal_id' AND ujian_id='$ujian_id' AND siswa_id='$siswa_id'")->row();
 
     ?>
-	<div class="col-12">
     <div id="slideMenu" class="container sidebar sidebar-right" v-bind:style="sidebar">
-        <div class="row">
-    	    <div class="sidebar col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    	        <div class="contente" style="">
-    	            <div class="text-center" style="padding-bottom:20px; font-size:14px; color:#0066CC;">Soal Pilihan Ganda</div>
-                    <div id="xslide" style="text-align: center; height: 1675px; position: relative;">
-                        <div class='row' style='margin:0 auto;'>
-                            <?php
-                            for($i=0; $i<count($soalSemua); $i++){ ?>
-                                <div style='margin-bottom:4px;padding:2px;width:60px;height:60px;'>
-                                    <a class="align-middle text-center link-pag <?php if($url==$i){echo "aktif";}else{if($soalSemua[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/soal/'.$i); ?>"><?php echo $i+1; ?></a>
-                                </div>
-                            <?php } ?>
-                        </div>
-    	            </div>          
-    	        </div>	
-            </div>
-        </div>
+    	<div class="contente">
+    	    <div class="text-center" style="padding-bottom:20px; font-size:14px; color:#0066CC;">Soal Pilihan Ganda</div>
+            <div class="items">
+                <?php for($i=0; $i<count($soalSemua); $i++){ ?>
+                    <a class="link-pag <?php if($url==$i){echo "aktif";}else{if($soalSemua[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/soal/'.$i); ?>"><?php echo $i+1; ?></a>
+                <?php } ?>            
+            </div>      
+            
+    	</div>
         <div @click="sidebar.right='0'" v-if="sidebar.right=='-300px'" style="font-size:40px; text-align:center;" class="toggler">
             <i class="fas fa-angle-left"></i>
         </div>
@@ -37,6 +28,7 @@
             <i class="fas fa-angle-right"></i>
         </div>
     </div>
+	<div class="col-12">
 		<div class="card" style="margin-top:70px;">
 			<div class="card-header">
                 Selamat Ujian Muhammad Syarif Hidayatullah
@@ -112,7 +104,7 @@
 						</h2>
         		    </div>
         		    <div class="modal-footer">
-                            <button class="btn btn-success w-50" @click="selesaiButton(<?=$ujian_id?>,<?=$siswa_id?>,<?=count($soalSemua)?>)">Akhiri</button>
+                            <button class="btn btn-success w-50" @click="selesaiButton(<?php echo $ujian_id?>,<?php echo $siswa_id?>,<?php echo count($soalSemua)?>,<?php echo $kkm->kkm ?>)">Akhiri</button>
                             <button class="btn btn-danger w-50" @click="yakin.form=false">Batal</button>
         		    </div>
         		</div>
@@ -127,19 +119,26 @@
                             <table class="table">
                                 <tr>
                                     <td>Benar</td>
-                                    <td>{{selesai.benar}}</td>
+                                    <td style="color:#28a745;">{{selesai.benar}}</td>
                                 </tr>
                                 <tr>
                                     <td>Salah</td>
-                                    <td>{{selesai.salah}}</td>
+                                    <td style="color:#dc3545;">{{selesai.salah}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tidak Terjawab</td>
+                                    <td>{{selesai.kosong}}</td>
                                 </tr>
                                 <tr>
                                     <td class="text-center" colspan="2">
-                                        <h1>{{selesai.nilai}}</h1>
+                                        <div :style="nilaiStyle" class="nilai">{{selesai.nilai}}</div>
                                     </td>
                                 </tr>
                             </table>
-        		    </div>
+                    </div>
+                    <div class="model-footer">
+                        <button class="w-100 btn btn-danger" @click="logout()">Logout</button>
+                    </div>
         		</div>
 			</div>
     	</div>

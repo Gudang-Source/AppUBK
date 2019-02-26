@@ -3,18 +3,36 @@ let ujian = new Vue({
     data:{
         sidebar:{
             right:'-300px',
-            transition:'0.5s'
+            transition:'0.5s',
         },
         selesai:{
             form:false,
             nilai:null,
             benar:null,
             salah:null,
-            kosong:null
+            kosong:null,
+            kkm:null
         },
         yakin:{
             form:false,
 
+        }
+    },
+    computed:{
+        nilaiStyle:function(){
+            if(this.selesai.nilai>=this.selesai.kkm){
+                let data={
+                    color:'#28a745',
+                    border:'3px solid #28a745'
+                }
+                return data; 
+            }else if(this.selesai.nilai<this.selesai.kkm){
+                let data={
+                    color:'#dc3545',
+                    border:'3px solid #dc3545',
+                }
+                return data; 
+            }
         }
     },
     methods:{
@@ -43,7 +61,7 @@ let ujian = new Vue({
             }
             axios.post("http://localhost/AppUBK/assets/json/json.php?akses=api",data);
         },
-        selesaiButton:function(id_ujian,id_siswa,jumlah_soal){
+        selesaiButton:function(id_ujian,id_siswa,jumlah_soal,kkm){
             axios.get("http://localhost/AppUBK/assets/json/json.php?query=SELECT%20record.id_soal%20FROM%20record%20JOIN%20siswa%20ON%20siswa.id_siswa=%27"+id_siswa+"%27%20JOIN%20ujian%20ON%20ujian.id_kelas=siswa.id_kelas%20WHERE%20record.id_siswa=siswa.id_siswa%20AND%20record.id_pelajaran=ujian.id_pelajaran")
             .then(response => {
                 axios.get("http://localhost/AppUBK/assets/json/json.php?query=SELECT%20CASE%20WHEN%20(a.soal_jawaban=b.jawaban)%20THEN%201%20ELSE%200%20END%20as%20nilai%20FROM%20soal%20as%20a%20LEFT%20JOIN%20ujian_jawaban%20as%20b%20ON%20a.soal_id=b.soal_id%20WHERE%20b.ujian_id=%27"+id_ujian+"%27%20AND%20b.siswa_id=%27"+id_siswa+"%27AND%20b.soal_id%20IN%20("+response.data[0].id_soal+")")
@@ -64,12 +82,16 @@ let ujian = new Vue({
                     this.selesai.benar=benar.length;
                     this.selesai.salah=salah.length;
                     this.selesai.kosong=jumlah_soal-response.data.length;
+                    this.selesai.kkm=kkm;
                     let data={
                         stat:"logout"
                     }
                     axios.post("http://localhost/AppUBK/assets/json/json.php?akses=api",data);
                 })
             })
+        },
+        logout:function(){
+            window.location.reload();
         }
     }
 })
