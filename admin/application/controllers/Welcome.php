@@ -21,11 +21,13 @@ class Welcome extends MY_Controller {
 	public function index()
 	{
 		// $this->load->view('welcome_message');
-		$this->pages('module/guru/guru');
+		$this->data['guru']=$this->Model->guru('guru');
+		$this->pages('module/guru/guru', $this->data);
 	}
 	
 	public function guru() {
-		$this->pages('module/guru/guru');
+		$this->data['guru']=$this->Model->guru('guru');
+		$this->pages('module/guru/guru', $this->data);
 	}
 	
 	public function kelas() {
