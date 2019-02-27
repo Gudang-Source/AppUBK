@@ -31,25 +31,54 @@
 	<div class="col-12">
 		<div class="card" style="margin-top:70px;">
 			<div class="card-header">
-                Selamat Ujian Muhammad Syarif Hidayatullah
+                Selamat Ujian <?php echo $soal[0]->nama ?>
 			</div>
 			<div class="card-body">
             <?php $url1=$url+1; ?>
 				<?php foreach ($soal as $data) {
-                    if($cek_jawaban>0){
-                        echo $url1.'.'.$data->soal_deskripsi; ?> <br>
-                        <input <?php if($jawaban->jawaban==$data->soal_jwb1){echo "checked";} ?> @click="jawab_update('<?php echo $data->soal_jwb1?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" > <?php echo $data->soal_jwb1 ?><br>
-                        <input <?php if($jawaban->jawaban==$data->soal_jwb2){echo "checked";} ?> @click="jawab_update('<?php echo $data->soal_jwb2?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" > <?php echo $data->soal_jwb2 ?><br>
-                        <input <?php if($jawaban->jawaban==$data->soal_jwb3){echo "checked";} ?> @click="jawab_update('<?php echo $data->soal_jwb3?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" > <?php echo $data->soal_jwb3 ?><br>
-                        <input <?php if($jawaban->jawaban==$data->soal_jwb4){echo "checked";} ?> @click="jawab_update('<?php echo $data->soal_jwb4?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" > <?php echo $data->soal_jwb4 ?><br>
-                        <input <?php if($jawaban->jawaban==$data->soal_jwb5){echo "checked";} ?> @click="jawab_update('<?php echo $data->soal_jwb5?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" > <?php echo $data->soal_jwb5 ?>
-                <?php }else{
-                        echo $url1.'.'.$data->soal_deskripsi; ?> <br>
-                        <input @click="jawab('<?php echo $data->soal_jwb1?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)" type="radio" name="pilgan" > <?php echo $data->soal_jwb1 ?><br>
-                        <input @click="jawab('<?php echo $data->soal_jwb2?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)" type="radio" name="pilgan" > <?php echo $data->soal_jwb2 ?><br>
-                        <input @click="jawab('<?php echo $data->soal_jwb3?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)" type="radio" name="pilgan" > <?php echo $data->soal_jwb3 ?><br>
-                        <input @click="jawab('<?php echo $data->soal_jwb4?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)" type="radio" name="pilgan" > <?php echo $data->soal_jwb4 ?><br>
-                        <input @click="jawab('<?php echo $data->soal_jwb5?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)" type="radio" name="pilgan" > <?php echo $data->soal_jwb5 ?>
+                    echo $url1.'.'.$data->soal_deskripsi.'</br>';
+                    if($cek_jawaban>0){ ?>
+                        <label class="jawaban"><?php echo $data->soal_jwb1 ?>
+                            <input <?php if($jawaban->jawaban==$data->soal_jwb1){echo "checked";} ?> @change="jawab_update('<?php echo $data->soal_jwb1?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">A</span>
+                        </label>
+                        <label class="jawaban"><?php echo $data->soal_jwb2 ?>
+                            <input <?php if($jawaban->jawaban==$data->soal_jwb2){echo "checked";} ?> @change="jawab_update('<?php echo $data->soal_jwb2?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">B</span>
+                        </label>
+                        <label class="jawaban"><?php echo $data->soal_jwb3 ?>
+                            <input <?php if($jawaban->jawaban==$data->soal_jwb3){echo "checked";} ?> @change="jawab_update('<?php echo $data->soal_jwb3?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">C</span>
+                        </label>
+                        <label class="jawaban"><?php echo $data->soal_jwb4 ?>
+                            <input <?php if($jawaban->jawaban==$data->soal_jwb4){echo "checked";} ?> @change="jawab_update('<?php echo $data->soal_jwb4?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">D</span>
+                        </label>
+                        <label class="jawaban"><?php echo $data->soal_jwb5 ?>
+                            <input <?php if($jawaban->jawaban==$data->soal_jwb5){echo "checked";} ?> @change="jawab_update('<?php echo $data->soal_jwb5?>',<?php echo $jawaban->id ?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">E</span>
+                        </label>
+                <?php }else{ ?>
+                        <label class="jawaban"><?php echo $data->soal_jwb1 ?>
+                            <input @change="jawab('<?php echo $data->soal_jwb1?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">A</span>
+                        </label>
+                        <label class="jawaban"><?php echo $data->soal_jwb2 ?>
+                            <input @change="jawab('<?php echo $data->soal_jwb2?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">B</span>
+                        </label>
+                        <label class="jawaban"><?php echo $data->soal_jwb3 ?>
+                            <input @change="jawab('<?php echo $data->soal_jwb3?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">C</span>
+                        </label>
+                        <label class="jawaban"><?php echo $data->soal_jwb4 ?>
+                            <input @change="jawab('<?php echo $data->soal_jwb4?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">D</span>
+                        </label>
+                        <label class="jawaban"><?php echo $data->soal_jwb5 ?>
+                            <input @change="jawab('<?php echo $data->soal_jwb5?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)"  type="radio" name="pilgan" >
+                            <span class="checkmark">E</span>
+                        </label>
                 <?php } ?>
                 <?php } ?>
             </div>

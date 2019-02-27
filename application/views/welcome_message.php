@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="<?=base_url('./assets/css/style.css')?>">
 </head>
 <body>
-		<div id="app">
+		<div id="app" v-cloak>
 		<nav class="navbar fixed-top navbar-dark">
 		<div class="navbar-brand judulapp">Aplikasi Latihan UNBK</div>
 			<!-- <div class="navbar nav" style="background-color: #343434;;">

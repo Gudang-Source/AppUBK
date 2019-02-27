@@ -1,4 +1,4 @@
-[v-cloack]{
+[v-cloak]{
     display: none;
 }
 body{
@@ -176,5 +176,55 @@ body{
     line-height: 200px;
     font-size: 60px;
     margin: 0 auto;
+    display: block;
+}
+.jawaban {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.jawaban input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 3px;
+    line-height: 25px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 17px;
+}
+
+.jawaban:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.jawaban input:checked ~ .checkmark {
+    background-color: #2196F3;
+    color:white;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.jawaban input:checked ~ .checkmark:after {
     display: block;
 }
