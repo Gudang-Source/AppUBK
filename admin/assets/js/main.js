@@ -24,7 +24,7 @@ let appAdmin= new Vue ({
             soal_jwb5:"",
             soal_jawaban:"",
         },
-        url_soal:"http://localhost/AppUBK/admin/welcome/per-soal/",
+        url_soal:"http://localhost/AppUBK/admin/welcome/perSoal/",
         url_sekarang:"",
 
     },

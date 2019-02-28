@@ -17,7 +17,7 @@ let ujian = new Vue({
             form:false,
 
         },
-        url:"localhost"
+        url:"hendri.ddns.net"
     },
     computed:{
         nilaiStyle:function(){

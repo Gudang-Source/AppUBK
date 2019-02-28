@@ -33,10 +33,11 @@ class Welcome extends MY_Controller {
 	public function kelas() {
 		$this->pages('module/kelas/kelas');
 	}
-	public function soal() {
+	public function soal() {  
 		$this->pages('module/soal/soal');
 	}
-	public function perSoal() {
-		$this->pages('module/per-soal/per-soal');
+	public function perSoal($soal_pelajaran) {
+		$data['perSoal'] = $this->Model->perSoal($soal_pelajaran);
+		$this->pages('module/perSoal/perSoal', $data);
 	}
 }

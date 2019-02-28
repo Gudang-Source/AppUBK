@@ -1,7 +1,5 @@
-<!-- <link rel="stylesheet" href="<?=//base_url('./assets/css/style.css')?>"> -->
-<!-- <link rel="stylesheet" href="<?=//base_url('./assets/css/bootstrap.min.css')?>"> -->
 <div class="container">
-    <div class="login-form">
+    <div class="login-form" style="margin-top: 100px;">
         <form action="<?php echo base_url('login/login'); ?>" method="post">
             <h2 class="text-center">Log in</h2>       
             <div class="form-group">
@@ -13,11 +11,6 @@
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-primary btn-block">Log in</button>
             </div>
-            <!-- <div class="clearfix"> -->
-                <!-- <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label> -->
-                <!-- <a href="#" class="pull-right">Forgot Password?</a> -->
-            <!-- </div>         -->
         </form>
-        <!-- <p class="text-center"><a href="#">Create an Account</a></p> -->
     </div>
 </div>

@@ -8,4 +8,9 @@ class Model extends CI_Model {
         }
         return $this->db->get($table);
     }
+	
+	public function perSoal($soal_pelajaran) {
+		$this->db->where('soal_pelajaran', $soal_pelajaran);
+		return $this->db->get('soal')->result();
+	}
 }
