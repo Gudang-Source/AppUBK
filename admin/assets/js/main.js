@@ -93,6 +93,14 @@ let appAdmin= new Vue ({
                     }           
                 })
             }
+        },
+        updateJawaban:function(soal_id,soal_jawaban){
+            let data={
+                soal_id:soal_id,
+                soal_jawaban:soal_jawaban,
+                stat:"updateJawaban"
+            }
+            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
         }
     }
 })

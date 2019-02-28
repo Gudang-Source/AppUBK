@@ -64,6 +64,13 @@
 			$koneksi->query($sql);
 
 		}
+		if($datas->stat=="updateJawaban"){
+			$soal_id = $datas->soal_id;
+			$soal_jawaban = $datas->soal_jawaban;
+			$sql= "UPDATE soal SET soal_jawaban='$soal_jawaban' WHERE soal_id='$soal_id'";
+			$koneksi->query($sql);
+
+		}
 		if($datas->stat=="logout"){
     		header('Location: ../../login/logout'); 
         }
