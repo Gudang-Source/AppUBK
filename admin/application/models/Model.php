@@ -10,7 +10,27 @@ class Model extends CI_Model {
     }
 	
 	public function perSoal($soal_pelajaran) {
-		$this->db->where('soal_pelajaran', $soal_pelajaran);
+        $this->db->where('soal_pelajaran', $soal_pelajaran);
+        if(isset($_POST['submit'])){
+            $soal_deskripsi=$_POST['soal_deskripsi'];
+            $soal_jwb1=$_POST['soal_jwb1'];
+            $soal_jwb2=$_POST['soal_jwb2'];
+            $soal_jwb3=$_POST['soal_jwb3'];
+            $soal_jwb4=$_POST['soal_jwb4'];
+            $soal_jwb5=$_POST['soal_jwb5'];
+            $soal_jawaban=$_POST['soal_jawaban'];
+            $data = array(
+                'soal_pelajaran' => $soal_pelajaran,
+                'soal_deskripsi' => $soal_deskripsi,
+                'soal_jwb1' => $soal_jwb1,
+                'soal_jwb2' => $soal_jwb2,
+                'soal_jwb3' => $soal_jwb3,
+                'soal_jwb4' => $soal_jwb4,
+                'soal_jwb5' => $soal_jwb5,
+                'soal_jawaban' => $soal_jawaban,
+            );
+            $this->db->insert('soal', $data);
+        }
 		return $this->db->get('soal')->result();
 	}
 }

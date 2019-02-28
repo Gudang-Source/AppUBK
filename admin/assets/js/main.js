@@ -13,7 +13,6 @@ let appAdmin= new Vue ({
             key:""
         },
         dataPelajaran:[],
-        dataSoal:[],
         soal:{
             id_pelajaran:"",
             soal_deskripsi:"",
@@ -22,11 +21,13 @@ let appAdmin= new Vue ({
             soal_jwb3:"",
             soal_jwb4:"",
             soal_jwb5:"",
-            soal_jawaban:"",
         },
-        url_soal:"http://localhost/AppUBK/admin/welcome/perSoal/",
-        url_sekarang:"",
 
+    },
+    computed:{
+        url_soal:function(){
+            return "http://"+this.url+"/AppUBK/admin/welcome/perSoal/";
+        }
     },
     created: function(){
         axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas")

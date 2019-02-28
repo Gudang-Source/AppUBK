@@ -2,14 +2,61 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body card-block">
-                <form class="form-group">
-                    <div class="input-group">
-                        <input v-model="kelas.nama" type="text" placeholder="Nama Kelas" class="form-control">
-                    </div>
+                <form action="" class="form" method="post">
+					<input type="text" disabled style="display:none;" value="<?php  ?>">
+                    <div class="form-group">
+						<label>Isi Soal</label>
+                        <textarea name="soal_deskripsi" required class="form-control" cols="30" rows="10" v-model="soal.soal_deskripsi"></textarea>
+					</div>
+					<label>Jawaban</label><br>
+					<small class="text-muted">*Isi jawaban dan pilih salah satu jawaban yang benar</small>
+					<div class="input-group mb-3">
+					  	<div class="input-group-prepend">
+						  	<span class="input-group-text">A</span>
+					    	<div class="input-group-text">
+					      		<input :value="soal.soal_jwb1" required type="radio" name="soal_jawaban">
+					    	</div>
+					  	</div>
+					  	<input name="soal_jwb1" v-model="soal.soal_jwb1" required type="text" class="form-control" placeholder="Jawaban A">
+					</div>
+					<div class="input-group mb-3">
+					  	<div class="input-group-prepend">
+						  	<span class="input-group-text">B</span>
+					    	<div class="input-group-text">
+					      		<input :value="soal.soal_jwb2" type="radio" name="soal_jawaban">
+					    	</div>
+					  	</div>
+					  	<input name="soal_jwb2" v-model="soal.soal_jwb2" required type="text" class="form-control" placeholder="Jawaban B">
+					</div>
+					<div class="input-group mb-3">
+					  	<div class="input-group-prepend">
+						  	<span class="input-group-text">C</span>
+					    	<div class="input-group-text">
+					      		<input :value="soal.soal_jwb3" type="radio" name="soal_jawaban">
+					    	</div>
+					  	</div>
+					  	<input name="soal_jwb3" v-model="soal.soal_jwb3" required type="text" class="form-control" placeholder="Jawaban C">
+					</div>
+					<div class="input-group mb-3">
+					  	<div class="input-group-prepend">
+						  	<span class="input-group-text">D</span>
+					    	<div class="input-group-text">
+					      		<input :value="soal.soal_jwb4" type="radio" name="soal_jawaban">
+					    	</div>
+					  	</div>
+					  	<input name="soal_jwb4" v-model="soal.soal_jwb4" required type="text" class="form-control" placeholder="Jawaban D">
+					</div>
+					<div class="input-group mb-3">
+					  	<div class="input-group-prepend">
+						  	<span class="input-group-text">E</span>
+					    	<div class="input-group-text">
+					      		<input :value="soal.soal_jwb5" type="radio" name="soal_jawaban">
+					    	</div>
+					  	</div>
+					  	<input name="soal_jwb5" v-model="soal.soal_jwb5" required type="text" class="form-control" placeholder="Jawaban E">
+					</div>	
+					<input type="submit" name="submit" class="btn btn-success">
 				</form>
-                <div class="form-actions form-group">
-                    <input @click="addClass()" class="btn btn-secondary btn-sm" type="button" value="Submit">
-                </div>
         </div>
     </div>
 </div>

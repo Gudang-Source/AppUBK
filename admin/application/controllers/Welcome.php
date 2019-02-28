@@ -40,4 +40,14 @@ class Welcome extends MY_Controller {
 		$data['perSoal'] = $this->Model->perSoal($soal_pelajaran);
 		$this->pages('module/perSoal/perSoal', $data);
 	}
+	public function tambahSoal(){
+		$soal_deskripsi = $this->input->post('soal_deskripsi');
+		$soal_jwb1 = $this->input->post('soal_jwb1');
+		$soal_jwb2 = $this->input->post('soal_jwb2');
+		$soal_jwb3 = $this->input->post('soal_jwb3');
+		$soal_jwb4 = $this->input->post('soal_jwb4');
+		$soal_jwb5 = $this->input->post('soal_jwb5');
+		$soal_jawaban = $this->input->post('soal_jawaban');
+
+	}
 }
