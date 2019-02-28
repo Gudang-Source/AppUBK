@@ -1,90 +1,98 @@
-$.noConflict();
+let appAdmin= new Vue ({
+    el:"#appAdmin",
+    data:{
+        url:"localhost",
+        dataKelas:[],
+        kelas:{
+            nama:""
+        },
+        editKelas:{
+            form:false,
+            nama:"",
+            id_kelas:"",
+            key:""
+        },
+        dataPelajaran:[],
+        dataSoal:[],
+        soal:{
+            id_pelajaran:"",
+            soal_deskripsi:"",
+            soal_jwb1:"",
+            soal_jwb2:"",
+            soal_jwb3:"",
+            soal_jwb4:"",
+            soal_jwb5:"",
+            soal_jawaban:"",
+        },
+        url_soal:"http://localhost/AppUBK/admin/welcome/per-soal/",
+        url_sekarang:"",
 
-jQuery(document).ready(function($) {
-
-	"use strict";
-
-	[].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
-		new SelectFx(el);
-	});
-
-	jQuery('.selectpicker').selectpicker;
-
-
-	
-
-	$('.search-trigger').on('click', function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		$('.search-trigger').parent('.header-left').addClass('open');
-	});
-
-	$('.search-close').on('click', function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		$('.search-trigger').parent('.header-left').removeClass('open');
-	});
-
-	$('.equal-height').matchHeight({
-		property: 'max-height'
-	});
-
-	// var chartsheight = $('.flotRealtime2').height();
-	// $('.traffic-chart').css('height', chartsheight-122);
-
-
-	// Counter Number
-	$('.count').each(function () {
-		$(this).prop('Counter',0).animate({
-			Counter: $(this).text()
-		}, {
-			duration: 3000,
-			easing: 'swing',
-			step: function (now) {
-				$(this).text(Math.ceil(now));
-			}
-		});
-	});
-
-
-	 
-	 
-	// Menu Trigger
-	$('#menuToggle').on('click', function(event) {
-		var windowWidth = $(window).width();   		 
-		if (windowWidth<1010) { 
-			$('body').removeClass('open'); 
-			if (windowWidth<760){ 
-				$('#left-panel').slideToggle(); 
-			} else {
-				$('#left-panel').toggleClass('open-menu');  
-			} 
-		} else {
-			$('body').toggleClass('open');
-			$('#left-panel').removeClass('open-menu');  
-		} 
-			 
-	}); 
-
-	 
-	$(".menu-item-has-children.dropdown").each(function() {
-		$(this).on('click', function() {
-			var $temp_text = $(this).children('.dropdown-toggle').html();
-			$(this).children('.sub-menu').prepend('<li class="subtitle">' + $temp_text + '</li>'); 
-		});
-	});
-
-
-	// Load Resize 
-	$(window).on("load resize", function(event) { 
-		var windowWidth = $(window).width();  		 
-		if (windowWidth<1010) {
-			$('body').addClass('small-device'); 
-		} else {
-			$('body').removeClass('small-device');  
-		} 
-		
-	});
-  
- 
-});
+    },
+    created: function(){
+        axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas")
+        .then (response => {
+            this.dataKelas=response.data;
+        })
+        axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20pelajaran")
+        .then (response => {
+            this.dataPelajaran=response.data;
+        })
+        // axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20soal")
+        // .then (response => {
+        //     this.dataSoal=response.data;
+        // })
+    },
+    methods:{
+        addClass:function(){
+            let data={
+                kelas:this.kelas.nama,
+                stat:"tambahKelas"
+            }
+            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20nama_kelas%20FROM%20kelas%20WHERE%20nama_kelas%20LIKE%20%27"+this.kelas.nama.trim()+"%27")
+            .then(r => {
+                if(r.data.length<1){
+                    if(this.kelas.nama.trim()!=""){
+                        axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
+                        .then (r => {
+                            appAdmin.dataKelas=r.data;
+                        })
+                    }else{
+                        alert("Nama kelas tidak boleh kosong");
+                    }       
+                }else{
+                    alert('Nama kelas sudah ada');
+                }
+            })
+        },
+        deleteClass:function(key,id_kelas){
+            let data ={
+                id_kelas:id_kelas,
+                stat:"deleteKelas"
+            }
+            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
+            .then (r => {
+                appAdmin.dataKelas.splice(key,1);
+            })
+        },
+        editClass:function(){
+            if(this.editKelas.nama.trim()!=""){
+                let data ={
+                    id_kelas:this.editKelas.id_kelas,
+                    nama_kelas:this.editKelas.nama,
+                    stat:"editKelas"
+                }
+                axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20nama_kelas%20FROM%20kelas%20WHERE%20nama_kelas%20LIKE%20%27"+this.kelas.nama.trim()+"%27")
+                .then(r => {
+                    if(r.data.length<1){
+                        axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
+                        .then (r => {
+                            appAdmin.dataKelas[appAdmin.editKelas.key].nama_kelas=appAdmin.editKelas.nama;
+                        })
+                    }else{
+                        alert("Nama kelas sudah ada");
+                    }           
+                })
+            }
+        }
+    }
+})

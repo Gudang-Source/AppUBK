@@ -12,12 +12,31 @@
 --------------------------------------------------------- */
 /* 
 
-
-Googel Fonts  */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 /* Googel Fonts End  
 
 */
+[v-cloak]{
+  display: none;
+}
+.modalSelesai{
+  width: 100%;
+  height: 100vh;
+  top:0;
+  background-color: rgba(0,0,0,.2);
+  position: fixed;
+  z-index: 999999;
+}
+.formEdit-enter-active {
+  transition: all .3s ease;
+}
+.formEdit-leave-active {
+  transition: all .3s ease;
+}
+.formEdit-enter, .form-leave-to{
+  transform: translateY(-300px);
+  opacity: 0;
+}
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 .bg-flat-color-1 {
   background: #00c292; }

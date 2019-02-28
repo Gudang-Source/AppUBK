@@ -143,13 +143,6 @@ body{
     position: fixed;
     z-index: 999999;
 }
-.modal-c{
-    width: 450px;
-    height: 450px;
-    margin: 0 auto;
-    z-index: 999999;
-    
-}
 .modal-y{
     width: 400px;
     height: 400px;
