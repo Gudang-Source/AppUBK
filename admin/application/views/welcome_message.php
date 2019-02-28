@@ -113,6 +113,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url('../assets/js/vue.js'); ?>"></script>
     <script src="<?php echo base_url('../assets/js/axios.min.js'); ?>"></script>
     <script src="<?php echo base_url('./assets/js/main.js'); ?>"></script>
-
+    <script src="http://js.nicedit.com/nicEdit-latest.js"></script> 
+    <script type="text/javascript">
+    bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+    </script>
 </body>
 </html>
