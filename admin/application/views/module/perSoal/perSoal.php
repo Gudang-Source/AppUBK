@@ -2,10 +2,10 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body card-block">
-                <form action="" class="form" method="post" novalidate>
+                <form action="" class="form" method="post">
                     <div class="form-group">
 						<label>Isi Soal</label>
-                        <textarea name="soal_deskripsi" required class="form-control" cols="30" rows="10"></textarea>
+                        <textarea name="soal_deskripsi" class="form-control" cols="30" rows="10"></textarea>
 					</div>
 					<label>Jawaban</label><br>
 					<small class="text-muted">*Isi jawaban dan pilih salah satu jawaban yang benar</small>
