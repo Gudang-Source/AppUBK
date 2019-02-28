@@ -1,16 +1,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body card-block">
-                <div class="form-group">
-                    <div class="input-group">
-                        <select class="form-control" v-model="soal.id_pelajaran">
-                            <option v-for="" value=""></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-actions form-group">
-                    <input @click="addClass()" class="btn btn-secondary btn-sm" type="button" value="Submit">
-                </div>
+            
         </div>
     </div>
 </div>

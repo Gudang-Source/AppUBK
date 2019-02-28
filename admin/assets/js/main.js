@@ -13,6 +13,16 @@ let appAdmin= new Vue ({
             key:""
         },
         dataPelajaran:[],
+        soal:{
+            id_pelajaran:"",
+            soal_deskripsi:"",
+            soal_jwb1:"",
+            soal_jwb2:"",
+            soal_jwb3:"",
+            soal_jwb4:"",
+            soal_jwb5:"",
+            soal_jawaban:"",
+        },
 
     },
     computed:{
