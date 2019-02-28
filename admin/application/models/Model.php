@@ -18,7 +18,17 @@ class Model extends CI_Model {
             $soal_jwb3=$_POST['soal_jwb3'];
             $soal_jwb4=$_POST['soal_jwb4'];
             $soal_jwb5=$_POST['soal_jwb5'];
-            $soal_jawaban=$_POST['soal_jawaban'];
+            if($_POST['soal_jawaban']=="soal_jwb1"){
+                $soal_jawaban=$_POST['soal_jwb1'];
+            }else if($_POST['soal_jawaban']=="soal_jwb2"){
+                $soal_jawaban=$_POST['soal_jwb2'];
+            }else if($_POST['soal_jawaban']=="soal_jwb3"){
+                $soal_jawaban=$_POST['soal_jwb3'];
+            }else if($_POST['soal_jawaban']=="soal_jwb4"){
+                $soal_jawaban=$_POST['soal_jwb4'];
+            }else if($_POST['soal_jawaban']=="soal_jwb5"){
+                $soal_jawaban=$_POST['soal_jwb5'];
+            }
             $data = array(
                 'soal_pelajaran' => $soal_pelajaran,
                 'soal_deskripsi' => $soal_deskripsi,
