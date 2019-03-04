@@ -13,6 +13,17 @@ let appAdmin= new Vue ({
             key:""
         },
         dataPelajaran:[],
+        soal_edit:"",
+        soal:{
+            form:false,
+            soal_id:"",
+            soal_deskripsi:"",
+            soal_jwb1:"",
+            soal_jwb2:"",
+            soal_jwb3:"",
+            soal_jwb4:"",
+            soal_jwb5:""
+        }
 
     },
     computed:{
@@ -21,6 +32,7 @@ let appAdmin= new Vue ({
         }
     },
     created: function(){
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
         axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas")
         .then (response => {
             this.dataKelas=response.data;
@@ -93,6 +105,16 @@ let appAdmin= new Vue ({
                 stat:"updateJawaban"
             }
             axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+        },
+        editSoal:function(soal_id,soal_deskripsi,soal_jwb1,soal_jwb2,soal_jwb3,soal_jwb4,soal_jwb5){
+            this.soal.form=true;
+            this.soal.soal_id=soal_id;
+            this.soal.soal_deskripsi=soal_deskripsi;
+            this.soal.soal_jwb1=soal_jwb1;
+            this.soal.soal_jwb2=soal_jwb2;
+            this.soal.soal_jwb3=soal_jwb3;
+            this.soal.soal_jwb4=soal_jwb4;
+            this.soal.soal_jwb5=soal_jwb5;
         }
     }
 })
