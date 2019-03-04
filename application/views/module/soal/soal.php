@@ -35,6 +35,13 @@
 			</div>
 			<div class="card-body">
             <?php $url1=$url+1; ?>
+            <!-- gambar -->
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-9 align-self-center">
+                    <img src="<?php echo base_url('./assets/gambar.png');?>" alt=".." class="img img-fluid">
+                </div>
+            </div>
+            <!-- akhir gambar -->
 				<?php foreach ($soal as $data) {
                     echo $url1.'.'.$data->soal_deskripsi.'</br>';
                     if($cek_jawaban>0){ ?>
@@ -62,6 +69,13 @@
                         <label class="jawaban"><?php echo $data->soal_jwb1 ?>
                             <input @change="jawab('<?php echo $data->soal_jwb1?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)"  type="radio" name="pilgan" >
                             <span class="checkmark">A</span>
+                            <!-- gambar -->
+                            <div class="row">
+                                <div class="col-12 col-lg-5">
+                                    <img src="<?php echo base_url('./assets/gambar.png');?>" alt=".." class="img img-fluid">
+                                </div>
+                            </div>
+                            <!-- akhir gambar -->
                         </label>
                         <label class="jawaban"><?php echo $data->soal_jwb2 ?>
                             <input @change="jawab('<?php echo $data->soal_jwb2?>',<?php echo $data->id_ujian?>,<?php echo $data->id_siswa?>,<?php echo $data->soal_id?>)"  type="radio" name="pilgan" >

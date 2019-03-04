@@ -61,6 +61,13 @@
 </div>
 <?php foreach($perSoal AS $data){ ?>
 	<div class="card-body">
+		<!-- Gambar -->
+		<div class="row">
+            <div class="col-12 col-lg-9 align-self-center">
+            	<img src="<?php echo base_url('../assets/gambar2.png');?>" alt=".." class="img img-fluid">
+        	</div>
+		</div>
+		<!-- akhir gambar -->
 		<?php echo $data->soal_deskripsi."</br>" ?>
 		<form>
 			<label class="jawaban"><?php echo $data->soal_jwb1 ?>
