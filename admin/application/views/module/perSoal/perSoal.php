@@ -5,7 +5,8 @@
                 <form action="" class="form" method="post">
                     <div class="form-group">
 						<label>Isi Soal</label>
-                        <textarea name="soal_deskripsi" class="form-control" cols="30" rows="10"></textarea>
+                        <textarea name="soal_deskripsi" class="form-control" cols="50" rows="10">
+						</textarea>
 					</div>
 					<label>Jawaban</label><br>
 					<small class="text-muted">*Isi jawaban dan pilih salah satu jawaban yang benar</small>
@@ -62,7 +63,7 @@
 <?php foreach($perSoal AS $data){ ?>
 	<div class="card-body">
 		<div class="float-right">
-			<button class="btn btn-info" @click="editSoal('<?php echo $data->soal_id ?>','<?php echo $data->soal_deskripsi ?>','<?php echo $data->soal_jwb1 ?>','<?php echo $data->soal_jwb2 ?>','<?php echo $data->soal_jwb3 ?>','<?php echo $data->soal_jwb4 ?>','<?php echo $data->soal_jwb5 ?>')">Edit</button>
+			<a href="<?php echo base_url("welcome/perSoalEdit/".$data->soal_id) ?>" class="btn btn-info" >Edit</a>
 		</div>
 		<!-- Gambar -->
 		<div class="row">
@@ -97,42 +98,3 @@
 		<hr>
 	</div>
 <?php } ?>
-<transition name="formEdit">
-    <div v-if="soal.form" class="modalSelesai">
-    	<div class="modal-dialog modal-dialog-centered">
-    		<div class="modal-content" style="overflow-y:scroll;height:600px;">
-    		    <div class="modal-body">
-                <button type="button" class="close" aria-label="Close" @click="soal.form=false">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-				<form action="" class="form" method="post">
-                    <div class="form-group">
-						<label>Isi Soal</label>
-                        <textarea  name="new_soal_deskripsi" class="form-control" cols="30" rows="10">
-
-						</textarea>
-					</div>
-					<label>Jawaban</label><br>
-					<small class="text-muted">*Isi jawaban</small>
-					<div class="input-group mb-3">
-					  	<input name="new_soal_jwb1" required type="text" class="form-control" placeholder="Jawaban A">
-					</div>
-					<div class="input-group mb-3">
-					  	<input name="new_soal_jwb2" required type="text" class="form-control" placeholder="Jawaban B">
-					</div>
-					<div class="input-group mb-3">
-					  	<input name="new_soal_jwb3" required type="text" class="form-control" placeholder="Jawaban C">
-					</div>
-					<div class="input-group mb-3">
-					  	<input name="new_soal_jwb4" required type="text" class="form-control" placeholder="Jawaban D">
-					</div>
-					<div class="input-group mb-3">
-					  	<input name="new_soal_jwb5" required type="text" class="form-control" placeholder="Jawaban E">
-					</div>	
-					<input type="submit" name="editSoal" class="btn btn-success">
-				</form>
-                </div>
-    		</div>
-    	</div>
-    </div>
-</transition>

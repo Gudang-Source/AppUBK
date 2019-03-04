@@ -32,7 +32,6 @@ let appAdmin= new Vue ({
         }
     },
     created: function(){
-        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
         axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas")
         .then (response => {
             this.dataKelas=response.data;
@@ -115,6 +114,6 @@ let appAdmin= new Vue ({
             this.soal.soal_jwb3=soal_jwb3;
             this.soal.soal_jwb4=soal_jwb4;
             this.soal.soal_jwb5=soal_jwb5;
-        }
+        },
     }
 })

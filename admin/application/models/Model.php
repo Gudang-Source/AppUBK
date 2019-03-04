@@ -42,5 +42,42 @@ class Model extends CI_Model {
             $this->db->insert('soal', $data);
         }
 		return $this->db->get('soal')->result();
+    }
+    public function perSoalEdit($soal_id) {
+        $this->db->where('soal_id', $soal_id);
+        if(isset($_POST['editSoal'])){
+            $soal_deskripsi=$_POST['new_soal_deskripsi'];
+            $soal_jwb1=$_POST['new_soal_jwb1'];
+            $soal_jwb2=$_POST['new_soal_jwb2'];
+            $soal_jwb3=$_POST['new_soal_jwb3'];
+            $soal_jwb4=$_POST['new_soal_jwb4'];
+            $soal_jwb5=$_POST['new_soal_jwb5'];
+            if($_POST['new_soal_jawaban']=="soal_jwb1"){
+                $soal_jawaban=$_POST['new_soal_jwb1'];
+            }else if($_POST['new_soal_jawaban']=="soal_jwb2"){
+                $soal_jawaban=$_POST['new_soal_jwb2'];
+            }else if($_POST['new_soal_jawaban']=="soal_jwb3"){
+                $soal_jawaban=$_POST['new_soal_jwb3'];
+            }else if($_POST['new_soal_jawaban']=="soal_jwb4"){
+                $soal_jawaban=$_POST['new_soal_jwb4'];
+            }else if($_POST['new_soal_jawaban']=="soal_jwb5"){
+                $soal_jawaban=$_POST['new_soal_jwb5'];
+            }
+            $data = array(
+                'soal_deskripsi' => $soal_deskripsi,
+                'soal_jwb1' => $soal_jwb1,
+                'soal_jwb2' => $soal_jwb2,
+                'soal_jwb3' => $soal_jwb3,
+                'soal_jwb4' => $soal_jwb4,
+                'soal_jwb5' => $soal_jwb5,
+                'soal_jawaban' => $soal_jawaban,
+            );
+            $where = array(
+                'soal_id' => $soal_id
+            );
+            $this->db->where($where);
+		    $this->db->update('soal',$data);
+        }
+		return $this->db->get('soal')->row();
 	}
 }

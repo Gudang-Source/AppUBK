@@ -40,6 +40,10 @@ class Welcome extends MY_Controller {
 		$data['perSoal'] = $this->Model->perSoal($soal_pelajaran);
 		$this->pages('module/perSoal/perSoal', $data);
 	}
+	public function perSoalEdit($soal_id) {
+		$data['perSoalEdit'] = $this->Model->perSoalEdit($soal_id);
+		$this->pages('module/perSoal/perSoalEdit', $data);
+	}
 	public function tambahSoal(){
 		$soal_deskripsi = $this->input->post('soal_deskripsi');
 		$soal_jwb1 = $this->input->post('soal_jwb1');
