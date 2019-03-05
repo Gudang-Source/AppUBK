@@ -34,6 +34,10 @@
                             <td><?php echo $ujian->nama; ?></td>
                         </tr>
                         <tr>
+                            <td>Guru</td>
+                            <td><?php echo $guru->nama; ?></td>
+                        </tr>
+                        <tr>
                             <td>KKM</td>
                             <td><?php echo $ujian->KKM; ?></td>
                         </tr>
@@ -62,7 +66,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <label for="">Input token disini</label>
-                    <input type="text" class="d-none" disabled name="id_ujian" value="<?php echo $ujian->id_ujian; ?>">
+                    <input type="text" class="d-none" readonly name="id_ujian" value="<?php echo $ujian->id_ujian; ?>">
                     <input type="text" placeholder="Input Token" name="token" class="form-control" required>
     		    </div>
     		    <div class="modal-footer">

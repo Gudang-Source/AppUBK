@@ -95,10 +95,11 @@
 
 		}
 		if($datas->stat=="logout"){
-    		header('Location: ../../login/logout'); 
+			$id_record = $datas->id_record;
+			$sql= "UPDATE INTO record SET status=1 WHERE id_record='$id_record'";
+			$koneksi->query($sql);
+    		echo "<script>window.location.href='../../login/logout'</script>" ;
         }
 	}
-
-	
 
 ?>

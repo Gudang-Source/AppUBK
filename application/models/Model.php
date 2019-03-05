@@ -10,6 +10,9 @@ class Model extends CI_Model {
     public function siswa($table,$where) {
         return $this->db->get_where($table,$where);
     }
+    public function guru($table,$where) {
+        return $this->db->get_where($table,$where);
+    }
     public function kelas($table,$where) {
         return $this->db->get_where($table,$where)->row();
     }
@@ -21,6 +24,7 @@ class Model extends CI_Model {
         $this->db->join('kelas', 'ujian.id_kelas = kelas.id_kelas');
         $this->db->join('pelajaran', 'ujian.id_pelajaran = pelajaran.id_pelajaran');
         $this->db->where('ujian.id_kelas',$id_kelas);
+        $this->db->where('status',0);
         return $query = $this->db->get();
     }
 
@@ -38,14 +42,14 @@ class Model extends CI_Model {
         return $this->db->get();
     }
     public function cek_record($siswa,$id_pelajaran){
-        return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran'")->num_rows();
+        return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran'");
     }
     public function cek_record_status($siswa,$id_pelajaran){
         return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran' AND status=1")->num_rows();
     }
 
     public function soal($config,$siswa) {
-            $id_soal=$this->db->query("SELECT record.id_soal,ujian.id_ujian,siswa.id_siswa FROM record JOIN siswa ON siswa.id_siswa=$siswa JOIN ujian ON ujian.id_kelas=siswa.id_kelas WHERE record.id_siswa=siswa.id_siswa AND record.id_pelajaran=ujian.id_pelajaran")->row();
+            $id_soal=$this->db->query("SELECT record.id_soal,ujian.id_ujian,siswa.id_siswa FROM record JOIN siswa ON siswa.id_siswa=$siswa JOIN ujian ON ujian.id_kelas=siswa.id_kelas WHERE record.id_siswa=siswa.id_siswa AND record.id_pelajaran=ujian.id_pelajaran AND record.status=0")->row();
             $arrayId=explode(",",$id_soal->id_soal);
             if($config=="select"){
                 $arrayId2=implode(",", $arrayId);

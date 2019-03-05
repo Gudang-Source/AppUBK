@@ -43,6 +43,10 @@ class Welcome extends MY_Controller {
 		);
 		$data["siswa"] = $this->Model->siswa("siswa",$where)->row();
 		$data['ujian'] = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
+		$where2 = array(
+			'id_guru' => $data['ujian']->id_guru,
+		);
+		$data['guru']  = $this->Model->guru("guru",$where2)->row();
 		$su=$this->input->post('cek_token');
 		if(isset($su)){
 			$id_ujian = $this->input->post('id_ujian');
@@ -92,7 +96,7 @@ class Welcome extends MY_Controller {
 		$ujian = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
 		$data['jum_soal']=$this->Model->random($ujian->id_pelajaran)->num_rows();
 		$data['kkm']= $this->Model->kkm($ujian->id_pelajaran)->row();
-		$cek_record=$this->Model->cek_record($siswa,$ujian->id_pelajaran);
+		$cek_record=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->num_rows();
 		if($cek_record < 1 ){
 			$random= $this->Model->random($ujian->id_pelajaran)->result();
 			$array=[];
@@ -105,6 +109,7 @@ class Welcome extends MY_Controller {
 		$data["soal"] = $this->Model->soal($config,$siswa);
 		$data["soalSemua"] = $this->Model->soal('select',$siswa);
 		$data['url']=$this->uri->segment('3');
+		$data['record']=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->row();
 		$this->pages('module/soal/soal', $data);
 	}
 	public function login()
