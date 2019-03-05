@@ -22,6 +22,8 @@
                 <tr v-for="(data,key) in dataPelajaran">
                     <td>{{key+1}}</td>
                     <td>{{data.nama}}</td>
+                    <td>{{data.nama_guru}}</td>
+                    <td>{{data.KKM}}</td>
                     <td>
                         <a :href="url_soal+data.id_pelajaran" class="btn btn-info">View soal</a>
                     </td>

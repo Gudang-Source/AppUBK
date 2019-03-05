@@ -40,7 +40,7 @@ let appAdmin= new Vue ({
         .then (response => {
             this.dataKelas=response.data;
         })
-        axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20pelajaran")
+        axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20a.id_pelajaran,b.id_guru,a.nama,b.nama%20AS%20nama_guru,a.KKM%20FROM%20pelajaran%20AS%20a%20INNER%20JOIN%20guru%20AS%20b%20ON%20b.id_guru=a.id_guru")
         .then (response => {
             this.dataPelajaran=response.data;
         })

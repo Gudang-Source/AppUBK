@@ -62,6 +62,7 @@
 </div>
 <?php foreach($perSoal AS $data){ ?>
 	<div class="card-body">
+		<hr>
 		<div class="float-right">
 			<a href="<?php echo base_url("welcome/perSoalEdit/".$data->soal_id) ?>" class="btn btn-info" >Edit</a>
 		</div>
