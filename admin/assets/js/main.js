@@ -23,6 +23,10 @@ let appAdmin= new Vue ({
             soal_jwb3:"",
             soal_jwb4:"",
             soal_jwb5:""
+        },
+        ujian:{
+            id_kelas:"",
+            id_pelajaran:""
         }
 
     },
@@ -115,5 +119,42 @@ let appAdmin= new Vue ({
             this.soal.soal_jwb4=soal_jwb4;
             this.soal.soal_jwb5=soal_jwb5;
         },
+        reload:function(){
+            window.location.reload();
+        },
+        genToken:function(id_ujian){
+            let data={
+                id_ujian:id_ujian,
+                stat:"genToken"
+            }
+            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
+            .then (response => {
+                if(response.status=200){
+                    this.reload();
+                }
+            })
+        },
+        stopUjian:function(id_ujian){
+            let data={
+                id_ujian:id_ujian,
+                stat:"stopUjian"
+            }
+            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
+            .then (response => {
+                if(response.status=200){
+                    this.reload();
+                }
+            })
+        },
+        tambahUjian:function(){
+            let data ={
+                id_kelas:this.ujian.id_kelas,
+                id_pelajaran:this.ujian.id_pelajaran,
+                stat:"tambahUjian"
+            }
+            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+        }
     }
 })
+// query random token
+// lpad(conv(floor(rand()*pow(36,6)), 10, 36), 6, 0)

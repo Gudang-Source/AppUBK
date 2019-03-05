@@ -71,6 +71,29 @@
 			$koneksi->query($sql);
 
 		}
+		if($datas->stat=="genToken"){
+			$id_ujian = $datas->id_ujian;
+			$sql1="SET GLOBAL event_scheduler = ON";
+			$koneksi->query($sql1);
+			$sql= "CREATE EVENT token_event_".$id_ujian." ON SCHEDULE EVERY 15 MINUTE STARTS CURRENT_TIMESTAMP ON COMPLETION PRESERVE ENABLE DO UPDATE ujian SET token=lpad(conv(floor(rand()*pow(36,6)), 10, 36), 6, 0),status=0 WHERE id_ujian='$id_ujian'";
+			$koneksi->query($sql);
+
+		}
+		if($datas->stat=="stopUjian"){
+			$id_ujian = $datas->id_ujian;
+			$sql= "DROP EVENT token_event_".$id_ujian."";
+			$koneksi->query($sql);
+			$sql1="UPDATE ujian SET token='',status=1 WHERE id_ujian='$id_ujian'";
+			$koneksi->query($sql1);
+
+		}
+		if($datas->stat=="tambahUjian"){
+			$id_kelas = $datas->id_kelas;
+			$id_pelajaran = $datas->id_pelajaran;
+			$sql= "INSERT INTO ujian (id_kelas,id_pelajaran) VALUES ('$id_kelas','$id_pelajaran')";
+			$koneksi->query($sql);
+
+		}
 		if($datas->stat=="logout"){
     		header('Location: ../../login/logout'); 
         }

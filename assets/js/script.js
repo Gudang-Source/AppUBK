@@ -17,7 +17,10 @@ let ujian = new Vue({
             form:false,
 
         },
-        url:"hendri.ddns.net"
+        token:{
+            form:false
+        },
+        url:"localhost"
     },
     computed:{
         nilaiStyle:function(){

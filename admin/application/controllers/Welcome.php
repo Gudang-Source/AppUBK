@@ -52,6 +52,10 @@ class Welcome extends MY_Controller {
 		$soal_jwb4 = $this->input->post('soal_jwb4');
 		$soal_jwb5 = $this->input->post('soal_jwb5');
 		$soal_jawaban = $this->input->post('soal_jawaban');
-
+	}
+	public function ujian(){
+		$data['ujian']= $this->Model->ujian();
+		$this->pages('module/ujian/ujian',$data);
+		// $this->pages('module/ujian/ujian');
 	}
 }

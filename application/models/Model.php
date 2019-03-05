@@ -2,6 +2,9 @@
 class Model extends CI_Model {
     public function cek_login($table, $where) {
 		return $this->db->get_where($table, $where);
+    }
+    public function cek_token($table, $where) {
+		return $this->db->get_where($table, $where);
 	}
 
     public function siswa($table,$where) {
@@ -36,6 +39,9 @@ class Model extends CI_Model {
     }
     public function cek_record($siswa,$id_pelajaran){
         return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran'")->num_rows();
+    }
+    public function cek_record_status($siswa,$id_pelajaran){
+        return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran' AND status=1")->num_rows();
     }
 
     public function soal($config,$siswa) {

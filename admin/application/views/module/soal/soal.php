@@ -1,5 +1,8 @@
 <div class="col-lg-12">
     <div class="card">
+        <div class="card-header">
+            <h3>Mata Pelajaran</h3>
+        </div>
         <div class="card-body card-block">
             
         </div>
@@ -11,6 +14,8 @@
             <thead class="thead-dark">
                 <th scope="col" class="text-center">No</th>
                 <th scope="col">Nama Pelajaran</th>
+                <th scope="col">Nama Guru</th>
+                <th scope="col">KKM</th>
                 <th scope="col">Action</th>
             </thead>
             <tbody>

@@ -30,6 +30,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <li class="menu-title">
                         <a href="<?php echo base_url('welcome/soal')?>"><i class="fa fa-users"></i> Menu soal</a>
 					</li>
+                    <li class="menu-title">
+                        <a href="<?php echo base_url('welcome/ujian')?>"><i class="fa fa-users"></i> Menu ujian</a>
+					</li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

@@ -29,6 +29,11 @@ class Welcome extends MY_Controller {
 			if($ada_ujian < 1 ){
 				redirect(base_url("./login"));
 			}
+			$ujian = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
+			$cek_record_status=$this->Model->cek_record_status($this->session->userdata('id_siswa'),$ujian->id_pelajaran);
+			if($cek_record_status>0){
+				redirect(base_url("./login"));
+			}	
 		}
 	}
 
@@ -38,11 +43,33 @@ class Welcome extends MY_Controller {
 		);
 		$data["siswa"] = $this->Model->siswa("siswa",$where)->row();
 		$data['ujian'] = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
+		$su=$this->input->post('cek_token');
+		if(isset($su)){
+			$id_ujian = $this->input->post('id_ujian');
+			$token = $this->input->post('token');
+			$where1 = array(
+				'id_ujian'=> $id_ujian,
+				'token'   => $token,
+				);
+			$cek = $this->Model->cek_token("ujian",$where1)->num_rows();
+			if($cek > 0){
+				$data_session = array(
+					'token'	=> "success",
+				);
+        	    $this->session->set_userdata($data_session);
+				redirect(base_url("welcome/soal"));
+			}else{ 
+        	    echo "<script>alert('Token yang Anda masukkan SALAH'); </script>"; 
+			}
+		}
 		$this->pages('module/home/home', $data);
 		
 	}
 	
 	public function soal() {
+		if($this->session->userdata('token') != "success"){
+			redirect(base_url("welcome/"));
+		}
 		//pagination
 		$config['base_url']    = base_url()."welcome/soal/";
 		$config['total_rows']  = $this->db->query("SELECT * FROM soal;")->num_rows();

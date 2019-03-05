@@ -49,7 +49,26 @@
                 </h4>
                 Silahkan klik tombol mulai ujian dibawah ini, jika anda telah siap melaksanakan ujian.
             </div>
-            <a class="btn btn-success btn-lg btn-block" href="<?=base_url('welcome/soal')?>">Mulai Ujian</a>
+            <button class="btn btn-success" @click="token.form=true">Mulai Ujian</button>
         </div>
     </div>
 </div>
+<transition name="form">
+    <div v-if="token.form" class="modalSelesai">
+    	<div class="modal-dialog modal-dialog-centered">
+            <form class="form modal-content" action="<?php echo base_url('welcome/') ?>" method="post">
+    		    <div class="modal-body">
+                    <button type="button" class="close" aria-label="Close" @click="token.form=false">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <label for="">Input token disini</label>
+                    <input type="text" class="d-none" disabled name="id_ujian" value="<?php echo $ujian->id_ujian; ?>">
+                    <input type="text" placeholder="Input Token" name="token" class="form-control" required>
+    		    </div>
+    		    <div class="modal-footer">
+                    <input type="submit" name="cek_token" class="w-100 btn btn-success" value="Submit">
+    		    </div>
+            </form>
+    	</div>
+    </div>
+</transition>

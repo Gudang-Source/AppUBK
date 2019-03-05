@@ -79,5 +79,13 @@ class Model extends CI_Model {
 		    $this->db->update('soal',$data);
         }
 		return $this->db->get('soal')->row();
-	}
+    }
+    public function ujian(){
+        $this->db->select('*');
+        $this->db->from('ujian');
+        $this->db->join('kelas', 'ujian.id_kelas = kelas.id_kelas');
+        $this->db->join('pelajaran', 'ujian.id_pelajaran = pelajaran.id_pelajaran');
+        $this->db->order_by('status');
+        return $query = $this->db->get()->result();
+    }
 }
