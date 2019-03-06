@@ -49,26 +49,29 @@ class Welcome extends MY_Controller {
 	}
 	function upload(){
 		$config = array(
-            'upload_path' 	=> './assets/unggah/',
-            'allowed_types' => "jpg|jpeg",
-            'overwrite' 	=> TRUE,
-            'max_size' 		=> "100000",
-			'encrypt_name'  => TRUE
+            'upload_path' 			=> './assets/unggah/',
+            'allowed_types' 		=> "jpg|jpeg",
+            'overwrite' 			=> TRUE,
+			'encrypt_name'  		=> TRUE,
+			'width'					=> '100px',
+			'height'				=> '100px'
         );
 
         $this->load->library('upload', $config);
         $this->upload->do_upload('image');
         $data = array(
-                'width'=>$this->upload->data('image_width'),
-                'height'=>$this->upload->data('image_height'),
-                'file_name'=>$this->upload->data('file_name')
+                'width'		=>$this->upload->data('image_width'),
+                'height'	=>$this->upload->data('image_height'),
+                'file_name'	=>$this->upload->data('file_name')
             );
 		$link = base_url().'./assets/unggah/'.$data['file_name'];
-        $res = array("data" => array(
-                'link' => $link,
-                'width' => $data['width'],
-                'height' => $data['height'])
-            );
+        $res = array(
+        		"data" => array(
+                	'link' 	=> $link,
+                	'width' => 100,
+                	'height'=> 100
+                )
+		);
         echo json_encode($res);
 	}
 }
