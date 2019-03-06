@@ -160,6 +160,21 @@ let appAdmin= new Vue ({
                 stat:"tambahUjian"
             }
             axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+        },
+        tambahMapel:function(){
+            let that=this.mataPelajaran;
+            if(that.namaMataPelajaran.trim()!="" && that.id_guru.trim()!="" && that.kkm.trim()!=""){
+                let data={
+                    nama_mapel:that.namaMataPelajaran,
+                    id_guru:that.id_guru,
+                    kkm:that.kkm,
+                    stat:"tambahMapel"
+                };
+                axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
+                .then(response => {
+                    console.log(response.data);
+                })
+            }
         }
     }
 })

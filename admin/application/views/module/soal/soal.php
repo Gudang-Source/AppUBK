@@ -4,23 +4,23 @@
             <h3>Mata Pelajaran</h3>
         </div>
         <div class="card-body card-block">
-            <form action="" class="form" @submit="">
-                <div class="form-group" v-model="mataPelajaran.namaMataPelajaran">
+            <div class="form">
+                <div class="form-group">
                     <label for="">Nama Mata Pelajaran</label>
-                    <input type="text" required placeholder="Nama Mata Pelajaran" class="form-control">
+                    <input v-model="mataPelajaran.namaMataPelajaran" type="text" required placeholder="Nama Mata Pelajaran" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="">Nama Guru Mata Pelajaran</label>
-                    <select class="form-control" v-model="mataPelajaran.idGuru">
-                        <option v-for="dataGuru in data" :value="data.id_guru">{{data.nama}}</option>
+                    <select class="form-control" v-model="mataPelajaran.id_guru">
+                        <option v-for="data in dataGuru" :value="data.id_guru">{{data.nama}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="">KKM</label>
-                    <input type="text" required placeholder="KKM" class="form-control" v-model="mataPelajaran.kkm">
+                    <input type="number" required placeholder="KKM" class="form-control" v-model="mataPelajaran.kkm">
                 </div>
-                <input type="submit" class="btn btn-secondary btn-sm" value="Submit">
-            </form>
+                <input type="button" @click="tambahMapel()" class="btn btn-secondary btn-sm" value="Submit">
+            </div>
         </div>
     </div>
 </div>

@@ -58,11 +58,18 @@ class Welcome extends MY_Controller {
         );
 
         $this->load->library('upload', $config);
-        $this->upload->do_upload('image');
+		$this->upload->do_upload('saol_deskripsi');
+		// move_uploaded_file($this->upload->data('file_name'),'./assets/unggah');
         $data = array(
-                'width'		=>$this->upload->data('image_width'),
-                'height'	=>$this->upload->data('image_height'),
-                'file_name'	=>$this->upload->data('file_name')
+                'width'=>$this->upload->data('image_width'),
+                'height'=>$this->upload->data('image_height'),
+                'file_name'=>$this->upload->data('file_name')
+			);
+		$link = base_url().'assets/unggah/'.$data['file_name'];
+        $res = array("data" => array(
+                'link' => $link,
+                'width' => $data['width'],
+                'height' => $data['height'])
             );
 		$link = base_url().'./assets/unggah/'.$data['file_name'];
         $res = array(
