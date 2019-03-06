@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 23, 2019 at 08:25 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Host: 127.0.0.1
+-- Generation Time: Mar 06, 2019 at 06:17 AM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -32,7 +32,16 @@ CREATE TABLE `guru` (
   `id_guru` int(11) NOT NULL,
   `nama` varchar(60) NOT NULL,
   `NIP` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `guru`
+--
+
+INSERT INTO `guru` (`id_guru`, `nama`, `NIP`) VALUES
+(1, 'Dosti Purba', '848333'),
+(2, 'te', '123'),
+(3, 'te', '45');
 
 -- --------------------------------------------------------
 
@@ -51,7 +60,8 @@ CREATE TABLE `kelas` (
 
 INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
 (1, 'X RPL'),
-(2, 'X TKJ');
+(2, 'X TKJ'),
+(3, 'X MM');
 
 -- --------------------------------------------------------
 
@@ -61,6 +71,7 @@ INSERT INTO `kelas` (`id_kelas`, `nama_kelas`) VALUES
 
 CREATE TABLE `pelajaran` (
   `id_pelajaran` int(11) NOT NULL,
+  `id_guru` int(11) NOT NULL,
   `nama` varchar(30) DEFAULT NULL,
   `KKM` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -69,9 +80,10 @@ CREATE TABLE `pelajaran` (
 -- Dumping data for table `pelajaran`
 --
 
-INSERT INTO `pelajaran` (`id_pelajaran`, `nama`, `KKM`) VALUES
-(1, 'B. Inggris Dosti', 75),
-(2, 'B. Indonesia Najwa', 75);
+INSERT INTO `pelajaran` (`id_pelajaran`, `id_guru`, `nama`, `KKM`) VALUES
+(1, 1, 'Bahasa Inggris', 75),
+(2, 2, 'Bahasa Indonesia', 75),
+(3, 3, 'Matematika', 75);
 
 -- --------------------------------------------------------
 
@@ -83,15 +95,17 @@ CREATE TABLE `record` (
   `id_record` int(11) NOT NULL,
   `id_siswa` int(15) NOT NULL,
   `id_pelajaran` int(15) NOT NULL,
-  `id_soal` varchar(255) NOT NULL
+  `id_soal` varchar(255) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `record`
 --
 
-INSERT INTO `record` (`id_record`, `id_siswa`, `id_pelajaran`, `id_soal`) VALUES
-(32, 2, 1, '1,3,2');
+INSERT INTO `record` (`id_record`, `id_siswa`, `id_pelajaran`, `id_soal`, `status`) VALUES
+(44, 2, 1, '13', 1),
+(45, 5, 1, '13', 0);
 
 -- --------------------------------------------------------
 
@@ -114,7 +128,11 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id_siswa`, `id_kelas`, `nama`, `nis`, `tanggal_lahir`, `username`, `password`) VALUES
-(2, 1, 'hendri', '2212', '2019-02-22', 'hendri', 'hendri');
+(2, 1, 'HENDRI ARIFIN, S.Kom', '2212', '2019-02-22', 'hendri', 'hendri'),
+(3, 3, 'firnanda', '21200', '2019-02-03', 'firnanda', 'firnanda'),
+(4, 2, 'syarif', '32532', '2019-02-12', 'syarif', 'syarif'),
+(5, 1, 'habibi', '22123', '0000-00-00', 'habibi', 'habibi'),
+(6, 1, 'fajrin', '0087', '1019-02-03', 'fajrin', 'fajrin');
 
 -- --------------------------------------------------------
 
@@ -140,9 +158,7 @@ CREATE TABLE `soal` (
 --
 
 INSERT INTO `soal` (`soal_id`, `soal_pelajaran`, `soal_deskripsi`, `soal_jwb1`, `soal_jwb2`, `soal_jwb3`, `soal_jwb4`, `soal_jwb5`, `soal_jawaban`, `gambar`) VALUES
-(1, 1, 'siapa prsiden kita', 'Jokowi', 'Soekarno', 'Soeharto', 'Habibi', 'Megawati', 'Jokowi', ''),
-(2, 1, 'Siapa kita ?`', 'Kami', 'Dia', 'Mereka', 'Saya', 'Kita', 'Kita', ''),
-(3, 1, 'Siapa anda ?`', 'Kami', 'Dia', 'Mereka', 'Saya', 'Anda', 'Anda', '');
+(13, 1, 'dada', 'dsd', 'dsdbgfbf', 'dsdsdddddddd', 'dsdsd', 'dsdsdsds', 'dsdsdddddddd', 'dsds');
 
 -- --------------------------------------------------------
 
@@ -153,15 +169,18 @@ INSERT INTO `soal` (`soal_id`, `soal_pelajaran`, `soal_deskripsi`, `soal_jwb1`, 
 CREATE TABLE `ujian` (
   `id_ujian` int(11) NOT NULL,
   `id_kelas` int(11) NOT NULL,
-  `id_pelajaran` int(11) NOT NULL
+  `id_pelajaran` int(11) NOT NULL,
+  `token` varchar(6) NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ujian`
 --
 
-INSERT INTO `ujian` (`id_ujian`, `id_kelas`, `id_pelajaran`) VALUES
-(1, 1, 1);
+INSERT INTO `ujian` (`id_ujian`, `id_kelas`, `id_pelajaran`, `token`, `status`) VALUES
+(1, 1, 1, '9WHC31', 0),
+(10, 2, 2, '', 1);
 
 -- --------------------------------------------------------
 
@@ -174,7 +193,7 @@ CREATE TABLE `ujian_jawaban` (
   `ujian_id` int(11) NOT NULL,
   `siswa_id` int(11) DEFAULT NULL,
   `soal_id` int(11) DEFAULT NULL,
-  `jawaban` varchar(200) DEFAULT NULL
+  `jawaban` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -182,7 +201,8 @@ CREATE TABLE `ujian_jawaban` (
 --
 
 INSERT INTO `ujian_jawaban` (`id`, `ujian_id`, `siswa_id`, `soal_id`, `jawaban`) VALUES
-(9, 1, 2, 3, 'Anda');
+(18, 1, 2, 13, 'dsdsdddddddd'),
+(19, 1, 5, 13, 'dsdsdddddddd');
 
 --
 -- Indexes for dumped tables
@@ -204,13 +224,16 @@ ALTER TABLE `kelas`
 -- Indexes for table `pelajaran`
 --
 ALTER TABLE `pelajaran`
-  ADD PRIMARY KEY (`id_pelajaran`);
+  ADD PRIMARY KEY (`id_pelajaran`),
+  ADD KEY `id_guru` (`id_guru`);
 
 --
 -- Indexes for table `record`
 --
 ALTER TABLE `record`
-  ADD PRIMARY KEY (`id_record`);
+  ADD PRIMARY KEY (`id_record`),
+  ADD KEY `id_siswa` (`id_siswa`),
+  ADD KEY `id_pelajaran` (`id_pelajaran`);
 
 --
 -- Indexes for table `siswa`
@@ -251,53 +274,66 @@ ALTER TABLE `ujian_jawaban`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pelajaran`
 --
 ALTER TABLE `pelajaran`
-  MODIFY `id_pelajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pelajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `record`
 --
 ALTER TABLE `record`
-  MODIFY `id_record` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_record` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `soal`
 --
 ALTER TABLE `soal`
-  MODIFY `soal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `soal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `ujian`
 --
 ALTER TABLE `ujian`
-  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ujian_jawaban`
 --
 ALTER TABLE `ujian_jawaban`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `pelajaran`
+--
+ALTER TABLE `pelajaran`
+  ADD CONSTRAINT `pelajaran_ibfk_1` FOREIGN KEY (`id_guru`) REFERENCES `guru` (`id_guru`);
+
+--
+-- Constraints for table `record`
+--
+ALTER TABLE `record`
+  ADD CONSTRAINT `record_ibfk_1` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id_siswa`),
+  ADD CONSTRAINT `record_ibfk_2` FOREIGN KEY (`id_pelajaran`) REFERENCES `pelajaran` (`id_pelajaran`);
 
 --
 -- Constraints for table `siswa`
@@ -324,6 +360,14 @@ ALTER TABLE `ujian`
 ALTER TABLE `ujian_jawaban`
   ADD CONSTRAINT `ujian_jawaban_ibfk_1` FOREIGN KEY (`siswa_id`) REFERENCES `siswa` (`id_siswa`),
   ADD CONSTRAINT `ujian_jawaban_ibfk_2` FOREIGN KEY (`soal_id`) REFERENCES `soal` (`soal_id`);
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `token_event_1` ON SCHEDULE EVERY 15 MINUTE STARTS '2019-03-05 22:47:59' ON COMPLETION PRESERVE ENABLE DO UPDATE ujian SET token=lpad(conv(floor(rand()*pow(36,6)), 10, 36), 6, 0),status=0 WHERE id_ujian='1'$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
