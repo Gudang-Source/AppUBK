@@ -1,7 +1,8 @@
 let appAdmin= new Vue ({
     el:"#appAdmin",
     data:{
-        url:"localhost",
+        url:"hendri.ddns.net",
+        // url:"localhost",
         dataKelas:[],
         kelas:{
             nama:""

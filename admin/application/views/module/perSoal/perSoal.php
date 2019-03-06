@@ -67,11 +67,11 @@
 			<a href="<?php echo base_url("welcome/perSoalEdit/".$data->soal_id) ?>" class="btn btn-info" >Edit</a>
 		</div>
 		<!-- Gambar -->
-		<div class="row">
+		<!-- <div class="row">
             <div class="col-12 col-lg-9 align-self-center">
-            	<img src="<?php echo base_url('../assets/gambar2.png');?>" alt=".." class="img img-fluid">
+            	<img src="<?php //echo base_url('../assets/gambar2.png');?>" alt=".." class="img img-fluid">
         	</div>
-		</div>
+		</div> -->
 		<!-- akhir gambar -->
 		<?php echo $data->soal_deskripsi."</br>" ?>
 		<form>
