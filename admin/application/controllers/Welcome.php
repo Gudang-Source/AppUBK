@@ -49,12 +49,13 @@ class Welcome extends MY_Controller {
 	}
 	function upload(){
 		$config = array(
-            'upload_path' => './assets/unggah/',
+            'upload_path' 	=> './assets/unggah/',
             'allowed_types' => "jpg|jpeg",
-            'overwrite' => TRUE,
-            'max_size' => "100000",
-            'file_name' => md5(date('YmdHis')).'.jpg'
+            'overwrite' 	=> TRUE,
+            'max_size' 		=> "100000",
+			'encrypt_name'  => TRUE
         );
+
         $this->load->library('upload', $config);
         $this->upload->do_upload('image');
         $data = array(
@@ -62,7 +63,7 @@ class Welcome extends MY_Controller {
                 'height'=>$this->upload->data('image_height'),
                 'file_name'=>$this->upload->data('file_name')
             );
-		$link = base_url().'assets/unggah/'.$data['file_name'];
+		$link = base_url().'./assets/unggah/'.$data['file_name'];
         $res = array("data" => array(
                 'link' => $link,
                 'width' => $data['width'],

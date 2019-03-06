@@ -119,7 +119,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url('./assets/js/main.js'); ?>"></script>
     <script type="text/javascript"> 
         bkLib.onDomLoaded(function() { 
-            nicEditors.allTextAreas({iconsPath:'<?php echo base_url(); ?>assets/js/nicEditorIcons.gif',uploadURI:'<?php echo site_url();?>/welcome/upload'}).panelInstance('image');
+            nicEditors.allTextAreas({iconsPath:'<?php echo base_url(); ?>assets/js/nicEditorIcons.gif',uploadURI:'<?php echo site_url() ?>./welcome/upload'}).panelInstance('image');
+            // nicEditors.allTextAreas({iconsPath:'<?php echo base_url(); ?>assets/js/nicEditorIcons.gif',uploadURI:'http://hendri.ddns.net/AppUBK/admin/welcome/upload'}).panelInstance('image');
+            // nicEditors.allTextAreas();
         });
     </script>
 </body>
