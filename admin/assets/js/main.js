@@ -28,6 +28,12 @@ let appAdmin= new Vue ({
         ujian:{
             id_kelas:"",
             id_pelajaran:""
+        },
+        dataGuru:[],
+        mataPelajaran:{
+            namaMataPelajaran:"",
+            id_guru:"",
+            kkm:""
         }
 
     },
@@ -45,10 +51,10 @@ let appAdmin= new Vue ({
         .then (response => {
             this.dataPelajaran=response.data;
         })
-        // axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20soal")
-        // .then (response => {
-        //     this.dataSoal=response.data;
-        // })
+        axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20guru")
+        .then (response => {
+            this.dataGuru=response.data;
+        })
     },
     methods:{
         addClass:function(){
