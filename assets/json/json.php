@@ -99,7 +99,15 @@
 			$sql= "UPDATE record SET status=1 WHERE id_record='$id_record'";
 			$koneksi->query($sql);
     		header('location:../../login/logout');
-        }
-	}
+		}
+		if($datas->stat=="tambahMapel"){
+			$nama = $datas->nama_mapel;
+			$id_guru = $datas->id_guru;
+			$kkm = $datas->kkm;
+			$sql= "INSERT INTO pelajaran (nama,id_guru,KKM) VALUES ('$nama','$id_guru','$kkm')";
+			$koneksi->query($sql);
+		}
+
+}
 
 ?>
