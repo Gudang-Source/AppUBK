@@ -615,13 +615,13 @@ class CI_Pagination {
 					elseif ($i === $base_page)
 					{
 						// First page
-						$output .= $this->num_tag_open.'<a style="font-size:20px;padding:15px;border: 3px solid rgb(49, 49, 50);" href="'.$first_url.'"'.$attributes.$this->_attr_rel('start').'>'
+						$output .= $this->num_tag_open.'<a style="font-size:20px;border: 3px solid rgb(49, 49, 50);" href="'.$first_url.'"'.$attributes.$this->_attr_rel('start').'>'
 							.$loop.'</a>'.$this->num_tag_close;
 					}
 					else
 					{
 						$append = $this->prefix.$i.$this->suffix;
-						$output .= $this->num_tag_open.'<a style="font-size:20px;padding:15px;border: 3px solid rgb(49, 49, 50);" href="'.$base_url.$append.'"'.$attributes.'>'
+						$output .= $this->num_tag_open.'<a style="font-size:20px;border: 3px solid rgb(49, 49, 50);" href="'.$base_url.$append.'"'.$attributes.'>'
 							.$loop.'</a>'.$this->num_tag_close;
 					}
 				}
