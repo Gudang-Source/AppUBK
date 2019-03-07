@@ -107,6 +107,20 @@
 			$sql= "INSERT INTO pelajaran (nama,id_guru,KKM) VALUES ('$nama','$id_guru','$kkm')";
 			$koneksi->query($sql);
 		}
+		if($datas->stat=="tambahSiswa"){
+			$nama = $datas->nama;
+			$id_kelas = $datas->id_kelas;
+			$nis = $datas->nis;
+			$username = $datas->username;
+			$password = $datas->password;
+			$sql= "INSERT INTO siswa (nama,id_kelas,nis,username,password) VALUES ('$nama','$id_kelas','$nis','$username','$password')";
+			$koneksi->query($sql);
+		}
+		if($datas->stat=="hapusSiswa"){
+			$id_siswa = $datas->id_siswa;
+			$sql= "DELETE FROM siswa WHERE id_siswa='$id_siswa'";
+			$koneksi->query($sql);
+		}
 
 }
 

@@ -1,8 +1,8 @@
 let appAdmin= new Vue ({
     el:"#appAdmin",
     data:{
-        url:"hendri.ddns.net",
-        // url:"localhost",
+        // url:"hendri.ddns.net",
+        url:"localhost",
         dataKelas:[],
         kelas:{
             nama:""
@@ -34,6 +34,14 @@ let appAdmin= new Vue ({
             namaMataPelajaran:"",
             id_guru:"",
             kkm:""
+        },
+        dataSiswa:[],
+        siswa:{
+            nama:"",
+            id_kelas:"",
+            nis:"",
+            username:"",
+            password:""
         }
 
     },
@@ -54,6 +62,10 @@ let appAdmin= new Vue ({
         axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20guru")
         .then (response => {
             this.dataGuru=response.data;
+        })
+        axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20siswa%20AS%20a%20INNER%20JOIN%20kelas%20AS%20b%20ON%20b.id_kelas=a.id_kelas")
+        .then (response => {
+            this.dataSiswa=response.data;
         })
     },
     methods:{
@@ -175,6 +187,35 @@ let appAdmin= new Vue ({
                     console.log(response.data);
                 })
             }
+        },
+        tambahSiswa:function(){
+            let that=this.siswa;
+            if(that.nama.trim()!="" && that.id_kelas.trim()!="" && that.nis.trim()!="" && that.username.trim()!="" && that.password.trim()!=""){
+                let data={
+                    nama:that.nama,
+                    id_kelas:that.id_kelas,
+                    nis:that.nis,
+                    username:that.username,
+                    password:that.password,
+                    stat:"tambahSiswa"
+                };
+                axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
+                .then (r=>{
+                    window.location.reload();
+                })
+            }
+        },
+        hapusSiswa:function(id_siswa,key){
+            let data={
+                id_siswa:id_siswa,
+                stat:"hapusSiswa"
+            }; 
+            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
+            .then (r => {
+                if(r.status==200){
+                    this.dataSiswa.splice(key,1);
+                }
+            })
         }
     }
 })

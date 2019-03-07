@@ -33,3 +33,21 @@
         </table>
     </div>
 </div>
+<transition name="formEdit">
+        <div v-if="editKelas.form" class="modalSelesai">
+        	<div class="modal-dialog modal-dialog-centered">
+        		<div class="modal-content modal-c">
+        		    <div class="modal-body">
+                    <button type="button" class="close" aria-label="Close" @click="editKelas.form=false,editKelas.nama='',editKelas.id_kelas='',editKelas.key=''">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                        <input class="form-control" type="text" placeholder="Nama Kelas" v-model="editKelas.nama">
+                    </div>
+                    <div class="model-footer">
+                        <button class="btn btn-danger" @click="editKelas.form=false,editKelas.nama='',editKelas.id_kelas='',editKelas.key=''">Batal</button>
+                        <button class="btn btn-warning" @click="editClass()">Edit</button>
+                    </div>
+        		</div>
+        	</div>
+        </div>
+    </transition>

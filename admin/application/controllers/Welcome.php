@@ -18,7 +18,9 @@ class Welcome extends MY_Controller {
 		$this->data['guru']=$this->Model->guru('guru');
 		$this->pages('module/guru/guru', $this->data);
 	}
-	
+	public function siswa(){
+		$this->pages('module/siswa/siswa');
+	}
 	public function kelas() {
 		$this->pages('module/kelas/kelas');
 	}

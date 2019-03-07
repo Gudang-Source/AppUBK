@@ -17,7 +17,7 @@
 					      		<input value="soal_jwb1" required type="radio" name="soal_jawaban">
 					    	</div>
 					  	</div>
-					  	<input name="soal_jwb1" required type="text" class="form-control" placeholder="Jawaban A">
+					  	<textarea name="soal_jwb1" class="form-control"></textarea>
 					</div>
 					<div class="input-group mb-3">
 					  	<div class="input-group-prepend">
