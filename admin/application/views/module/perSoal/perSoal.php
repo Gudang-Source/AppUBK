@@ -17,10 +17,6 @@
 					    	</div>
 					  	</div>
 					  	<textarea name="soal_jwb1" class="form-control"></textarea>
-<<<<<<< HEAD
-=======
-					  	<!-- <input name="soal_jwb1" required type="text" class="form-control" placeholder="Jawaban A"> -->
->>>>>>> master
 					</div>
 					<div class="input-group mb-3">
 					  	<div class="input-group-prepend">

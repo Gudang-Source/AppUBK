@@ -6,9 +6,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta charset="utf-8">
 	<title>Admin - Aplikasi USBN SMKN 1 Kotabaru</title>
     <link rel="stylesheet" href="<?php echo base_url('../assets/css/bootstrap.min.css'); ?>">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="<?php echo base_url('./assets/css/style.css'); ?>">
-=======
     <!-- <link rel="stylesheet" href="assets/css/cs-skin-elastic.css"> -->
     <link rel="stylesheet" href="<?php echo base_url('./assets/css/style.css'); ?>">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
@@ -17,7 +14,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" /> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" /> -->
->>>>>>> master
 </head>
 <body>
 <div id="appAdmin" v-cloak>
@@ -109,10 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript"> 
         bkLib.onDomLoaded(function() { 
             nicEditors.allTextAreas({iconsPath:'<?php echo base_url(); ?>assets/js/nicEditorIcons.gif',uploadURI:'<?php echo site_url() ?>./welcome/upload'});
-<<<<<<< HEAD
             // nicEditors.allTextAreas();
-=======
->>>>>>> master
         });
     </script>
 </body>
