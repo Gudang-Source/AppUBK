@@ -5,12 +5,11 @@
                 <form action="" class="form" method="post" enctype="multipart/form-data">
                     <div class="form-group">
 						<label>Isi Soal</label>
-                        <textarea name="soal_deskripsi" class="form-control" cols="50" rows="10">
-						</textarea>
+                        <textarea name="soal_deskripsi" class="form-control" cols="50" rows="10"></textarea>
 					</div>
 					<label>Jawaban</label><br>
 					<small class="text-muted">*Isi jawaban dan pilih salah satu jawaban yang benar</small>
-					<div class="input-group mb-3">
+					<div class="input-group input-group-sm mb-3">
 					  	<div class="input-group-prepend">
 						  	<span class="input-group-text">A</span>
 					    	<div class="input-group-text">
@@ -18,6 +17,10 @@
 					    	</div>
 					  	</div>
 					  	<textarea name="soal_jwb1" class="form-control"></textarea>
+<<<<<<< HEAD
+=======
+					  	<!-- <input name="soal_jwb1" required type="text" class="form-control" placeholder="Jawaban A"> -->
+>>>>>>> master
 					</div>
 					<div class="input-group mb-3">
 					  	<div class="input-group-prepend">
@@ -26,7 +29,8 @@
 					      		<input value="soal_jwb2" type="radio" name="soal_jawaban">
 					    	</div>
 					  	</div>
-					  	<input name="soal_jwb2" required type="text" class="form-control" placeholder="Jawaban B">
+					  	<textarea name="soal_jwb2" class="form-control"></textarea>
+					  	<!-- <input name="soal_jwb2" required type="text" class="form-control" placeholder="Jawaban B"> -->
 					</div>
 					<div class="input-group mb-3">
 					  	<div class="input-group-prepend">
@@ -35,7 +39,8 @@
 					      		<input value="soal_jwb3" type="radio" name="soal_jawaban">
 					    	</div>
 					  	</div>
-					  	<input name="soal_jwb3" required type="text" class="form-control" placeholder="Jawaban C">
+					  	<textarea name="soal_jwb3" class="form-control"></textarea>
+					  	<!-- <input name="soal_jwb3" required type="text" class="form-control" placeholder="Jawaban C"> -->
 					</div>
 					<div class="input-group mb-3">
 					  	<div class="input-group-prepend">
@@ -44,7 +49,8 @@
 					      		<input value="soal_jwb4" type="radio" name="soal_jawaban">
 					    	</div>
 					  	</div>
-					  	<input name="soal_jwb4" required type="text" class="form-control" placeholder="Jawaban D">
+					  	<textarea name="soal_jwb4" class="form-control"></textarea>
+					  	<!-- <input name="soal_jwb4" required type="text" class="form-control" placeholder="Jawaban D"> -->
 					</div>
 					<div class="input-group mb-3">
 					  	<div class="input-group-prepend">
@@ -53,7 +59,8 @@
 					      		<input value="soal_jwb5" type="radio" name="soal_jawaban">
 					    	</div>
 					  	</div>
-					  	<input name="soal_jwb5" required type="text" class="form-control" placeholder="Jawaban E">
+					  	<textarea name="soal_jwb5" class="form-control"></textarea>
+					  	<!-- <input name="soal_jwb5" required type="text" class="form-control" placeholder="Jawaban E"> -->
 					</div>	
 					<input type="submit" name="submit" class="btn btn-success">
 				</form>
