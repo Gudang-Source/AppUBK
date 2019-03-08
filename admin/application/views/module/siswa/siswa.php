@@ -16,7 +16,7 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <input required v-model="siswa.nis" type="text" name="nis" placeholder="NIS" class="form-control">
+                        <input required v-model="siswa.nis" type="number" name="nis" placeholder="NIS" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
