@@ -2,80 +2,74 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body card-block">
-                <form action="" class="form" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-						<label>Isi Soal</label>
-                        <textarea name="soal_deskripsi" class="form-control" cols="50" rows="10"></textarea>
+            <form action="" class="form" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label>Isi Soal</label>
+					<textarea name="soal_deskripsi" class="form-control" cols="50" rows="10"></textarea>
+				</div>
+				<label>Jawaban</label><br>
+				<small class="text-muted">*Isi jawaban dan pilih salah satu jawaban yang benar</small>
+				<div class="input-group input-group-sm mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">A</span>
+						<div class="input-group-text">
+							<input value="soal_jwb1" required type="radio" name="soal_jawaban">
+						</div>
 					</div>
-					<label>Jawaban</label><br>
-					<small class="text-muted">*Isi jawaban dan pilih salah satu jawaban yang benar</small>
-					<div class="input-group input-group-sm mb-3">
-					  	<div class="input-group-prepend">
-						  	<span class="input-group-text">A</span>
-					    	<div class="input-group-text">
-					      		<input value="soal_jwb1" required type="radio" name="soal_jawaban">
-					    	</div>
-					  	</div>
-					  	<textarea name="soal_jwb1" class="form-control"></textarea>
+					<textarea name="soal_jwb1" class="form-control"></textarea>
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">B</span>
+						<div class="input-group-text">
+							<input value="soal_jwb2" type="radio" name="soal_jawaban">
+						</div>
 					</div>
-					<div class="input-group mb-3">
-					  	<div class="input-group-prepend">
-						  	<span class="input-group-text">B</span>
-					    	<div class="input-group-text">
-					      		<input value="soal_jwb2" type="radio" name="soal_jawaban">
-					    	</div>
-					  	</div>
-					  	<textarea name="soal_jwb2" class="form-control"></textarea>
-					  	<!-- <input name="soal_jwb2" required type="text" class="form-control" placeholder="Jawaban B"> -->
+					<textarea name="soal_jwb2" class="form-control"></textarea>
+					<!-- <input name="soal_jwb2" required type="text" class="form-control" placeholder="Jawaban B"> -->
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">C</span>
+						<div class="input-group-text">
+							<input value="soal_jwb3" type="radio" name="soal_jawaban">
+						</div>
 					</div>
-					<div class="input-group mb-3">
-					  	<div class="input-group-prepend">
-						  	<span class="input-group-text">C</span>
-					    	<div class="input-group-text">
-					      		<input value="soal_jwb3" type="radio" name="soal_jawaban">
-					    	</div>
-					  	</div>
-					  	<textarea name="soal_jwb3" class="form-control"></textarea>
-					  	<!-- <input name="soal_jwb3" required type="text" class="form-control" placeholder="Jawaban C"> -->
+					<textarea name="soal_jwb3" class="form-control"></textarea>
+					<!-- <input name="soal_jwb3" required type="text" class="form-control" placeholder="Jawaban C"> -->
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">D</span>
+						<div class="input-group-text">
+							<input value="soal_jwb4" type="radio" name="soal_jawaban">
+						</div>
 					</div>
-					<div class="input-group mb-3">
-					  	<div class="input-group-prepend">
-						  	<span class="input-group-text">D</span>
-					    	<div class="input-group-text">
-					      		<input value="soal_jwb4" type="radio" name="soal_jawaban">
-					    	</div>
-					  	</div>
-					  	<textarea name="soal_jwb4" class="form-control"></textarea>
-					  	<!-- <input name="soal_jwb4" required type="text" class="form-control" placeholder="Jawaban D"> -->
+					<textarea name="soal_jwb4" class="form-control"></textarea>
+					<!-- <input name="soal_jwb4" required type="text" class="form-control" placeholder="Jawaban D"> -->
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">E</span>
+						<div class="input-group-text">
+							<input value="soal_jwb5" type="radio" name="soal_jawaban">
+						</div>
 					</div>
-					<div class="input-group mb-3">
-					  	<div class="input-group-prepend">
-						  	<span class="input-group-text">E</span>
-					    	<div class="input-group-text">
-					      		<input value="soal_jwb5" type="radio" name="soal_jawaban">
-					    	</div>
-					  	</div>
-					  	<textarea name="soal_jwb5" class="form-control"></textarea>
-					  	<!-- <input name="soal_jwb5" required type="text" class="form-control" placeholder="Jawaban E"> -->
-					</div>	
-					<input type="submit" name="submit" class="btn btn-success">
-				</form>
+					<textarea name="soal_jwb5" class="form-control"></textarea>
+					<!-- <input name="soal_jwb5" required type="text" class="form-control" placeholder="Jawaban E"> -->
+				</div>	
+				<input type="submit" name="submit" class="btn btn-success">
+			</form>
         </div>
     </div>
 </div>
-<?php foreach($perSoal AS $data){ ?>
+<?php $no=1; foreach($perSoal AS $data) { ?>
 	<div class="card-body">
 		<hr>
 		<div class="float-right">
-			<a href="<?php echo base_url("welcome/perSoalEdit/".$data->soal_id) ?>" class="btn btn-info" >Edit</a>
+			<a href="<?php echo base_url("welcome/perSoalEdit/".$data->soal_id.'/'.$data->soal_pelajaran) ?>" class="btn btn-info" >Edit</a>
 		</div>
-		<!-- Gambar -->
-		<!-- <div class="row">
-            <div class="col-12 col-lg-9 align-self-center">
-            	<img src="<?php //echo base_url('../assets/gambar2.png');?>" alt=".." class="img img-fluid">
-        	</div>
-		</div> -->
-		<!-- akhir gambar -->
+		<?php echo "Soal No. ".$no; ?>
 		<?php echo $data->soal_deskripsi."</br>" ?>
 		<form>
 			<label class="jawaban w-50"><?php echo $data->soal_jwb1 ?>
@@ -101,4 +95,4 @@
 		</form>
 		<hr>
 	</div>
-<?php } ?>
+<?php $no++; } ?>

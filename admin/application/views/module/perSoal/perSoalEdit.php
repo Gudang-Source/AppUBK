@@ -1,4 +1,4 @@
-<form action="" class="form" method="post">
+<?php echo form_open("welcome/UpdateperSoalEdit/".$perSoalEdit->soal_id.'/'.$perSoalEdit->soal_pelajaran); ?>
     <div class="form-group">
         <label>Isi Soal</label>
         <textarea name="new_soal_deskripsi" class="form-control">
@@ -9,9 +9,9 @@
 	<small class="text-muted">*Isi jawaban</small>
 	<div class="input-group mb-3">
         <div class="input-group-prepend">
-		  	<span class="input-group-text">A</span>
+			<span class="input-group-text">A</span>
 			<div class="input-group-text">
-		  		<input <?php if($perSoalEdit->soal_jawaban==$perSoalEdit->soal_jwb1){echo "checked";} ?> value="soal_jwb1" type="radio" name="new_soal_jawaban">
+				<input <?php if($perSoalEdit->soal_jawaban==$perSoalEdit->soal_jwb1){echo "checked";} ?> value="soal_jwb1" type="radio" name="new_soal_jawaban">
 			</div>
 		</div>
 	  	<input name="new_soal_jwb1" value="<?php echo $perSoalEdit->soal_jwb1 ?>" required type="text" class="form-control" placeholder="Jawaban A">
@@ -52,6 +52,6 @@
 		</div>
 	  	<input name="new_soal_jwb5" value="<?php echo $perSoalEdit->soal_jwb5 ?>" required type="text" class="form-control" placeholder="Jawaban E">
 	</div>	
-    <input type="submit" name="editSoal" class="btn btn-success">
+    <input type="submit" value="update" name="editSoal" class="btn btn-success">
     <a href="<?php echo base_url('welcome/perSoal/').$perSoalEdit->soal_pelajaran ?>" class="btn btn-danger">Batal</a>
-</form>
+<?php form_close(); ?>
