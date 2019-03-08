@@ -60,14 +60,14 @@ class Welcome extends MY_Controller {
         );
 
         $this->load->library('upload', $config);
-		$this->upload->do_upload('saol_deskripsi');
+		$this->upload->do_upload('image');
 		// move_uploaded_file($this->upload->data('file_name'),'./assets/unggah');
         $data = array(
                 'width'=>$this->upload->data('image_width'),
                 'height'=>$this->upload->data('image_height'),
                 'file_name'=>$this->upload->data('file_name')
 			);
-		$link = base_url().'assets/unggah/'.$data['file_name'];
+		$link = base_url().'./assets/unggah/'.$data['file_name'];
         $res = array("data" => array(
                 'link' => $link,
                 'width' => $data['width'],
@@ -77,8 +77,8 @@ class Welcome extends MY_Controller {
         $res = array(
         		"data" => array(
                 	'link' 	=> $link,
-                	'width' => 100,
-                	'height'=> 100
+                	'width' => $data['width'],
+                	'height'=> $data['height']
                 )
 		);
         echo json_encode($res);

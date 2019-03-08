@@ -218,3 +218,7 @@ body{
 .jawaban input:checked ~ .checkmark:after {
     display: block;
 }
+
+img {
+	width: 100%;
+}
