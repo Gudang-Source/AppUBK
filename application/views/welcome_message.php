@@ -5,9 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Aplikasi USBN SMKN 1 Kotabaru</title>
-	<link rel="stylesheet" href="<?=base_url('./assets/css/bootstrap.min.css')?>">
-	<!--link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" -->
-	<link rel="stylesheet" href="<?=base_url('./assets/css/style.css')?>">
+	<link rel="stylesheet" href="<?=base_url('./assets/css/bootstrap.min.css') ?>">
+	<link rel="stylesheet" href="<?=base_url('./assets/fontawesome/css/all.min.css') ?>">
+	<link rel="stylesheet" href="<?=base_url('./assets/css/style.css') ?>">
 </head>
 <body>
 		<div id="app" v-cloak>
