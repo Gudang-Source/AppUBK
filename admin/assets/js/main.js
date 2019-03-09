@@ -1,8 +1,8 @@
 let appAdmin= new Vue ({
     el:"#appAdmin",
     data:{
-        // url:"hendri.ddns.net",
-        url:"localhost",
+        url:"hendri.ddns.net",
+        // url:"localhost",
         // url:"192.168.1.254",
         // url:"199.169.1.26",
         dataKelas:[],
@@ -132,12 +132,16 @@ let appAdmin= new Vue ({
             }
         },
         updateJawaban:function(soal_id,soal_jawaban){
-            let data={
-                soal_id:soal_id,
-                soal_jawaban:soal_jawaban,
-                stat:"updateJawaban"
-            }
-            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20"+soal_jawaban+"%20AS%20soal_jawaban%20FROM%20soal%20WHERE%20soal_id=%27"+soal_id+"%27")
+            .then (response => {
+                console.log(response.data[0].soal_jawaban);
+                let data={
+                    soal_id:soal_id,
+                    soal_jawaban:response.data[0].soal_jawaban,
+                    stat:"updateJawaban"
+                }
+                axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+            })
         },
         editSoal:function(soal_id,soal_deskripsi,soal_jwb1,soal_jwb2,soal_jwb3,soal_jwb4,soal_jwb5){
             this.soal.form=true;
@@ -160,7 +164,7 @@ let appAdmin= new Vue ({
             axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
             .then (response => {
                 if(response.status=200){
-                    this.reload();
+                    window.location.reload();
                 }
             })
         },

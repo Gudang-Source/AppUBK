@@ -9,52 +9,6 @@
     <link rel="stylesheet" href="<?php echo base_url('./assets/css/style.css'); ?>">
 </head>
 <body>
-<div id="appAdmin" v-cloak>
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="menu-title">
-                        <a href="<?php echo base_url('welcome/guru')?>"><i class="fa fa-user"></i> Menu guru</a>
-                    </li>
-                    <li class="menu-title">
-                        <a href="<?php echo base_url('welcome/kelas')?>"><i class="fa fa-users"></i> Menu kelas</a>
-                    </li>
-                    <li class="menu-title">
-                        <a href="<?php echo base_url('welcome/siswa')?>"><i class="fa fa-users"></i> Menu Siswa</a>
-					</li>
-                    <li class="menu-title">
-                        <a href="<?php echo base_url('welcome/soal')?>"><i class="fa fa-users"></i> Menu soal</a>
-					</li>
-                    <li class="menu-title">
-                        <a href="<?php echo base_url('welcome/ujian')?>"><i class="fa fa-users"></i> Menu ujian</a>
-					</li>
-                    <li class="menu-title">
-                        <a href="<?php echo base_url('welcome/nilai')?>"><i class="fa fa-users"></i> Menu rekap nilai</a>
-					</li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside>
-    <!-- /#left-panel -->
-    <!-- Right Panel -->
-    <div id="right-panel" class="right-panel">
-        <!-- Header-->
-        <header id="header" class="header">
-			<div class="top-left">
-                <div class="navbar-header">
-					<a href="">AppUBK</a>
-					<a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
-                </div>
-            </div>
-        </a>
-		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap">
-				<a class="nav-link" href="#">Sign out</a>
-			</li>
-		</ul>
-	</nav>
     <div class="container-fluid">
         <div class="row">
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -110,8 +64,8 @@
     </div>
     <script src="<?php echo base_url('../assets/js/vue.js'); ?>"></script>
     <script src="<?php echo base_url('../assets/js/axios.min.js'); ?>"></script>
-    <script src="<?php echo base_url('./assets/js/nicEdit.js'); ?>"></script> 
     <script src="<?php echo base_url('./assets/js/main.js'); ?>"></script>
+    <script src="<?php echo base_url('./assets/js/nicEdit.js'); ?>"></script> 
     <script src="<?php echo base_url('../assets/js/jquery.min.js'); ?>"></script>
     <script src="<?php echo base_url('../assets/js/popper.min.js'); ?>"></script>
     <script src="<?php echo base_url('../assets/js/bootstrap.js'); ?>"></script>
