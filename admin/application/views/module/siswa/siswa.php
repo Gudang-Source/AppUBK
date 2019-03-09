@@ -38,8 +38,8 @@
 </div>
 <div class="table-responsive">
     <div class="card-body">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+        <table class="table table-striped table-hover table-bordered table-sm">
+            <thead class="thead-light">
                 <th scope="col" class="text-center">No</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Kelas</th>

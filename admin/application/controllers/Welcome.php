@@ -3,13 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends MY_Controller {
 	public function index() {
-		$this->data['guru']=$this->Model->guru('guru');
-		$this->pages('module/guru/guru', $this->data);
+		$this->pages('module/guru/guru');
 	}
-	
 	public function guru() {
-		$this->data['guru']=$this->Model->guru('guru');
-		$this->pages('module/guru/guru', $this->data);
+		$this->pages('module/guru/guru');
 	}
 	public function siswa(){
 		$this->pages('module/siswa/siswa');

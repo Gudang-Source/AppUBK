@@ -31,8 +31,8 @@
 <div class="table-responsive">
     <div class="card-body">
     <h4 class="d-inline mr-3">Refresh untuk melihat token terbaru</h4><img @click="reload()" style="cursor:pointer;" src="../assets/icon/refresh-cw.svg" alt="">
-        <table class="mt-3 table table-bordered">
-            <thead class="thead-dark text-center">
+    <table class="mt-3 table table-striped table-hover table-bordered table-sm">
+            <thead class="thead-light text-center">
                 <th scope="col" class="text-center">No</th>
                 <th scope="col">Kelas</th>
                 <th scope="col">Mapel</th>

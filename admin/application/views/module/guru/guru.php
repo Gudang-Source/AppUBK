@@ -19,28 +19,19 @@
 </div>
 <div class="table-responsive">
     <div class="card-body">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+    <table class="table table-striped table-hover table-bordered table-sm">
+            <thead class="thead-light">
                 <th scope="col" class="text-center">No</th>
                 <th scope="col">Nama</th>
                 <th scope="col">NIP</th>
             </thead>
-            <?php
-            $no=1;
-            foreach ($guru->result() as $row)
-            {
-            ?>
             <tbody>
-                <tr>
-                    <th scope="row" class="text-center"><?php echo $no; ?></th>
-                    <td><?php echo $row->nama;?></td>
-                    <td><?php echo $row->NIP;?></td>
+                <tr v-for="(data,key) in dataGuru">
+                    <td>{{key+1}}</td>
+                    <td>{{data.nama}}</td>
+                    <td>{{data.NIP}}</td>
                 </tr>
             </tbody>
-            <?php 
-            $no++;
-            }
-            ?>
         </table>
     </div>
 </div>
