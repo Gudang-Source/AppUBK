@@ -12,7 +12,9 @@
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
             Aplikasi UNBK
-            <div class="spinner-border text-primary float-right" role="status"></div>
+            <div class="spinner-border spinner-border-sm text-warning float-right" role="status">
+                <div class="spinner-grow spinner-grow-sm text-danger" role="status"></div>
+            </div>
         </a>
 		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
 		<ul class="navbar-nav px-3">
@@ -27,33 +29,33 @@
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 						<li class="nav-item">
-							<a class="nav-link active" href="<?php echo base_url('welcome/guru')?>">
-								<span data-feather="home"></span>
-								Menu Guru <span class="sr-only">(current)</span>
+                            <a class="nav-link" href="<?php echo base_url('welcome/guru')?>">
+                            <span data-feather="home"></span>
+							Menu Guru
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="<?php echo base_url('welcome/kelas')?>">
-								<span data-feather="file"></span>
-								Menu Kelas
+							<span data-feather="file"></span>
+							Menu Kelas
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="<?php echo base_url('welcome/siswa')?>">
-								<span data-feather="shopping-cart"></span>
-								Menu Siswa
+							<span data-feather="shopping-cart"></span>
+							Menu Siswa
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="<?php echo base_url('welcome/soal')?>">
-								<span data-feather="shopping-cart"></span>
-								Menu Soal
+					        <span data-feather="users"></span>
+							Menu Soal
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="<?php echo base_url('welcome/ujian')?>">
-								<span data-feather="shopping-cart"></span>
-								Menu Ujian
+					        <span data-feather="bar-chart-2"></span>
+							Menu Ujian
 							</a>
 						</li>
                     </ul>
@@ -78,6 +80,9 @@
     <script src="<?php echo base_url('../assets/js/axios.min.js'); ?>"></script>
     <script src="<?php echo base_url('./assets/js/nicEdit.js'); ?>"></script> 
     <script src="<?php echo base_url('./assets/js/main.js'); ?>"></script>
+    <script src="<?php echo base_url('../assets/js/jquery.min.js'); ?>"></script>
+    <script src="<?php echo base_url('../assets/js/popper.min.js'); ?>"></script>
+    <script src="<?php echo base_url('../assets/js/bootstrap.js'); ?>"></script>
     <script type="text/javascript"> 
         bkLib.onDomLoaded(function() { 
             nicEditors.allTextAreas({iconsPath:'<?php echo base_url(); ?>assets/js/nicEditorIcons.gif',uploadURI:'<?php echo site_url() ?>./welcome/upload'});
