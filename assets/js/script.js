@@ -20,9 +20,8 @@ let ujian = new Vue({
             form:false
         },
         jawabanEssay:"",
-        jawabanEssayForm:false,
-        url:"hendri.ddns.net"
-        // url:"localhost"
+        // url:"hendri.ddns.net"
+        url:"localhost"
         // url:"192.168.1.254"
         // url:"199.169.1.26"
     },
@@ -44,10 +43,6 @@ let ujian = new Vue({
         }
     },
     methods:{
-        toEssay:function(jawaban){
-            this.jawabanEssay=jawaban;
-            this.jawabanEssayForm=true;
-        },
         jawab:function(jawaban,id_ujian,id_siswa,id_soal){
             let data={
                 jawaban:jawaban,
@@ -125,11 +120,11 @@ let ujian = new Vue({
         },
         updateJawaban:function(id){
             let data={
-                jawaban:this.jawabanEssay,
+                jawaban:this.$refs.jawaban.value,
                 id:id,
                 stat:"updateJawabanEssay",
             }
             axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
-        }
+        },
     }
 })

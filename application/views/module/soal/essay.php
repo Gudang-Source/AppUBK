@@ -57,8 +57,7 @@
                         
                     </textarea>
                 <?php }else{ ?>
-                    <textarea v-if="jawabanEssayForm==false" @click="toEssay('<?php echo $jawaban->jawaban ?>')" class="form-control"><?php echo $jawaban->jawaban ?></textarea>
-                    <textarea autofocus v-if="jawabanEssayForm==true" @input="updateJawaban(<?php echo $jawaban->id ?>)" v-model="jawabanEssay"  class="form-control"><?php echo $jawaban->jawaban ?></textarea>
+                    <textarea @input="updateJawaban(<?php echo $jawaban->id ?>)" ref="jawaban" class="form-control"><?php echo $jawaban->jawaban ?></textarea>
                 <?php 
                 }  
                 } ?>
