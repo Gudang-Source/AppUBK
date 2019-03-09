@@ -97,6 +97,12 @@ class Welcome extends MY_Controller {
 		$data['jum_soal']=$this->Model->random($ujian->id_pelajaran)->num_rows();
 		$data['kkm']= $this->Model->kkm($ujian->id_pelajaran)->row();
 		$cek_record=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->num_rows();
+		$cek_essay=$this->Model->cek_essay($ujian->id_pelajaran)->num_rows();
+		if($cek_essay>0){
+			$data['cek_essay']=1;
+		}else{
+			$data['cek_essay']=0;
+		}
 		if($cek_record < 1 ){
 			$random= $this->Model->random($ujian->id_pelajaran)->result();
 			$array=[];
@@ -108,9 +114,49 @@ class Welcome extends MY_Controller {
 		}
 		$data["soal"] = $this->Model->soal($config,$siswa);
 		$data["soalSemua"] = $this->Model->soal('select',$siswa);
+		$data["soalEssay"] = $this->Model->essay('select',$ujian->id_pelajaran,$ujian->id_ujian,$siswa);
+		$data['halaman'] = $this->uri->segment('2');
 		$data['url']=$this->uri->segment('3');
 		$data['record']=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->row();
 		$this->pages('module/soal/soal', $data);
+	}
+	public function essay() {
+		if($this->session->userdata('token') != "success"){
+			redirect(base_url("welcome/"));
+		}
+		//pagination
+		$config['base_url']    = base_url()."welcome/essay/";
+		$config['total_rows']  = $this->db->query("SELECT * FROM essay;")->num_rows();
+		$config['per_page']    = 1;
+		$config['num_links']   = 5;
+		$config['uri_segment'] = 3;
+
+		//styling
+		$config['full_tag_open']   = "";
+		$config['full_tag_close']  = "";
+		$config['last_tag_open']    = "";
+		$config['last_tag_close']   = "";
+		$config['cur_tag_open']    = "<div style='margin-bottom:30px;padding:2px;color: rgb(0, 0, 0); width:25%;'>";
+		$config['cur_tag_close']   = "</div>";
+		$config['num_tag_open']    = "<div style='margin-bottom:30px;padding:2px;color: rgb(0, 0, 0); width:25%;'>";
+		$config['num_tag_close']   = "</div>";
+		$this->pagination->initialize($config);
+		$siswa = $this->session->userdata('id_siswa');
+		$kelas = $this->Model->kelas('kelas',array('id_kelas' => $this->session->userdata('id_kelas')));
+		$ujian = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
+		$data['jum_soal']=$this->Model->random($ujian->id_pelajaran)->num_rows();
+		$data['kkm']= $this->Model->kkm($ujian->id_pelajaran)->row();
+		//list
+		$data["soalSemua"] = $this->Model->soal('select',$siswa);
+		$data["soalEssay"] = $this->Model->essay('select',$ujian->id_pelajaran,$ujian->id_ujian,$siswa);
+		//tutup list
+		$data['halaman'] = $this->uri->segment('2');
+		$data['url']=$this->uri->segment('3');
+		$data["essay"] = $this->Model->essay($config,$ujian->id_pelajaran,$ujian->id_ujian,$siswa);
+		$data['id_siswa']=$siswa;
+		$data['id_ujian']= $ujian->id_ujian;
+		$data['record']=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->row();
+		$this->pages('module/soal/essay', $data);
 	}
 	public function login()
 	{

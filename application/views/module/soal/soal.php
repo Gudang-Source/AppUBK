@@ -16,9 +16,17 @@
     	    <div class="text-center" style="padding-bottom:20px; font-size:14px; color:#0066CC;">Soal Pilihan Ganda</div>
             <div class="items">
                 <?php for($i=0; $i<count($soalSemua); $i++){ ?>
-                    <a class="link-pag <?php if($url==$i){echo "aktif";}else{if($soalSemua[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/soal/'.$i); ?>"><?php echo $i+1; ?></a>
-                <?php } ?>            
-            </div>      
+                    <a class="link-pag <?php if($url==$i AND $halaman=="soal"){echo "aktif";}else{if($soalSemua[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/soal/'.$i); ?>"><?php echo $i+1; ?></a>
+                <?php } ?>         
+            </div>
+            <?php if($cek_essay==1){ ?>
+                <div class="text-center" style="padding-bottom:20px; font-size:14px; color:#0066CC;">Soal Essay</div>
+                <div class="items">
+                    <?php for($i=0; $i<count($soalEssay); $i++){ ?>
+                        <a class="link-pag <?php if($url==$i AND $halaman!="soal"){echo "aktif";}else{if($soalEssay[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/essay/'.$i); ?>"><?php echo $i+1; ?></a>
+                    <?php }
+                    } ?>
+                </div>
             
     	</div>
         <div @click="sidebar.right='0'" v-if="sidebar.right=='-300px'" style="font-size:40px; text-align:center;" class="toggler">
@@ -132,10 +140,14 @@
                         ?>
 
                             <a href="<?php echo base_url('welcome/soal/'.$url_next) ?>" class="w-100 btn btn-primary">Next</a>    
-                        <?php }else if($url+1==count($soalSemua)){ 
-                            ?>
-                            <button class="btn btn-success w-100" @click="yakin.form=true">Selesai</button>
-                        <?php } 
+                        <?php }else if($url+1==count($soalSemua)){
+                            if($cek_essay==0){ ?>
+                                <button class="btn btn-success w-100" @click="yakin.form=true">Selesai</button>
+                        <?php }else{ ?>
+                            <a href="<?php echo base_url('welcome/essay/0') ?>" class="w-100 btn btn-primary">Next Ke Essay</a>    
+                        <?php    
+                        }
+                        } 
                         ?>       
                     </div>
                 </div>

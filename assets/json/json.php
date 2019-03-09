@@ -121,6 +121,21 @@
 			$sql= "DELETE FROM siswa WHERE id_siswa='$id_siswa'";
 			$koneksi->query($sql);
 		}
+		if($datas->stat=="addJawabanEssay"){
+			$jawaban= $datas->jawaban;
+			$id_ujian=$datas->id_ujian;
+			$id_siswa=$datas->id_siswa;
+			$id_soal= $datas->id_soal;
+			// $sql ="DELETE ujian_jawaban WHERE ujian_id='$id_ujian' AND siswa_id='$id_siswa' AND soal_id='$id_soal'";
+			$sql= "REPLACE INTO essay_jawaban (ujian_id,siswa_id,soal_id,jawaban) VALUES ('$id_ujian','$id_siswa','$id_soal','$jawaban')";
+			$koneksi->query($sql);
+		}
+		if($datas->stat=="updateJawabanEssay"){
+			$jawaban= $datas->jawaban;
+			$id= $datas->id;
+			$sql= "UPDATE essay_jawaban SET jawaban='$jawaban' WHERE id='$id'";
+			$koneksi->query($sql);
+		}
 
 }
 

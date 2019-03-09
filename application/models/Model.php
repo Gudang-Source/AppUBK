@@ -47,6 +47,9 @@ class Model extends CI_Model {
     public function cek_record_status($siswa,$id_pelajaran){
         return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran' AND status=1")->num_rows();
     }
+    public function cek_essay($id_pelajaran){
+        return $this->db->query("SELECT soal_id FROM essay WHERE soal_pelajaran='$id_pelajaran'");
+    }
 
     public function soal($config,$siswa) {
             $id_soal=$this->db->query("SELECT record.id_soal,ujian.id_ujian,siswa.id_siswa FROM record JOIN siswa ON siswa.id_siswa=$siswa JOIN ujian ON ujian.id_kelas=siswa.id_kelas WHERE record.id_siswa=siswa.id_siswa AND record.id_pelajaran=ujian.id_pelajaran AND record.status=0")->row();
@@ -68,6 +71,15 @@ class Model extends CI_Model {
                 $data[] = $value;
             }
             return $data;
+    }
+    public function essay($config,$id_pelajaran,$id_ujian,$id_siswa){
+        if($config=="select"){
+            $essay=$this->db->query("SELECT * FROM essay LEFT OUTER JOIN essay_jawaban ON essay_jawaban.soal_id=essay.soal_id AND essay_jawaban.ujian_id=$id_ujian AND essay_jawaban.siswa_id=$id_siswa WHERE soal_pelajaran=$id_pelajaran") ;
+            return $essay->result();
+        }else{;
+            $this->db->where('soal_pelajaran',$id_pelajaran);
+            return $this->db->get('essay',$config['per_page'], $this->uri->segment(3))->result();
+        }
     }
     public function cek_jawaban($table, $where){
             return $this->db->get_where($table,$where);
