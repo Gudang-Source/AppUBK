@@ -27,6 +27,10 @@ class Welcome extends MY_Controller {
 		$this->Model->SaveEssay($soal_pelajaran);
 	}
 
+	public function EditEssay() {
+		# code...
+	}
+
 	public function perSoalEdit($soal_id, $soal_pelajaran) {
 		$data['perSoalEdit'] = $this->Model->perSoalEdit($soal_id, $soal_pelajaran);
 		$this->pages('module/perSoal/perSoalEdit', $data);
