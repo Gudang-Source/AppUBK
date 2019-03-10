@@ -41,12 +41,26 @@ class Model extends CI_Model {
             );
             $this->db->insert('soal', $data);
         }
-		return $this->db->get('soal')->result();
+        return $this->db->get('soal')->result();
+    }
+
+    public function SaveEssay($soal_pelajaran) {
+        $data = array(
+            "soal_pelajaran"    => $soal_pelajaran,
+            "soal_deskripsi"    => $this->input->post('soal_deskripsi'),
+        );
+        $this->db->insert('essay', $data);
+        redirect('welcome/perSoal/'.$soal_pelajaran);
+    }
+
+    public function listEssay($soal_pelajaran) {
+        $this->db->where('soal_pelajaran', $soal_pelajaran);
+        return $this->db->get('essay')->result();
     }
 
     public function perSoalEdit($soal_id) {
-		$this->db->where('soal_id', $soal_id);
-		return $this->db->get('soal')->row();
+        $this->db->where('soal_id', $soal_id);
+        return $this->db->get('soal')->row();
     }
 
     public function UpdateperSoalEdit($soal_id, $soal_pelajaran) {

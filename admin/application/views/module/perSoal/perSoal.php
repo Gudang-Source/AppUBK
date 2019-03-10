@@ -14,7 +14,7 @@
 <!-- Form Soal -->
 <nav>
 	<div class="nav nav-tabs" id="nav-tab" role="tablist">
-	<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Soal Pilihan Ganda</a>
+	<a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Soal Pilihan Ganda</a>
 	<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Soal Essay</a>
 </div>
 </nav>
@@ -117,5 +117,31 @@
 			</div>
 		<?php $no++; } ?>
 	</div>
-	<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+	<div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+		<div class="row mb-5">
+			<div class="col-12">
+				<?php echo form_open("welcome/saveEssay/".$perSoal[0]->soal_pelajaran); ?>
+				<div class="form-group">
+					<textarea name="soal_deskripsi" class="form-control"></textarea>
+				</div>
+				<input type="submit" value="Simpan" class="btn btn-primary btn-sm">
+				<?php form_close(); ?>
+			</div>
+		</div>
+
+		<!-- Daftar List Soal Essay -->
+		<?php $no=1; foreach($listEssay AS $data) { ?>
+			<div class="card bg-light">
+				<div class="card-header">
+					<?php echo "<b>Soal No. ".$no."</b>" ?>
+					<div class="float-right">
+						<a href="<?php //echo base_url("welcome/perSoalEdit/".$data->soal_id.'/'.$data->soal_pelajaran) ?>" class="btn btn-info btn-sm" >Edit</a>
+					</div>
+				</div>
+				<div class="card-body">
+					<?php echo $data->soal_deskripsi."</br>" ?>
+				</div>
+			</div>
+		<?php $no++; } ?>
+	</div>
 </div>
