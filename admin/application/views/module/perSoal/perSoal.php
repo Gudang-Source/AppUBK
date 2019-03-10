@@ -103,7 +103,7 @@
 							<span class="checkmark">C</span>
 						</label>
 						<label class="jawaban w-50"><?php echo $data->soal_jwb4 ?>
-							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'<?php echo $data->soal_jwb4 ?>')" <?php if($data->soal_jawaban==$data->soal_jwb4){echo "checked";} ?> type="radio" name="pilgan" >
+							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'<?php echo $data->soal_jwb4 ?>')" <?php if($data->soal_jawaban==$data->soal_jwb4){echo "checked";} ?> type="radio" name="pilgan">
 							<span class="checkmark">D</span>
 						</label>
 						<label class="jawaban w-50"><?php echo $data->soal_jwb5 ?>
