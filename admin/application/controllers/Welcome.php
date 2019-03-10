@@ -78,4 +78,7 @@ class Welcome extends MY_Controller {
 		);
         echo json_encode($res);
 	}
+	public function nilai(){
+		$this->pages('module/nilai/nilai');
+	}
 }

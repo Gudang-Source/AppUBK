@@ -90,24 +90,26 @@
 				<div class="card-body">
 					<?php echo $data->soal_deskripsi."</br>" ?>
 					<form>
-						<label class="jawaban w-50"><?php echo $data->soal_jwb1 ?>
-							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'<?php echo $data->soal_jwb1 ?>')" <?php if($data->soal_jawaban==$data->soal_jwb1){echo "checked";} ?> type="radio" name="pilgan" >
+						<label class="jawaban w-50">
+							<div><?php echo $data->soal_jwb1 ?></div>
+
+							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'soal_jwb1')" <?php if($data->soal_jawaban==$data->soal_jwb1){echo "checked";} ?> type="radio" name="pilgan" >
 							<span class="checkmark">A</span>
 						</label>
 						<label class="jawaban w-50"><?php echo $data->soal_jwb2 ?>
-							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'<?php echo $data->soal_jwb2 ?>')" <?php if($data->soal_jawaban==$data->soal_jwb2){echo "checked";} ?> type="radio" name="pilgan" >
+							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'soal_jwb2')" <?php if($data->soal_jawaban==$data->soal_jwb2){echo "checked";} ?> type="radio" name="pilgan" >
 							<span class="checkmark">B</span>
 						</label>
 						<label class="jawaban w-50"><?php echo $data->soal_jwb3 ?>
-							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'<?php echo $data->soal_jwb3 ?>')" <?php if($data->soal_jawaban==$data->soal_jwb3){echo "checked";} ?> type="radio" name="pilgan" >
+							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'soal_jwb3')" <?php if($data->soal_jawaban==$data->soal_jwb3){echo "checked";} ?> type="radio" name="pilgan" >
 							<span class="checkmark">C</span>
 						</label>
 						<label class="jawaban w-50"><?php echo $data->soal_jwb4 ?>
-							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'<?php echo $data->soal_jwb4 ?>')" <?php if($data->soal_jawaban==$data->soal_jwb4){echo "checked";} ?> type="radio" name="pilgan">
+							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'soal_jwb4')" <?php if($data->soal_jawaban==$data->soal_jwb4){echo "checked";} ?> type="radio" name="pilgan" >
 							<span class="checkmark">D</span>
 						</label>
 						<label class="jawaban w-50"><?php echo $data->soal_jwb5 ?>
-							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'<?php echo $data->soal_jwb5 ?>')" <?php if($data->soal_jawaban==$data->soal_jwb5){echo "checked";} ?> type="radio" name="pilgan" >
+							<input @change="updateJawaban(<?php echo $data->soal_id ?>,'soal_jwb5')" <?php if($data->soal_jawaban==$data->soal_jwb5){echo "checked";} ?> type="radio" name="pilgan" >
 							<span class="checkmark">E</span>
 						</label>
 					</form>

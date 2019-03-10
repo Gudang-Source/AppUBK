@@ -44,13 +44,22 @@ let appAdmin= new Vue ({
             nis:"",
             username:"",
             password:""
-        }
+        },
+        nilai:{
+            kelas:[],
+            form:false,
+            formSiswa:false,
+            id_pelajaran:"",
+            id_ujian:"",
+            kkm:""
+        },
+        siswaNilai:[],
 
     },
     computed:{
         url_soal:function(){
             return "http://"+this.url+"/AppUBK/admin/welcome/perSoal/";
-        }
+        },
     },
     created: function(){
         axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas")
@@ -123,12 +132,16 @@ let appAdmin= new Vue ({
             }
         },
         updateJawaban:function(soal_id,soal_jawaban){
-            let data={
-                soal_id:soal_id,
-                soal_jawaban:soal_jawaban,
-                stat:"updateJawaban"
-            }
-            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20"+soal_jawaban+"%20AS%20soal_jawaban%20FROM%20soal%20WHERE%20soal_id=%27"+soal_id+"%27")
+            .then (response => {
+                console.log(response.data[0].soal_jawaban);
+                let data={
+                    soal_id:soal_id,
+                    soal_jawaban:response.data[0].soal_jawaban,
+                    stat:"updateJawaban"
+                }
+                axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+            })
         },
         editSoal:function(soal_id,soal_deskripsi,soal_jwb1,soal_jwb2,soal_jwb3,soal_jwb4,soal_jwb5){
             this.soal.form=true;
@@ -151,7 +164,7 @@ let appAdmin= new Vue ({
             axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data)
             .then (response => {
                 if(response.status=200){
-                    this.reload();
+                    window.location.reload();
                 }
             })
         },
@@ -217,6 +230,61 @@ let appAdmin= new Vue ({
                 if(r.status==200){
                     this.dataSiswa.splice(key,1);
                 }
+            })
+        },
+        listKelas:function(id_pelajaran,kkm){
+            this.nilai.id_pelajaran=id_pelajaran;
+            this.nilai.kkm=kkm;
+            let id_kelas=[];
+            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20id_ujian,id_kelas%20FROM%20ujian%20WHERE%20id_pelajaran=%27"+id_pelajaran+"%27")
+            .then(response => {
+                this.nilai.id_ujian=response.data[0].id_ujian;
+                for(let i=0; i<response.data.length; i++){
+                    id_kelas.push(response.data[i].id_kelas);
+                }
+                let id_kelas_new=id_kelas.join();
+                if(id_kelas.length!=0){
+                    axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas%20WHERE%20id_kelas%20IN%20("+id_kelas_new+")")
+                    .then (response => {
+                        this.nilai.kelas=response.data
+                    })
+                }else{
+                    this.nilai.kelas=[];
+                }
+            })
+            this.nilai.form=true;
+        },
+        listSiswa:function(id_kelas){
+            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20COUNT(soal_id)AS%20jum_soal%20FROM%20soal%20WHERE%20soal_pelajaran=%27"+this.nilai.id_pelajaran+"%27")
+            .then(r_soal => {
+                let per_soal= 100/r_soal.data[0].jum_soal;
+                axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20siswa%20WHERE%20id_kelas=%27"+id_kelas+"%27")
+                .then(r=>{
+                    let id_siswa=[];
+                    for(let i=0; i<r.data.length; i++){
+                        id_siswa.push(r.data[i].id_siswa);
+                    }
+                    axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20nama,CASE%20WHEN(ujian_jawaban.jawaban=soal.soal_jawaban)%20THEN%201%20ELSE%200%20END%20AS%20nilai%20FROM%20ujian_jawaban%20JOIN%20siswa%20ON%20siswa.id_siswa=ujian_jawaban.siswa_id%20JOIN%20soal%20ON%20ujian_jawaban.soal_id=soal.soal_id%20WHERE%20ujian_jawaban.ujian_id=%27"+this.nilai.id_ujian+"%27%20AND%20siswa_id%20IN%20("+id_siswa.join()+")")
+                    .then(response => {
+                        let siswa=[];
+                        for(let i=0; i<response.data.length; i++){
+                            let key = siswa.findIndex(x=>x.nama==response.data[i].nama);
+                            if(key!=-1){
+                                if(response.data[i].nilai=='1'){
+                                    siswa[key].nilai=siswa[key].nilai+per_soal;
+                                }
+                            }else{
+                                if(response.data[i].nilai=='1'){
+                                    siswa.push({nama:response.data[i].nama,nilai:per_soal})
+                                }
+                            }
+                        }
+                        this.siswaNilai=siswa;
+                        
+                    })
+                })
+                this.nilai.formSiswa=true;
+                this.nilai.form=false;
             })
         }
     }
