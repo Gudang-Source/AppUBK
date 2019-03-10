@@ -14,13 +14,13 @@
 <!-- Form Soal -->
 <nav>
 	<div class="nav nav-tabs" id="nav-tab" role="tablist">
-	<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Soal Pilihan Ganda</a>
+	<a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Soal Pilihan Ganda</a>
 	<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Soal Essay</a>
 </div>
 </nav>
 	<div class="tab-content" id="nav-tabContent">
 	<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-		<form action="" class="form mb-5" method="post" enctype="multipart/form-data">
+		<form action="" class="form mb-4 mt-2" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<textarea name="soal_deskripsi" class="form-control" cols="50" rows="10"></textarea>
 			</div>
@@ -43,7 +43,6 @@
 					</div>
 				</div>
 				<textarea name="soal_jwb2" class="form-control"></textarea>
-				<!-- <input name="soal_jwb2" required type="text" class="form-control" placeholder="Jawaban B"> -->
 			</div>
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
@@ -53,7 +52,6 @@
 					</div>
 				</div>
 				<textarea name="soal_jwb3" class="form-control"></textarea>
-				<!-- <input name="soal_jwb3" required type="text" class="form-control" placeholder="Jawaban C"> -->
 			</div>
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
@@ -63,7 +61,6 @@
 					</div>
 				</div>
 				<textarea name="soal_jwb4" class="form-control"></textarea>
-				<!-- <input name="soal_jwb4" required type="text" class="form-control" placeholder="Jawaban D"> -->
 			</div>
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
@@ -73,9 +70,8 @@
 					</div>
 				</div>
 				<textarea name="soal_jwb5" class="form-control"></textarea>
-				<!-- <input name="soal_jwb5" required type="text" class="form-control" placeholder="Jawaban E"> -->
 			</div>	
-			<input type="submit" name="submit" class="btn btn-success">
+			<input type="submit" name="submit" value="simpan" class="btn btn-primary btn-sm float-right">
 		</form>
 
 		<!-- Daftar List Soal -->
@@ -117,5 +113,31 @@
 			</div>
 		<?php $no++; } ?>
 	</div>
-	<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+	<div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+		<div class="row mb-5 mt-2">
+			<div class="col-12">
+				<?php echo form_open("welcome/saveEssay/".$perSoal[0]->soal_pelajaran); ?>
+				<div class="form-group">
+					<textarea name="soal_deskripsi" class="form-control"></textarea>
+				</div>
+				<input type="submit" value="Simpan" class="btn btn-primary btn-sm float-right">
+				<?php form_close(); ?>
+			</div>
+		</div>
+
+		<!-- Daftar List Soal Essay -->
+		<?php $no=1; foreach($listEssay AS $data) { ?>
+			<div class="card bg-light">
+				<div class="card-header">
+					<?php echo "<b>Soal No. ".$no."</b>" ?>
+					<div class="float-right">
+						<a href="<?php echo base_url("welcome/EditEssay/".$data->soal_id) ?>" class="btn btn-info btn-sm" >Edit</a>
+					</div>
+				</div>
+				<div class="card-body">
+					<?php echo $data->soal_deskripsi."</br>" ?>
+				</div>
+			</div>
+		<?php $no++; } ?>
+	</div>
 </div>
