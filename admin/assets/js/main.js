@@ -1,9 +1,9 @@
 let appAdmin= new Vue ({
     el:"#appAdmin",
     data:{
-        url:"hendri.ddns.net",
+        // url:"hendri.ddns.net",
         // url:"localhost",
-        // url:"192.168.1.254",
+        url:"192.168.1.254",
         // url:"199.169.1.26",
         dataKelas:[],
         kelas:{
@@ -47,13 +47,21 @@ let appAdmin= new Vue ({
         },
         nilai:{
             kelas:[],
+            essay:[],
             form:false,
             formSiswa:false,
             id_pelajaran:"",
             id_ujian:"",
-            kkm:""
+            kkm:"",
+            nama_pelajaran:"",
+            nama_kelas:""
         },
         siswaNilai:[],
+        ujianEdit:{
+            formEdit:false,
+            id_kelas:"",
+            id_pelajaran:""
+        }
 
     },
     computed:{
@@ -181,12 +189,35 @@ let appAdmin= new Vue ({
             })
         },
         tambahUjian:function(){
-            let data ={
-                id_kelas:this.ujian.id_kelas,
-                id_pelajaran:this.ujian.id_pelajaran,
-                stat:"tambahUjian"
-            }
-            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20id_ujian%20FROM%20ujian%20WHERE%20id_kelas=%27"+this.ujian.id_kelas+"%27%20AND%20id_pelajaran=%27"+this.ujian.id_pelajaran+"%27")
+            .then (response => {
+                if(response.data.length<1){
+                    let data ={
+                        id_kelas:this.ujian.id_kelas,
+                        id_pelajaran:this.ujian.id_pelajaran,
+                        stat:"tambahUjian"
+                    }
+                    axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+                }else{
+                    alert("Ujian Sudah Ada!!");
+                }
+            })
+        },
+        updateUjian:function(){
+            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20id_ujian%20FROM%20ujian%20WHERE%20id_kelas=%27"+this.ujianEdit.id_kelas+"%27%20AND%20id_pelajaran=%27"+this.ujianEdit.id_pelajaran+"%27")
+            .then (response => {
+                if(response.data.length<1){
+                    let data ={
+                        id_kelas:this.ujianEdit.id_kelas,
+                        id_pelajaran:this.ujianEdit.id_pelajaran,
+                        stat:"updateUjian"
+                    }
+                    axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
+                    window.location.reload();
+                }else{
+                    alert("Ujian Sudah Ada!!");
+                }
+            })
         },
         tambahMapel:function(){
             let that=this.mataPelajaran;
@@ -232,8 +263,9 @@ let appAdmin= new Vue ({
                 }
             })
         },
-        listKelas:function(id_pelajaran,kkm){
+        listKelas:function(id_pelajaran,kkm,nama_pelajaran){
             this.nilai.id_pelajaran=id_pelajaran;
+            this.nilai.nama_pelajaran=nama_pelajaran;
             this.nilai.kkm=kkm;
             let id_kelas=[];
             axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20id_ujian,id_kelas%20FROM%20ujian%20WHERE%20id_pelajaran=%27"+id_pelajaran+"%27")
@@ -254,10 +286,11 @@ let appAdmin= new Vue ({
             })
             this.nilai.form=true;
         },
-        listSiswa:function(id_kelas){
+        listSiswa:function(id_kelas,nama_kelas){
+            this.nilai.nama_kelas=nama_kelas;
             axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20COUNT(soal_id)AS%20jum_soal%20FROM%20soal%20WHERE%20soal_pelajaran=%27"+this.nilai.id_pelajaran+"%27")
             .then(r_soal => {
-                let per_soal= 100/r_soal.data[0].jum_soal;
+                let per_soal= Math.round(100/r_soal.data[0].jum_soal);
                 axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20siswa%20WHERE%20id_kelas=%27"+id_kelas+"%27")
                 .then(r=>{
                     let id_siswa=[];
@@ -286,6 +319,38 @@ let appAdmin= new Vue ({
                 this.nilai.formSiswa=true;
                 this.nilai.form=false;
             })
+        },
+        exportTableToExcel: function (nama_pelajaran,nama_kelas){
+            let filename = nama_pelajaran+'_'+nama_kelas;
+            let tableID=this.$refs.table;
+            var downloadLink;
+            var dataType = 'application/vnd.ms-excel';
+            var tableSelect = tableID;
+            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+            
+            // Specify file name
+            filename = filename?filename+'.xls':'excel_data.xls';
+            
+            // Create download link element
+            downloadLink = document.createElement("a");
+            
+            document.body.appendChild(downloadLink);
+            
+            if(navigator.msSaveOrOpenBlob){
+                var blob = new Blob(['\ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob( blob, filename);
+            }else{
+                // Create a link to the file
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+            
+                // Setting the file name
+                downloadLink.download = filename;
+                
+                //triggering the function
+                downloadLink.click();
+            }
         }
     }
 })

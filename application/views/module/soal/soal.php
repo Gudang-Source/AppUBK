@@ -25,8 +25,9 @@
                     <?php for($i=0; $i<count($soalEssay); $i++){ ?>
                         <a class="link-pag <?php if($url==$i AND $halaman!="soal"){echo "aktif";}else{if($soalEssay[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/essay/'.$i); ?>"><?php echo $i+1; ?></a>
                     <?php }
-                    } ?>
+                    ?>
                 </div>
+            <?php } ?>
             
     	</div>
         <div @click="sidebar.right='0'" v-if="sidebar.right=='-300px'" style="font-size:40px; text-align:center;" class="toggler">
