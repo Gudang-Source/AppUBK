@@ -297,7 +297,7 @@ let appAdmin= new Vue ({
                     for(let i=0; i<r.data.length; i++){
                         id_siswa.push(r.data[i].id_siswa);
                     }
-                    axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20nama,GROUP_CONCAT(CASE%20WHEN(ujian_jawaban.jawaban=soal.soal_jawaban)%20THEN%201%20ELSE%200%20END)%20AS%20nilai%20FROM%20ujian_jawaban%20JOIN%20siswa%20ON%20siswa.id_siswa=ujian_jawaban.siswa_id%20JOIN%20soal%20ON%20ujian_jawaban.soal_id=soal.soal_id%20WHERE%20ujian_jawaban.ujian_id=%27"+this.nilai.id_ujian+"%27%20AND%20siswa_id%20IN%20("+id_siswa.join()+")")
+                    axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20nama,GROUP_CONCAT(CASE%20WHEN(ujian_jawaban.jawaban=soal.soal_jawaban)%20THEN%201%20ELSE%200%20END)%20AS%20nilai%20FROM%20ujian_jawaban%20JOIN%20siswa%20ON%20siswa.id_siswa=ujian_jawaban.siswa_id%20JOIN%20soal%20ON%20ujian_jawaban.soal_id=soal.soal_id%20WHERE%20ujian_jawaban.ujian_id=%27"+this.nilai.id_ujian+"%27%20AND%20siswa_id%20IN%20("+id_siswa.join()+")%20GROUP%20BY%20nama")
                     .then(response => {
                         let siswa=[];
                         function cekBenar(nilai){
@@ -307,7 +307,7 @@ let appAdmin= new Vue ({
                             let array=response.data[i].nilai.split(",");
                             let benar = array.filter(cekBenar);
                             let hasil = Math.round(benar.length*per_soal);
-                            siswa.push({nama:response.data[0].nama,nilai:hasil})
+                            siswa.push({nama:response.data[i].nama,nilai:hasil})
                         }
                         this.siswaNilai=siswa;
                         
