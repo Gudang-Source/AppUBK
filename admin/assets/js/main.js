@@ -290,7 +290,7 @@ let appAdmin= new Vue ({
             this.nilai.nama_kelas=nama_kelas;
             axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20COUNT(soal_id)AS%20jum_soal%20FROM%20soal%20WHERE%20soal_pelajaran=%27"+this.nilai.id_pelajaran+"%27")
             .then(r_soal => {
-                let per_soal= Math.round(100/r_soal.data[0].jum_soal);
+                let per_soal= 100/r_soal.data[0].jum_soal;
                 axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20siswa%20WHERE%20id_kelas=%27"+id_kelas+"%27")
                 .then(r=>{
                     let id_siswa=[];
