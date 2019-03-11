@@ -2,8 +2,8 @@ let appAdmin= new Vue ({
     el:"#appAdmin",
     data:{
         // url:"hendri.ddns.net",
-        // url:"localhost",
-        url:"192.168.1.254",
+        url:"localhost",
+        // url:"192.168.1.254",
         // url:"199.169.1.26",
         dataKelas:[],
         kelas:{
@@ -319,6 +319,7 @@ let appAdmin= new Vue ({
                 this.nilai.formSiswa=true;
                 this.nilai.form=false;
             })
+            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20F")
         },
         exportTableToExcel: function (nama_pelajaran,nama_kelas){
             let filename = nama_pelajaran+'_'+nama_kelas;

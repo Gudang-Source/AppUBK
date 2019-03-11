@@ -21,8 +21,8 @@ let ujian = new Vue({
         },
         jawabanEssay:"",
         // url:"hendri.ddns.net"
-        // url:"localhost"
-        url:"192.168.1.254"
+        url:"localhost"
+        // url:"192.168.1.254"
         // url:"199.169.1.26"
     },
     computed:{
@@ -111,7 +111,12 @@ let ujian = new Vue({
             axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20id%20FROM%20essay_jawaban%20WHERE%20ujian_id=%27"+id_ujian+"%27%20AND%20soal_id=%27"+id_soal+"%27%20AND%20siswa_id=%27"+id_siswa+"%27")
             .then(response => {
                 if(response.data.length>0){
-                    this.updateJawaban(response.data[0].id);
+                    let data={
+                        jawaban:this.jawabanEssay,
+                        id:response.data[0].id,
+                        stat:"updateJawabanEssay",
+                    }
+                    axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
                 }else{
                     let data={
                         id_soal:id_soal,
