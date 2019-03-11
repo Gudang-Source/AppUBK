@@ -76,7 +76,8 @@
                         <?php }else{ ?>
                             <button @click="stopUjian(<?php echo $data->id_ujian ?>)" class="btn btn-danger">Stop Ujian</button>
                         <?php } ?>
-                        <button class="btn btn-info" @click="ujianEdit.formEdit=true,ujianEdit.id_kelas='<?php echo $data->id_kelas ?>',ujianEdit.id_pelajaran='<?php echo $data->id_pelajaran ?>'">Edit</button>
+                        <button class="btn btn-info">Edit</button>
+                        <!-- <button class="btn btn-info" @click="ujianEdit.formEdit=true,ujianEdit.id_kelas='<?php echo $data->id_kelas ?>',ujianEdit.id_pelajaran='<?php echo $data->id_pelajaran ?>'">Edit</button> -->
                         </td>
                     </tr>
                 <?php } ?>
