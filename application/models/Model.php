@@ -42,7 +42,7 @@ class Model extends CI_Model {
         return $this->db->get();
     }
     public function cek_record($siswa,$id_pelajaran){
-        return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran'");
+        return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran' AND status=1");
     }
     public function cek_record_status($siswa,$id_pelajaran){
         return $this->db->query("SELECT id_record FROM record WHERE id_siswa='$siswa' AND id_pelajaran='$id_pelajaran' AND status=1")->num_rows();
