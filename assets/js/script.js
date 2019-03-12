@@ -23,7 +23,7 @@ let ujian = new Vue({
         // url:"hendri.ddns.net"
         // url:"localhost"
         url:"192.168.1.254"
-        // url:"199.169.1.26"
+        // url:"199.169.1.46"
     },
     computed:{
         nilaiStyle:function(){
