@@ -43,6 +43,12 @@
 					        <span data-feather="bar-chart-2"></span>
 							Menu Ujian
 							</a>
+                        </li>
+                        <li class="nav-item">
+							<a class="nav-link" href="<?php echo base_url('welcome/nilai')?>">
+					        <span data-feather="bar-chart-2"></span>
+							Menu Nilai
+							</a>
 						</li>
                     </ul>
                 </div>

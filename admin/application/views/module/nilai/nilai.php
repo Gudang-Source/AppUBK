@@ -22,7 +22,7 @@
                     <td>{{data.nama_guru}}</td>
                     <td>{{data.KKM}}</td>
                     <td>
-                        <button @click="listKelas(data.id_pelajaran,data.KKM)">List Kelas</button>
+                        <button @click="listKelas(data.id_pelajaran,data.KKM,data.nama)">List Kelas</button>
                     </td>
                 </tr>
             </tbody>
@@ -49,7 +49,7 @@
                             <tr v-for="(data,key) in nilai.kelas">
                                 <td>{{key+1}}</td>
                                 <td>{{data.nama_kelas}}</td>
-                                <td><button class="btn btn-success" @click="listSiswa(data.id_kelas)">Download Rekap Nilai</button></td>
+                                <td><button class="btn btn-success" @click="listSiswa(data.id_kelas,data.nama_kelas)">Download Rekap Nilai</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -69,7 +69,10 @@
                     <button type="button" class="close" aria-label="Close" @click="nilai.formSiswa=false">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <table class="table">
+                    <button @click="exportTableToExcel(nilai.nama_pelajaran,nilai.nama_kelas)">
+                        export
+                    </button>
+                    <table class="table" ref="table">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -88,6 +91,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    
                     </div>
                     <div class="model-footer">
                         

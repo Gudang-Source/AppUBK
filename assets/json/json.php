@@ -94,6 +94,13 @@
 			$koneksi->query($sql);
 
 		}
+		if($datas->stat=="updateUjian"){
+			$id_kelas = $datas->id_kelas;
+			$id_pelajaran = $datas->id_pelajaran;
+			$sql= "UPDATE ujian SET id_kelas='$id_kelas',id_pelajaran='$id_pelajaran'";
+			$koneksi->query($sql);
+
+		}
 		if($datas->stat=="logout"){
 			$id_record = $datas->id_record;
 			$sql= "UPDATE record SET status=1 WHERE id_record='$id_record'";

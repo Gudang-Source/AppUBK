@@ -13,13 +13,13 @@
     	    <div class="text-center" style="padding-bottom:20px; font-size:14px; color:#0066CC;">Soal Pilihan Ganda</div>
             <div class="items">
                 <?php for($i=0; $i<count($soalSemua); $i++){ ?>
-                    <a class="link-pag <?php if($url==$i AND $halaman=="essay"){echo "aktif";}else{if($soalSemua[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/soal/'.$i); ?>"><?php echo $i+1; ?></a>
+                    <a class="link-pag <?php if($url==$i AND $halaman!="essay"){echo "aktif";}else{if($soalSemua[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/soal/'.$i); ?>"><?php echo $i+1; ?></a>
                 <?php } ?>
             </div>      
             <div class="text-center" style="padding-bottom:20px; font-size:14px; color:#0066CC;">Soal Essay</div>
             <div class="items">
                 <?php for($i=0; $i<count($soalEssay); $i++){ ?>
-                    <a class="link-pag <?php if($url==$i AND $halaman!="essay"){echo "aktif";}else{if($soalEssay[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/essay/'.$i); ?>"><?php echo $i+1; ?></a>
+                    <a class="link-pag <?php if($url==$i AND $halaman=="essay"){echo "aktif";}else{if($soalEssay[$i]->jawaban!=null){echo "terjawab";}else{echo "biasa";}} ?>" href="<?php echo base_url('welcome/essay/'.$i); ?>"><?php echo $i+1; ?></a>
                 <?php } ?>
             </div>
             
@@ -38,17 +38,6 @@
 			</div>
 			<div class="card-body">
             <?php $url1=$url+1; ?>
-            <!-- gambar -->
-            <!-- <div class="row justify-content-center">
-                <div class="col-12 col-lg-9 align-self-center">
-                    <img src="
-                    <?php
-                    //  echo base_url('./assets/gambar.png');
-                     ?>
-                     " alt=".." class="img img-fluid">
-                </div>
-            </div> -->
-            <!-- akhir gambar -->
 				<?php foreach ($essay as $data) {
                     echo $url1.'.'.$data->soal_deskripsi.'</br>';
                     if($jawaban==null){
