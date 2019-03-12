@@ -24,9 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://192.168.100.4/AppUBK';
-$config['base_url'] = 'http://localhost/AppUBK';
+// $config['base_url'] = 'http://localhost/AppUBK';
 // $config['base_url'] = 'http://hendri.ddns.net/AppUBK';
-// $config['base_url'] = 'http://192.168.1.254/AppUBK';
+$config['base_url'] = 'http://192.168.1.254/AppUBK';
 // $config['base_url'] = 'http://199.169.1.26/AppUBK';
 // $config['base_url'] = '';
 

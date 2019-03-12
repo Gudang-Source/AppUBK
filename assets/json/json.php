@@ -90,7 +90,7 @@
 		if($datas->stat=="tambahUjian"){
 			$id_kelas = $datas->id_kelas;
 			$id_pelajaran = $datas->id_pelajaran;
-			$sql= "INSERT INTO ujian (id_kelas,id_pelajaran) VALUES ('$id_kelas','$id_pelajaran')";
+			$sql= "INSERT INTO ujian (id_kelas,id_pelajaran,status) VALUES ('$id_kelas','$id_pelajaran',1)";
 			$koneksi->query($sql);
 
 		}

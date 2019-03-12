@@ -157,7 +157,7 @@
 						</h2>
         		    </div>
         		    <div class="modal-footer">
-                            <button class="btn btn-success w-50" @click="selesaiButton(<?php echo $ujian_id?>,<?php echo $siswa_id?>,<?php echo count($soalSemua)?>,<?php echo $kkm->kkm ?>,<?php echo $id_pelajaran ?>)">Akhiri</button>
+                            <button class="btn btn-success w-50" @click="selesaiButton(<?php echo $ujian_id?>,<?php echo $siswa_id?>,<?php echo count($soalSemua)?>,<?php echo $kkm->kkm ?>,<?php echo $id_pelajaran ?>,<?php echo $id_record->id_record ?>)">Akhiri</button>
                             <button class="btn btn-danger w-50" @click="yakin.form=false">Batal</button>
         		    </div>
         		</div>

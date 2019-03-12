@@ -56,7 +56,8 @@ let appAdmin = new Vue({
 			nama_pelajaran: "",
 			nama_kelas: ""
 		},
-		siswaNilai: [],
+        siswaNilai: [],
+        siswaEssay:[],
 		ujianEdit: {
 			formEdit: false,
 			id_kelas: "",
@@ -267,16 +268,10 @@ let appAdmin = new Vue({
 			this.nilai.id_pelajaran = id_pelajaran;
 			this.nilai.nama_pelajaran = nama_pelajaran;
 			this.nilai.kkm = kkm;
-			let id_kelas = [];
-			axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20id_ujian,id_kelas%20FROM%20ujian%20WHERE%20id_pelajaran=%27" + id_pelajaran + "%27")
+			axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20GROUP_CONCAT(id_kelas)%20AS%20id_kelas%20FROM%20ujian%20WHERE%20id_pelajaran=%27" + id_pelajaran + "%27")
 				.then(response => {
-					this.nilai.id_ujian = response.data[0].id_ujian;
-					for (let i = 0; i < response.data.length; i++) {
-						id_kelas.push(response.data[i].id_kelas);
-					}
-					let id_kelas_new = id_kelas.join();
-					if (id_kelas.length != 0) {
-						axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas%20WHERE%20id_kelas%20IN%20(" + id_kelas_new + ")")
+					if (response.data.length == 1) {
+						axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas%20WHERE%20id_kelas%20IN%20(" + response.data[0].id_kelas + ")")
 							.then(response => {
 								this.nilai.kelas = response.data
 							})
@@ -287,36 +282,43 @@ let appAdmin = new Vue({
 			this.nilai.form = true;
 		},
 		listSiswa: function (id_kelas, nama_kelas) {
-			this.nilai.nama_kelas = nama_kelas;
+            this.nilai.nama_kelas = nama_kelas;
+            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20essay")
+            .then (response => {
+                console.log(response.data);
+            })
+            axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20nama,GROUP_CONCAT(essay.soal_id)%20AS%20id_soal%20FROM%20siswa%20LEFT%20JOIN%20essay_jawaban%20ON%20siswa.id_siswa=essay_jawaban.siswa_id%20LEFT%20JOIN%20essay%20ON%20essay.soal_id=essay_jawaban.soal_id%20AND%20essay.soal_pelajaran="+this.nilai.id_pelajaran+"%20WHERE%20siswa.id_kelas="+id_kelas+"%20GROUP%20BY%20nama")
+            .then (response => {
+                var data = response.data.filter(function (el) {
+                    return el.id_soal != null
+                  });
+                let essay=[];
+                for(let i=0; i<data.length; i++){
+                    console.log(data[i].id_soal);
+                    
+                }
+                // console.log(essay);
+            })
 			axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20COUNT(soal_id)AS%20jum_soal%20FROM%20soal%20WHERE%20soal_pelajaran=%27" + this.nilai.id_pelajaran + "%27")
 				.then(r_soal => {
 					let per_soal = 100 / r_soal.data[0].jum_soal;
-					axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20siswa%20WHERE%20id_kelas=%27" + id_kelas + "%27")
-						.then(r => {
-							let id_siswa = [];
-							for (let i = 0; i < r.data.length; i++) {
-								id_siswa.push(r.data[i].id_siswa);
-							}
-							axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20nama,GROUP_CONCAT(CASE%20WHEN(ujian_jawaban.jawaban=soal.soal_jawaban)%20THEN%201%20ELSE%200%20END)%20AS%20nilai%20FROM%20ujian_jawaban%20JOIN%20siswa%20ON%20siswa.id_siswa=ujian_jawaban.siswa_id%20JOIN%20soal%20ON%20ujian_jawaban.soal_id=soal.soal_id%20WHERE%20ujian_jawaban.ujian_id=%27" + this.nilai.id_ujian + "%27%20AND%20siswa_id%20IN%20(" + id_siswa.join() + ")%20GROUP%20BY%20nama")
-								.then(response => {
-									let siswa = [];
-
-									function cekBenar(nilai) {
-										return nilai == '1';
-									}
-									for (let i = 0; i < response.data.length; i++) {
-										let array = response.data[i].nilai.split(",");
-										let benar = array.filter(cekBenar);
-										let hasil = Math.round(benar.length * per_soal);
-										siswa.push({
-											nama: response.data[i].nama,
-											nilai: hasil
-										})
-									}
-									this.siswaNilai = siswa;
-
-								})
-						})
+					axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20nama,GROUP_CONCAT(CASE%20WHEN(ujian_jawaban.jawaban=soal.soal_jawaban)%20THEN%201%20ELSE%200%20END)%20AS%20nilai%20FROM%20siswa%20LEFT%20JOIN%20ujian_jawaban%20ON%20siswa.id_siswa=ujian_jawaban.siswa_id%20LEFT%20JOIN%20soal%20ON%20soal.soal_id=ujian_jawaban.soal_id%20AND%20soal.soal_pelajaran="+this.nilai.id_pelajaran+"%20WHERE%20siswa.id_kelas="+id_kelas+"%20GROUP%20BY%20nama")
+					.then(response => {
+						let siswa = [];
+						function cekBenar(nilai) {
+							return nilai == '1';
+						}
+						for (let i = 0; i < response.data.length; i++) {
+							let array = response.data[i].nilai.split(",");
+							let benar = array.filter(cekBenar);
+							let hasil = Math.round(benar.length * per_soal);
+							siswa.push({
+								nama: response.data[i].nama,
+								nilai: hasil
+							})
+						}
+						this.siswaNilai = siswa;
+					})
 					this.nilai.formSiswa = true;
 					this.nilai.form = false;
 				})

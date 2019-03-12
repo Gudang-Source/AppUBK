@@ -115,6 +115,8 @@ class Welcome extends MY_Controller {
 		$data["soal"] = $this->Model->soal($config,$siswa);
 		$data["soalSemua"] = $this->Model->soal('select',$siswa);
 		$data["soalEssay"] = $this->Model->essay('select',$ujian->id_pelajaran,$ujian->id_ujian,$siswa);
+		$data['id_pelajaran']=$ujian->id_pelajaran;
+		$data['id_record']=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->row();
 		$data['halaman'] = $this->uri->segment('2');
 		$data['url']=$this->uri->segment('3');
 		$this->pages('module/soal/soal', $data);
@@ -155,6 +157,7 @@ class Welcome extends MY_Controller {
 		$data['id_siswa']=$siswa;
 		$data['id_ujian']= $ujian->id_ujian;
 		$data['id_pelajaran']=$ujian->id_pelajaran;
+		$data['id_record']=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->row();
 		$this->pages('module/soal/essay', $data);
 	}
 	public function login()
