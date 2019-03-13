@@ -75,7 +75,7 @@
                             <span class="checkmark">D</span>
                         </label>
                         <label class="jawaban"><?php echo $data->soal_jwb5 ?>
-                            <input <?php if($jawaban->jawaban==$data->soal_jwb5){echo "checked";} ?> @change="jawab_update('soal_jwb1',<?php echo $jawaban->id ?>,<?php echo $data->soal_id ?>)"  type="radio" name="pilgan" >
+                            <input <?php if($jawaban->jawaban==$data->soal_jwb5){echo "checked";} ?> @change="jawab_update('soal_jwb5',<?php echo $jawaban->id ?>,<?php echo $data->soal_id ?>)"  type="radio" name="pilgan" >
                             <span class="checkmark">E</span>
                         </label>
                 <?php }else{ ?>

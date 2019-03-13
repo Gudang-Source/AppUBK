@@ -71,6 +71,13 @@ let appAdmin = new Vue({
 		},
 	},
 	created: function () {
+        let data={
+            stat:"essay"
+        }
+        axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api")
+        .then (response => {
+                console.log(response.data);
+        })
 		axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas")
 			.then(response => {
 				this.dataKelas = response.data;
@@ -229,10 +236,7 @@ let appAdmin = new Vue({
 					kkm: that.kkm,
 					stat: "tambahMapel"
 				};
-				axios.post("http://" + this.url + "/AppUBK/assets/json/json.php?akses=api", data)
-					.then(response => {
-						console.log(response.data);
-					})
+				axios.post("http://" + this.url + "/AppUBK/assets/json/json.php?akses=api", data);
 			}
 		},
 		tambahSiswa: function () {
@@ -283,10 +287,7 @@ let appAdmin = new Vue({
 		},
 		listSiswa: function (id_kelas, nama_kelas) {
             this.nilai.nama_kelas = nama_kelas;
-            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20essay")
-            .then (response => {
-                console.log(response.data);
-            })
+            
             axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20nama,GROUP_CONCAT(essay.soal_id)%20AS%20id_soal%20FROM%20siswa%20LEFT%20JOIN%20essay_jawaban%20ON%20siswa.id_siswa=essay_jawaban.siswa_id%20LEFT%20JOIN%20essay%20ON%20essay.soal_id=essay_jawaban.soal_id%20AND%20essay.soal_pelajaran="+this.nilai.id_pelajaran+"%20WHERE%20siswa.id_kelas="+id_kelas+"%20GROUP%20BY%20nama")
             .then (response => {
                 var data = response.data.filter(function (el) {
@@ -297,8 +298,8 @@ let appAdmin = new Vue({
                     console.log(data[i].id_soal);
                     
                 }
-                // console.log(essay);
             })
+            console.log(this.siswaEssay);
 			axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20COUNT(soal_id)AS%20jum_soal%20FROM%20soal%20WHERE%20soal_pelajaran=%27" + this.nilai.id_pelajaran + "%27")
 				.then(r_soal => {
 					let per_soal = 100 / r_soal.data[0].jum_soal;
