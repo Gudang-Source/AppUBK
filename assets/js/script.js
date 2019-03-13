@@ -19,10 +19,9 @@ let ujian = new Vue({
         token:{
             form:false
         },
-        jawabanEssay:false,
         // url:"hendri.ddns.net"
-        // url:"localhost"
-        url:"192.168.1.254"
+        url:"localhost"
+        // url:"192.168.1.254"
         // url:"199.169.1.46"
     },
     computed:{
@@ -44,40 +43,23 @@ let ujian = new Vue({
     },
     methods:{
         jawab:function(jawaban,id_ujian,id_siswa,id_soal){
-            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20"+jawaban+"%20AS%20soal_jawaban%20FROM%20soal%20WHERE%20soal_id=%27"+id_soal+"%27")
-            .then(response => {
                 let data={
-                    jawaban:response.data[0].soal_jawaban,
+                    jawaban:jawaban,
                     id_ujian:id_ujian,
                     id_siswa:id_siswa,
                     id_soal:id_soal,
                     stat:"jawab"
                 }
-                let dataUpdate={
-                    jawaban:response.data[0].soal_jawaban,
-                    stat:"update_jawab",
-                }
-                axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20id%20FROM%20ujian_jawaban%20WHERE%20ujian_id=%27"+id_ujian+"%27%20AND%20soal_id=%27"+id_soal+"%27%20AND%20siswa_id=%27"+id_siswa+"%27")
-                .then(response => {
-                    if(response.data.length>0){
-                        dataUpdate.id=response.data[0].id;
-                        axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",dataUpdate);
-                    }else{
-                        axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
-                    }
-                })
-            })
+                axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
         },
         jawab_update:function(jawaban,id,id_soal){
-            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20"+jawaban+"%20AS%20soal_jawaban%20FROM%20soal%20WHERE%20soal_id=%27"+id_soal+"%27")
-            .then(response => {
                 let data={
-                    jawaban:response.data[0].soal_jawaban,
+                    jawaban:jawaban,
+                    id_soal:id_soal,
                     id:id,
                     stat:"update_jawab",
                 }
                 axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
-            })
         },
         selesaiButton:function(id_ujian,id_siswa,jumlah_soal,kkm,id_pelajaran,id_record){
             axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20GROUP_CONCAT(soal_id)%20AS%20soal_id%20FROM%20soal%20WHERE%20soal_pelajaran=%27"+id_pelajaran+"%27")
@@ -113,32 +95,17 @@ let ujian = new Vue({
             window.location.reload();
         },
         addJawaban:function(id_soal,id_ujian,id_siswa){
-            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20id%20FROM%20essay_jawaban%20WHERE%20ujian_id=%27"+id_ujian+"%27%20AND%20soal_id=%27"+id_soal+"%27%20AND%20siswa_id=%27"+id_siswa+"%27")
-            .then(response => {
-                if(response.data.length<1){
-                    let data={
-                        id_soal:id_soal,
-                        id_ujian:id_ujian,
-                        id_siswa:id_siswa,
-                        jawaban:this.$refs.addJawaban.value,
-                        stat:"addJawabanEssay"
-                    }
-                    axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
-                }else{
-                    this.jawabanEssay=true;
-                }
-            })
-        },
-        uJawaban:function(id_soal,id_ujian,id_siswa){
-            axios.get("http://"+this.url+"/AppUBK/assets/json/json.php?query=SELECT%20id%20FROM%20essay_jawaban%20WHERE%20ujian_id=%27"+id_ujian+"%27%20AND%20soal_id=%27"+id_soal+"%27%20AND%20siswa_id=%27"+id_siswa+"%27")
-            .then(response => {
-                let data={
-                    jawaban:this.$refs.addJawaban.value,
-                    id:response.data[0].id,
-                    stat:"updateJawabanEssay",
-                }
-                axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
-            })
+            // let jawaban = this.$refs.addJawaban.value;
+            // console.log(jawaban.replace(/'|"/g,''));
+            let data={
+                id_soal:id_soal,
+                id_ujian:id_ujian,
+                id_siswa:id_siswa,
+                // jawaban:jawaban.replace(/'|"/g,'%27'),
+                jawaban:this.$refs.addJawaban.value,
+                stat:"addJawabanEssay"
+            }
+            axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api",data);
         },
         updateJawaban:function(id){
             let data={

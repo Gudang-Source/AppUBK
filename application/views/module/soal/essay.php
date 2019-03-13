@@ -42,11 +42,14 @@
                     echo $url1.'.'.$data->soal_deskripsi.'</br>';
                     if($jawaban==null){
                 ?>
-                    <textarea v-if="jawabanEssay==false" @input="addJawaban(<?php echo $data->soal_id ?>,<?php echo $id_ujian ?>,<?php echo $id_siswa ?>)" ref="addJawaban" class="form-control" style="height:400px;">
+                    <textarea @input="addJawaban(<?php echo $data->soal_id ?>,<?php echo $id_ujian ?>,<?php echo $id_siswa ?>)" ref="addJawaban" class="form-control" style="height:400px;">
                         
                     </textarea>
-                    <textarea autofocus v-if="jawabanEssay==true" @input="uJawaban(<?php echo $data->soal_id ?>,<?php echo $id_ujian ?>,<?php echo $id_siswa ?>)" ref="addJawaban" class="form-control" style="height:400px;"></textarea>
-                <?php }else{ ?>
+                <?php }else{ 
+                    // $c = array ('%27');
+                    // $jawabanUbah = str_replace($c, '"', $jawaban->jawaban); // Hilangkan karakter yang telah disebutkan di array $d
+                    ?>
+                    
                     <textarea @input="updateJawaban(<?php echo $jawaban->id ?>)" ref="updateJawaban" class="form-control" style="height:400px;"><?php echo $jawaban->jawaban ?></textarea>
                 <?php 
                 }  

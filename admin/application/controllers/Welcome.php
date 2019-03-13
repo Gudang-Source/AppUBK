@@ -40,14 +40,26 @@ class Welcome extends MY_Controller {
 		$this->Model->UpdateperSoalEdit($soal_id, $soal_pelajaran);
 	}
 
-	public function tambahSoal(){
-		$soal_deskripsi = $this->input->post('soal_deskripsi');
-		$soal_jwb1 = $this->input->post('soal_jwb1');
-		$soal_jwb2 = $this->input->post('soal_jwb2');
-		$soal_jwb3 = $this->input->post('soal_jwb3');
-		$soal_jwb4 = $this->input->post('soal_jwb4');
-		$soal_jwb5 = $this->input->post('soal_jwb5');
-		$soal_jawaban = $this->input->post('soal_jawaban');
+	public function tambahSoal($soal_pelajaran){
+        $soal_deskripsi=$this->input->post('soal_deskripsi');
+        $soal_jwb1=$this->input->post('soal_jwb1');
+        $soal_jwb2=$this->input->post('soal_jwb2');
+        $soal_jwb3=$this->input->post('soal_jwb3');
+        $soal_jwb4=$this->input->post('soal_jwb4');
+        $soal_jwb5=$this->input->post('soal_jwb5');
+        if($this->input->post('soal_jawaban')=="soal_jwb1"){
+            $soal_jawaban=$soal_jwb1;
+        }else if($this->input->post('soal_jawaban')=="soal_jwb2"){
+            $soal_jawaban=$soal_jwb2;
+        }else if($this->input->post('soal_jawaban')=="soal_jwb3"){
+            $soal_jawaban=$soal_jwb3;
+        }else if($this->input->post('soal_jawaban')=="soal_jwb4"){
+            $soal_jawaban=$soal_jwb4;
+        }else if($this->input->post('soal_jawaban')=="soal_jwb5"){
+            $soal_jawaban=$soal_jwb5;
+		}
+		$this->Model->tambahSoal($soal_pelajaran,$soal_deskripsi,$soal_jwb1,$soal_jwb2,$soal_jwb3,$soal_jwb4,$soal_jwb5,$soal_jawaban);
+		redirect('/welcome/perSoal/'.$soal_pelajaran);
 	}
 
 	public function ujian(){

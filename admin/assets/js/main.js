@@ -2,8 +2,8 @@ let appAdmin = new Vue({
 	el: "#appAdmin",
 	data: {
 		// url:"hendri.ddns.net",
-		// url:"localhost",
-		url: "192.168.1.254",
+		url:"localhost",
+		// url: "192.168.1.254",
 		// url: "199.169.1.46",
 		dataKelas: [],
 		kelas: {
@@ -71,13 +71,6 @@ let appAdmin = new Vue({
 		},
 	},
 	created: function () {
-        let data={
-            stat:"essay"
-        }
-        axios.post("http://"+this.url+"/AppUBK/assets/json/json.php?akses=api")
-        .then (response => {
-                console.log(response.data);
-        })
 		axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20*%20FROM%20kelas")
 			.then(response => {
 				this.dataKelas = response.data;
@@ -148,16 +141,15 @@ let appAdmin = new Vue({
 			}
 		},
 		updateJawaban: function (soal_id, soal_jawaban) {
-			axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20" + soal_jawaban + "%20AS%20soal_jawaban%20FROM%20soal%20WHERE%20soal_id=%27" + soal_id + "%27")
-				.then(response => {
-					console.log(response.data[0].soal_jawaban);
 					let data = {
 						soal_id: soal_id,
-						soal_jawaban: response.data[0].soal_jawaban,
+						soal_jawaban: soal_jawaban,
 						stat: "updateJawaban"
 					}
-					axios.post("http://" + this.url + "/AppUBK/assets/json/json.php?akses=api", data);
-				})
+					axios.post("http://" + this.url + "/AppUBK/assets/json/json.php?akses=api", data)
+					.then (response => {
+						console.log(response.data);
+					})
 		},
 		editSoal: function (soal_id, soal_deskripsi, soal_jwb1, soal_jwb2, soal_jwb3, soal_jwb4, soal_jwb5) {
 			this.soal.form = true;
@@ -292,14 +284,16 @@ let appAdmin = new Vue({
             .then (response => {
                 var data = response.data.filter(function (el) {
                     return el.id_soal != null
-                  });
+				});
                 let essay=[];
                 for(let i=0; i<data.length; i++){
-                    console.log(data[i].id_soal);
-                    
-                }
+					axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?querys=SELECT%20essay.soal_deskripsi,essay_jawaban.jawaban%20FROM%20essay%20JOIN%20essay_jawaban%20ON%20essay_jawaban.soal_id=essay.soal_id%20WHERE%20essay.soal_id%20IN("+data[i].id_soal+")")
+					.then (response => {
+						essay.push({nama:data[i].nama,isi:response.data});
+					})
+				}
+				this.siswaEssay=essay;
             })
-            console.log(this.siswaEssay);
 			axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?query=SELECT%20COUNT(soal_id)AS%20jum_soal%20FROM%20soal%20WHERE%20soal_pelajaran=%27" + this.nilai.id_pelajaran + "%27")
 				.then(r_soal => {
 					let per_soal = 100 / r_soal.data[0].jum_soal;
