@@ -20,10 +20,10 @@ let ujian = new Vue({
             form:false
         },
         jawabanEssay:false,
-        // url:"hendri.ddns.net"
+        url:"hendri.ddns.net"
         // url:"localhost"
-        url:"192.168.1.254"
-        // url:"199.169.1.46"
+        // url:"192.168.1.254"
+        // url:"199.169.1.28"
     },
     computed:{
         nilaiStyle:function(){
