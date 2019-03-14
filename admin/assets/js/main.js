@@ -171,9 +171,7 @@ let appAdmin = new Vue({
 			}
 			axios.post("http://" + this.url + "/AppUBK/assets/json/json.php?akses=api", data)
 				.then(response => {
-					if (response.status = 200) {
-						window.location.reload();
-					}
+					window.location.reload();
 				})
 		},
 		stopUjian: function (id_ujian) {

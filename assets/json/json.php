@@ -1,4 +1,5 @@
 <?php
+	header('Content-type:application/json');
 	$server = "localhost";
 	$username = "root";
 	$password = "";
@@ -26,7 +27,28 @@
 			$array[] = $row;
     		// array_push($array["data"], $row);
 		}
-		echo json_encode(mb_convert_encoding($array,'UTF-8','UTF-8'));
+		function convert_from_latin1_to_utf8_recursively($dat)
+		{
+		   if (is_string($dat)) {
+			  return utf8_encode($dat);
+		   } elseif (is_array($dat)) {
+			  $ret = [];
+			  foreach ($dat as $i => $d) {
+				  $ret[ $i ] = convert_from_latin1_to_utf8_recursively($d);
+				}
+	 
+			  return $ret;
+		   } elseif (is_object($dat)) {
+			  foreach ($dat as $i => $d){
+				   $dat->$i = convert_from_latin1_to_utf8_recursively($d);
+			  }
+	 
+			  return $dat;
+		   } else {
+			  return $dat;
+		   }
+		}
+		echo json_encode(convert_from_latin1_to_utf8_recursively($array));
 	}
 	$datas = json_decode(file_get_contents("php://input"));
 	if(isset($_GET['akses'])=="api"){

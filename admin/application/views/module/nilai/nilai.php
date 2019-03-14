@@ -73,35 +73,45 @@
                         export
                     </button>
                     <div ref="table">
-                    <table class="table">
+
+                    <table border="1px">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
+                                <th style="text-align:left;">Nama</th>
                                 <th>Nilai</th>
                                 <th>Status Lulus</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(dataBaru,keys) in siswaNilai">
-                                <td>{{keys+1}}</td>
-                                <td>{{dataBaru.nama}}</td>
-                                <td>{{dataBaru.nilai}}</td>
-                                <td v-if="dataBaru.nilai>=nilai.kkm">Lulus</td>
-                                <td v-if="dataBaru.nilai<nilai.kkm">Tidak Lulus</td>
+                                <td style="text-align:center;">{{keys+1}}</td>
+                                <td style="text-align:left;">{{dataBaru.nama}}</td>
+                                <td style="text-align:center;">{{dataBaru.nilai}}</td>
+                                <td style="text-align:center;" v-if="dataBaru.nilai>=nilai.kkm">Lulus</td>
+                                <td style="text-align:center;" v-if="dataBaru.nilai<nilai.kkm">Tidak Lulus</td>
                             </tr>
                         </tbody>
                     </table>
                     <div v-for="data in siswaEssay">
                         {{data.nama}}
-                        <br>
-                        <div v-for="data2 in data.isi">
-                            <div v-html="data2.soal_deskripsi"></div>
-                            <br>
-                            <div>{{data2.jawaban}}</div>
-                            <br>
-                        </div>
-                        <br>
+                        <table v-for="(data2,key) in data.isi">
+                            <thead>
+                                <tr><td colspan="4"></td></tr>
+                            </thead>
+                            <tbody style="border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0; background-color: rgba(0, 0, 0, 0.03); border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
+                                <tr>
+                                    <td colspan="4" style=" padding: 0.75rem; text-align:left;background-color: rgba(0, 0, 0, 0.03); border-top: 1px solid #dee2e6; font-weight:bold;"> No. {{key+1}} </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" v-html="data2.soal_deskripsi" style=" padding: 0.75rem; vertical-align: top; border-top: 1px solid #dee2e6;"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style=" padding: 0.75rem; text-align:left; border-top: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6;"> <span style="font-weight:bold;">Jawaban:</span><br> {{data2.jawaban}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     </div>
                     </div>
                     </div>
