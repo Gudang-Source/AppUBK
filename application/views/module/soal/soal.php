@@ -1,7 +1,6 @@
 <div class="container">
 <div class="row">
-    <?php
-        if($url==""){
+    <?php if($url==""){
             $url=0;
         }
         $soal_id=$soal[0]->soal_id;
@@ -9,7 +8,6 @@
         $siswa_id=$soal[0]->id_siswa;
         $cek_jawaban= $this->db->query("SELECT jawaban FROM ujian_jawaban WHERE ujian_id='$ujian_id' AND siswa_id='$siswa_id' AND soal_id='$soal_id'")->num_rows();
         $jawaban=$this->db->query("SELECT * FROM ujian_jawaban WHERE soal_id='$soal_id' AND ujian_id='$ujian_id' AND siswa_id='$siswa_id'")->row();
-
     ?>
     <div id="slideMenu" class="container sidebar sidebar-right" v-bind:style="sidebar">
     	<div class="contente">
