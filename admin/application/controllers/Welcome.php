@@ -90,14 +90,14 @@ class Welcome extends MY_Controller {
 			'width' => $data['width'],
 			'height' => $data['height'])
         );
-		$link = base_url().'./assets/unggah/'.$data['file_name'];
-        $res = array(
-			"data" => array(
-				'link' 	=> $link,
-				'width' => $data['width'],
-				'height'=> $data['height']
-			)
-		);
+		// $link = base_url().'./assets/unggah/'.$data['file_name'];
+        // $res = array(
+		// 	"data" => array(
+		// 		'link' 	=> $link,
+		// 		'width' => $data['width'],
+		// 		'height'=> $data['height']
+		// 	)
+		// );
         echo json_encode($res);
 	}
 	public function nilai(){

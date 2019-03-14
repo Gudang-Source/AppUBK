@@ -171,9 +171,7 @@ let appAdmin = new Vue({
 			}
 			axios.post("http://" + this.url + "/AppUBK/assets/json/json.php?akses=api", data)
 				.then(response => {
-					if (response.status = 200) {
-						window.location.reload();
-					}
+					window.location.reload();
 				})
 		},
 		stopUjian: function (id_ujian) {
@@ -289,6 +287,7 @@ let appAdmin = new Vue({
                 for(let i=0; i<data.length; i++){
 					axios.get("http://" + this.url + "/AppUBK/assets/json/json.php?querys=SELECT%20essay.soal_deskripsi,essay_jawaban.jawaban%20FROM%20essay%20JOIN%20essay_jawaban%20ON%20essay_jawaban.soal_id=essay.soal_id%20WHERE%20essay.soal_id%20IN("+data[i].id_soal+")")
 					.then (response => {
+						console.log(response.data);
 						essay.push({nama:data[i].nama,isi:response.data});
 					})
 				}
