@@ -68,9 +68,6 @@
                         <?php } ?>
                         </td>
                         <td>
-                        <?php if($data->status==0 && $data->token==''){ ?>
-                            <button @click="genToken(<?php echo $data->id_ujian ?>)" class="btn btn-primary">Generate Token</button>
-                        <?php }?>
                         <?php if($data->status!=0){ ?>
                             <button @click="genToken(<?php echo $data->id_ujian ?>)" class="btn btn-success">Mulai Ujian</button>
                         <?php }else{ ?>

@@ -115,6 +115,8 @@ class Welcome extends MY_Controller {
 		$data["soal"] = $this->Model->soal($config,$siswa);
 		$data["soalSemua"] = $this->Model->soal('select',$siswa);
 		$data["soalEssay"] = $this->Model->essay('select',$ujian->id_pelajaran,$ujian->id_ujian,$siswa);
+		$data['id_pelajaran']=$ujian->id_pelajaran;
+		$data['id_record']=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->row();
 		$data['halaman'] = $this->uri->segment('2');
 		$data['url']=$this->uri->segment('3');
 		$this->pages('module/soal/soal', $data);
@@ -145,6 +147,16 @@ class Welcome extends MY_Controller {
 		$ujian = $this->Model->ada_ujian($this->session->userdata('id_kelas'))->row();
 		$data['jum_soal']=$this->Model->random($ujian->id_pelajaran)->num_rows();
 		$data['kkm']= $this->Model->kkm($ujian->id_pelajaran)->row();
+		$cek_record=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->num_rows();
+		if($cek_record < 1 ){
+			$random= $this->Model->random($ujian->id_pelajaran)->result();
+			$array=[];
+			foreach($random as $datas){
+				array_push($array,$datas->soal_id);
+			}
+			$arrays= join(',',$array);
+			$this->db->query("INSERT INTO record (id_siswa,id_pelajaran,id_soal) VALUES ('$siswa','$ujian->id_pelajaran','$arrays')");
+		}
 		//list
 		$data["soalSemua"] = $this->Model->soal('select',$siswa);
 		$data["soalEssay"] = $this->Model->essay('select',$ujian->id_pelajaran,$ujian->id_ujian,$siswa);
@@ -155,6 +167,7 @@ class Welcome extends MY_Controller {
 		$data['id_siswa']=$siswa;
 		$data['id_ujian']= $ujian->id_ujian;
 		$data['id_pelajaran']=$ujian->id_pelajaran;
+		$data['id_record']=$this->Model->cek_record($siswa,$ujian->id_pelajaran)->row();
 		$this->pages('module/soal/essay', $data);
 	}
 	public function login()

@@ -19,23 +19,30 @@
 		}
 		echo json_encode($array);
 	}
-
+	if(isset($_GET['querys'])){
+		$query = $_GET['querys'];
+		$data  = $koneksi->query($query);
+		while ($row=$data->fetch_assoc()) {
+			$array[] = $row;
+    		// array_push($array["data"], $row);
+		}
+		echo json_encode(mb_convert_encoding($array,'UTF-8','UTF-8'));
+	}
 	$datas = json_decode(file_get_contents("php://input"));
-	
 	if(isset($_GET['akses'])=="api"){
         if($datas->stat=="jawab"){
 			$jawaban= $datas->jawaban;
 			$id_ujian=$datas->id_ujian;
 			$id_siswa=$datas->id_siswa;
 			$id_soal= $datas->id_soal;
-			// $sql ="DELETE ujian_jawaban WHERE ujian_id='$id_ujian' AND siswa_id='$id_siswa' AND soal_id='$id_soal'";
-			$sql= "REPLACE INTO ujian_jawaban (ujian_id,siswa_id,soal_id,jawaban) VALUES ('$id_ujian','$id_siswa','$id_soal','$jawaban')";
+			$sql= "INSERT INTO ujian_jawaban (ujian_id,siswa_id,soal_id,jawaban) SELECT '$id_ujian','$id_siswa','$id_soal',$jawaban FROM soal WHERE soal_id='$id_soal' ON DUPLICATE KEY UPDATE jawaban=$jawaban";
 			$koneksi->query($sql);
 		}
 		if($datas->stat=="update_jawab"){
 			$jawaban= $datas->jawaban;
+			$id_soal= $datas->id_soal;
 			$id= $datas->id;
-			$sql= "UPDATE ujian_jawaban SET jawaban='$jawaban' WHERE id='$id'";
+			$sql= "UPDATE ujian_jawaban SET jawaban=(SELECT $jawaban FROM soal WHERE soal_id=$id_soal) WHERE id='$id'";
 			$koneksi->query($sql);
 		}
 		if($datas->stat=="tambahKelas"){
@@ -67,8 +74,9 @@
 		if($datas->stat=="updateJawaban"){
 			$soal_id = $datas->soal_id;
 			$soal_jawaban = $datas->soal_jawaban;
-			$sql= "UPDATE soal SET soal_jawaban='$soal_jawaban' WHERE soal_id='$soal_id'";
+			$sql= "UPDATE soal SET soal_jawaban=$soal_jawaban WHERE soal_id='$soal_id'";
 			$koneksi->query($sql);
+			echo json_encode($soal_jawaban);
 
 		}
 		if($datas->stat=="genToken"){
@@ -90,7 +98,7 @@
 		if($datas->stat=="tambahUjian"){
 			$id_kelas = $datas->id_kelas;
 			$id_pelajaran = $datas->id_pelajaran;
-			$sql= "INSERT INTO ujian (id_kelas,id_pelajaran) VALUES ('$id_kelas','$id_pelajaran')";
+			$sql= "INSERT INTO ujian (id_kelas,id_pelajaran,status) VALUES ('$id_kelas','$id_pelajaran',1)";
 			$koneksi->query($sql);
 
 		}
@@ -133,8 +141,7 @@
 			$id_ujian=$datas->id_ujian;
 			$id_siswa=$datas->id_siswa;
 			$id_soal= $datas->id_soal;
-			// $sql ="DELETE ujian_jawaban WHERE ujian_id='$id_ujian' AND siswa_id='$id_siswa' AND soal_id='$id_soal'";
-			$sql= "REPLACE INTO essay_jawaban (ujian_id,siswa_id,soal_id,jawaban) VALUES ('$id_ujian','$id_siswa','$id_soal','$jawaban')";
+			$sql= "INSERT INTO essay_jawaban (ujian_id,siswa_id,soal_id,jawaban) VALUES ('$id_ujian','$id_siswa','$id_soal','$jawaban') ON DUPLICATE KEY UPDATE jawaban='$jawaban'";
 			$koneksi->query($sql);
 		}
 		if($datas->stat=="updateJawabanEssay"){

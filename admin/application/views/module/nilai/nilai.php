@@ -72,7 +72,8 @@
                     <button @click="exportTableToExcel(nilai.nama_pelajaran,nilai.nama_kelas)">
                         export
                     </button>
-                    <table class="table" ref="table">
+                    <div ref="table">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -91,7 +92,18 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+                    <div v-for="data in siswaEssay">
+                        {{data.nama}}
+                        <br>
+                        <div v-for="data2 in data.isi">
+                            <div v-html="data2.soal_deskripsi"></div>
+                            <br>
+                            <div>{{data2.jawaban}}</div>
+                            <br>
+                        </div>
+                        <br>
+                    </div>
+                    </div>
                     </div>
                     <div class="model-footer">
                         

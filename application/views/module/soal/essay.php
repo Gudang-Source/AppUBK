@@ -42,11 +42,14 @@
                     echo $url1.'.'.$data->soal_deskripsi.'</br>';
                     if($jawaban==null){
                 ?>
-                    <textarea v-if="jawabanEssay==false" @input="addJawaban(<?php echo $data->soal_id ?>,<?php echo $id_ujian ?>,<?php echo $id_siswa ?>)" ref="addJawaban" class="form-control" style="height:400px;">
+                    <textarea @input="addJawaban(<?php echo $data->soal_id ?>,<?php echo $id_ujian ?>,<?php echo $id_siswa ?>)" ref="addJawaban" class="form-control" style="height:400px;">
                         
                     </textarea>
-                    <textarea autofocus v-if="jawabanEssay==true" @input="uJawaban(<?php echo $data->soal_id ?>,<?php echo $id_ujian ?>,<?php echo $id_siswa ?>)" ref="addJawaban" class="form-control" style="height:400px;"></textarea>
-                <?php }else{ ?>
+                <?php }else{ 
+                    // $c = array ('%27');
+                    // $jawabanUbah = str_replace($c, '"', $jawaban->jawaban); // Hilangkan karakter yang telah disebutkan di array $d
+                    ?>
+                    
                     <textarea @input="updateJawaban(<?php echo $jawaban->id ?>)" ref="updateJawaban" class="form-control" style="height:400px;"><?php echo $jawaban->jawaban ?></textarea>
                 <?php 
                 }  
@@ -103,7 +106,7 @@
 						</h2>
         		    </div>
         		    <div class="modal-footer">
-                            <button class="btn btn-success w-50" @click="selesaiButton(<?php echo $id_ujian?>,<?php echo $id_siswa?>,<?php echo count($soalSemua)?>,<?php echo $kkm->kkm ?>,<?php echo $id_pelajaran ?>)">Akhiri</button>
+                            <button class="btn btn-success w-50" @click="selesaiButton(<?php echo $id_ujian?>,<?php echo $id_siswa?>,<?php echo count($soalSemua)?>,<?php echo $kkm->kkm ?>,<?php echo $id_pelajaran ?>,<?php echo $id_record->id_record ?>)">Akhiri</button>
                             <button class="btn btn-danger w-50" @click="yakin.form=false">Batal</button>
         		    </div>
         		</div>

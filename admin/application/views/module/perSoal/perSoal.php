@@ -20,7 +20,7 @@
 </nav>
 	<div class="tab-content" id="nav-tabContent">
 	<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-		<form action="" class="form mb-4 mt-2" method="post" enctype="multipart/form-data">
+		<form action="<?php echo base_url('welcome/tambahSoal/'.$this->uri->segment('3')) ?>" class="form mb-4 mt-2" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<textarea name="soal_deskripsi" class="form-control" cols="50" rows="10"></textarea>
 			</div>
